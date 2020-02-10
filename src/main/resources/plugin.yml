@@ -1,0 +1,9 @@
+name: MedCraft
+main: me.smeths.and.rhetorical.MedCraft
+author: smeths&rhetorical
+version: 1.3.4
+commands:
+  MedCraft:
+    description: MedCraft Command!
+    usage: /MedCraft
+    aliases: [meds]
