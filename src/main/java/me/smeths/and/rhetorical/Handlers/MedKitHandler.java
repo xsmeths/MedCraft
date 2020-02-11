@@ -4,24 +4,25 @@ import me.smeths.and.rhetorical.MedCraft;
 import me.smeths.and.rhetorical.MedKitItemManagement.MedKitItemLoader;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MedKitHandler
 {
-  private static Map<Player, BukkitRunnable> MedKitPlayers = new HashMap();
+  private static Map<Player, BukkitRunnable> MedKitPlayers = new HashMap<>();
 
   public MedKitHandler(final Player p) {
     if (MedKitPlayers.containsKey(p)) {
-      ((BukkitRunnable)MedKitPlayers.get(p)).cancel();
+      MedKitPlayers.get(p).cancel();
       MedKitPlayers.remove(p);
-      p.getInventory().addItem(new ItemStack[] { MedKitItemLoader.getMedKitItem() });
+      p.getInventory().addItem(MedKitItemLoader.getMedKitItem());
     }
 
     MedKitPlayers.put(p, new BukkitRunnable()
@@ -44,16 +45,16 @@ public class MedKitHandler
         if ((this.progress > 60) || (cancelled))
         {
           if (cancelled) {
-            p.getInventory().addItem(new ItemStack[] { MedKitItemLoader.getMedKitItem() });
+            p.getInventory().addItem(MedKitItemLoader.getMedKitItem());
           }
 
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
         } else if (this.progress == 60) {
-          if (p.getHealth() < p.getMaxHealth())
+          if (p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           else {
-            p.getInventory().addItem(new ItemStack[]{MedKitItemLoader.getMedKitItem()});
+            p.getInventory().addItem(MedKitItemLoader.getMedKitItem());
             MedKitHandler.MedKitPlayers.remove(p);
             cancel();
           }
@@ -78,7 +79,7 @@ public class MedKitHandler
         this.progress += 1;
       }
     });
-    ((BukkitRunnable)MedKitPlayers.get(p)).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
+    MedKitPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
   }
 
   public static boolean isMedding(Player p) { return MedKitPlayers.containsKey(p);
