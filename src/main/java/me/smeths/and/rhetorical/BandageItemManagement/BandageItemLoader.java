@@ -15,6 +15,8 @@ public class BandageItemLoader {
     private static BandageItemLoader instance;
     private ItemStack bandageItem;
     private ItemStack craftedbandageItem;
+    public NamespacedKey recipekey = new NamespacedKey(medCraft, "Bandage");
+    public ShapedRecipe Bandagerecipe = new ShapedRecipe(recipekey, craftedbandageItem);
 
     public BandageItemLoader() {
         if (instance != null) {
@@ -49,8 +51,6 @@ public class BandageItemLoader {
         craftedbandageItem.setItemMeta(craftedBandageMeta);
     }
     private void setupBandageRecipe() {
-        NamespacedKey recipekey = new NamespacedKey(medCraft, "Bandage");
-        ShapedRecipe Bandagerecipe = new ShapedRecipe(recipekey, craftedbandageItem);
         Bandagerecipe.shape("123", "456", "789");
         Bandagerecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-left")));
         Bandagerecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-middle")));

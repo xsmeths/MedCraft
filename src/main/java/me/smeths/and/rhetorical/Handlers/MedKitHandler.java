@@ -42,7 +42,7 @@ public class MedKitHandler
       {
         boolean cancelled = p.getLocation().distance(this.position) > 0.75D;
 
-        if ((this.progress > 60) || (cancelled))
+        if ((this.progress > MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup")) || (cancelled))
         {
           if (cancelled) {
             p.getInventory().addItem(MedKitItemLoader.getMedKitItem());
@@ -50,7 +50,7 @@ public class MedKitHandler
 
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
-        } else if (this.progress == 60) {
+        } else if (this.progress == MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup")) {
           if (p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           else {

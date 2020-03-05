@@ -16,6 +16,7 @@ Bandage:
   Crafting-Material-bottom-right: AIR
 MedKit:
   Material: PAPER
+  Warmup: 1
   Result-Amount: 1
   ModelData: 18
   Name: '&c✚&fMedKit&c✚'

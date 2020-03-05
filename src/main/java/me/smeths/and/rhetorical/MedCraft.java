@@ -50,6 +50,8 @@ public class MedCraft extends JavaPlugin
     }
     public void onDisable()
     {
+        Bukkit.removeRecipe(MedKitItemLoader.getInstance().key);
+        Bukkit.removeRecipe(BandageItemLoader.getInstance().recipekey);
     }
     public static MedCraft getInstance() {
         return instance;
