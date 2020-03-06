@@ -15,8 +15,6 @@ public class MedKitItemLoader {
     private static MedKitItemLoader instance;
     private ItemStack MedKitItem;
     private ItemStack MedKitItemcraftd;
-    public NamespacedKey key = new NamespacedKey(medCraft, "MedKit");
-    public ShapedRecipe MedKitrecipe = new ShapedRecipe(key, MedKitItemcraftd);
 
     public MedKitItemLoader() {
         if (instance != null) {
@@ -53,6 +51,8 @@ public class MedKitItemLoader {
 
     private void setupMedKitRecipe()
     {
+        NamespacedKey key = new NamespacedKey(medCraft, "MedKit");
+        ShapedRecipe MedKitrecipe = new ShapedRecipe(key, MedKitItemcraftd);
         MedKitrecipe.shape("123", "456", "789");
         MedKitrecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-left")));
         MedKitrecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-middle")));
