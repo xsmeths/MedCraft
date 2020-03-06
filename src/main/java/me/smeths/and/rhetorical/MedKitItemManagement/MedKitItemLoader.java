@@ -51,8 +51,8 @@ public class MedKitItemLoader {
 
     private void setupMedKitRecipe()
     {
-        NamespacedKey key = new NamespacedKey(medCraft, "MedKit");
-        ShapedRecipe MedKitrecipe = new ShapedRecipe(key, MedKitItemcraftd);
+        NamespacedKey recipekey = new NamespacedKey(medCraft, "MedKit");
+        ShapedRecipe MedKitrecipe = new ShapedRecipe(recipekey, MedKitItemcraftd);
         MedKitrecipe.shape("123", "456", "789");
         MedKitrecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-left")));
         MedKitrecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-middle")));
