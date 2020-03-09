@@ -1,5 +1,6 @@
 Bandage:
   Material: PAPER
+  Warmup-Speed: 1
   Result-Amount: 2
   ModelData: 16
   Name: '&4✚&fBandage&4✚'
@@ -16,7 +17,7 @@ Bandage:
   Crafting-Material-bottom-right: AIR
 MedKit:
   Material: PAPER
-  Warmup: 1
+  Warmup-Speed: 1
   Result-Amount: 1
   ModelData: 18
   Name: '&c✚&fMedKit&c✚'

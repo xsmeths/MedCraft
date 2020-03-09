@@ -31,6 +31,7 @@ public class BandageHandler
       int progress = 0;
       int duration = 20 * MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Time");
       int amplifier = MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Amplifier");
+      int multiplier = MedCraft.getPlugin().getConfig().getInt("Bandage.Warmup-Speed");
 
       public void cancel()
       {
@@ -71,7 +72,7 @@ public class BandageHandler
 
         PacketHandler.getInstance().sendActionBarMessage(p,sb.toString());
 
-        this.progress += 1;
+        this.progress += multiplier;
       }
     });
     bandagingPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);

@@ -32,6 +32,7 @@ public class MedKitHandler
       int progress = 0;
       int duration = 20 * MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Time");
       int amplifier = MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Amplifier");
+      int multiplier = MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup-Speed");
 
       public void cancel()
       {
@@ -42,7 +43,7 @@ public class MedKitHandler
       {
         boolean cancelled = p.getLocation().distance(this.position) > 0.75D;
 
-        if ((this.progress > MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup")) || (cancelled))
+        if ((this.progress > 60) || (cancelled))
         {
           if (cancelled) {
             p.getInventory().addItem(MedKitItemLoader.getMedKitItem());
@@ -50,7 +51,7 @@ public class MedKitHandler
 
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
-        } else if (this.progress == MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup")) {
+        } else if (this.progress == 60) {
           if (p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           else {
@@ -76,7 +77,7 @@ public class MedKitHandler
 
         PacketHandler.getInstance().sendActionBarMessage(p,sb.toString());
 
-        this.progress += 1;
+        this.progress += multiplier;
       }
     });
     MedKitPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
