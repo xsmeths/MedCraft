@@ -67,7 +67,7 @@ public class MedKitItemListener
   }
   @EventHandler
   public void StopCraftMedKit(CraftItemEvent e) {
-    if (e.getInventory().getResult().getType() == MedKitItemLoader.getMedKitItem().getType()) {
+    if (e.getInventory().getResult().getType() == MedKitItemLoader.getMedKitItem().getType() && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) {
       Player crafter = (Player) e.getWhoClicked();
       if (!crafter.hasPermission("medkit.craft")) {
         e.setCancelled(true);

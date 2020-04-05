@@ -64,7 +64,7 @@ public class BandageItemListener
   }
   @EventHandler
   public void StopCraftBandage(CraftItemEvent e) {
-    if (e.getInventory().getResult().getType() == BandageItemLoader.getBandageItem().getType()) {
+    if (e.getInventory().getResult().getType() == BandageItemLoader.getBandageItem().getType() && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")) {
       Player crafter = (Player) e.getWhoClicked();
       if (!crafter.hasPermission("bandage.craft")) {
         e.setCancelled(true);
