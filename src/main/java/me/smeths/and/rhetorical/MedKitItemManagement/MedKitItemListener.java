@@ -20,7 +20,7 @@ public class MedKitItemListener
 
   @EventHandler
   public void onPlayerUseMedKit(PlayerInteractEvent e) {
-    if (e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_AIR) {
+    if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
       return;
     }
     Player p = e.getPlayer();
