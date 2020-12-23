@@ -2,6 +2,7 @@ Bandage:
   Material: PAPER
   Warmup-Speed: 1
   Result-Amount: 2
+  movecancel-threshhold: 0.75D
   ModelData: 16
   Name: '&4✚&fBandage&4✚'
   Regen-Time: 3

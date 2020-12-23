@@ -39,6 +39,7 @@ public class BandageHandler
       }
       public void run()
       {
+
         boolean cancelled = p.getLocation().distance(this.position) > 0.75D;
         if ((this.progress > 60) || (cancelled))
         {
