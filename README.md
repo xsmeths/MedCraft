@@ -1,5 +1,6 @@
 # MedCraft
 Realistic Medical Items for spigot
+
 https://www.spigotmc.org/resources/resource-pack-now-included-medcraft-a-realistic-healing-items-plugin-for-spigot-1-15-support.6760/
 
 # Contributors
@@ -11,3 +12,6 @@ Chasef8 -> Came up with the original idea for Bandages which turned into Bandage
 Everyone who uses or has used this plugin and/or gives ideas for its continued developement
 
 love you all
+
+you?
+make a fork, submit a pr and maybe you could be next?
