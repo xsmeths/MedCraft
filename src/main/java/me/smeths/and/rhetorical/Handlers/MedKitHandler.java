@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class MedKitHandler
 {
-  private static Map<Player, BukkitRunnable> MedKitPlayers = new HashMap<>();
+  private static final Map<Player, BukkitRunnable> MedKitPlayers = new HashMap<>();
 
   public MedKitHandler(final Player p) {
     if (MedKitPlayers.containsKey(p)) {
@@ -27,12 +27,12 @@ public class MedKitHandler
 
     MedKitPlayers.put(p, new BukkitRunnable()
     {
-      Location position = p.getLocation();
+      final Location position = p.getLocation();
       final int total = 60;
       int progress = 0;
-      int duration = 20 * MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Time");
-      int amplifier = MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Amplifier");
-      int multiplier = MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup-Speed");
+      final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Time");
+      final int amplifier = MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Amplifier");
+      final int multiplier = MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup-Speed");
 
       public void cancel()
       {
@@ -51,7 +51,7 @@ public class MedKitHandler
 
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
-        } else if (this.progress == 60) {
+        } else if (this.progress == total) {
           if (p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           else {
@@ -83,6 +83,8 @@ public class MedKitHandler
     MedKitPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
   }
 
-  public static boolean isMedding(Player p) { return MedKitPlayers.containsKey(p);
+  public static boolean isMedding(Player p)
+  {
+    return MedKitPlayers.containsKey(p);
   }
 }

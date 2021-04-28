@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 public class BandageItemListener
   implements Listener {
@@ -43,7 +44,7 @@ public class BandageItemListener
       toCheck[0] = p.getInventory().getItemInHand();
     }
     for (ItemStack i : toCheck)
-      if ((i.getType().equals(BandageItemLoader.getBandageItem().getType())) && i.getItemMeta().hasCustomModelData() == true && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))) {
+      if (i.getType().equals(BandageItemLoader.getBandageItem().getType()) && Objects.requireNonNull(i.getItemMeta()).hasCustomModelData() && i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")) {
         if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("bandage.use")) {
           int heldslot = p.getInventory().getHeldItemSlot();
           p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
