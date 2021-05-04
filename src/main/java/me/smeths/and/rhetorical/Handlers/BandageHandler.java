@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class BandageHandler
 {
-  private static final Map<Player, BukkitRunnable> bandagingPlayers = new HashMap<>();
+  private static Map<Player, BukkitRunnable> bandagingPlayers = new HashMap<>();
 
   public BandageHandler(final Player p) {
     if (bandagingPlayers.containsKey(p)) {
@@ -26,12 +26,12 @@ public class BandageHandler
     }
     bandagingPlayers.put(p, new BukkitRunnable()
     {
-      final Location position = p.getLocation();
+      Location position = p.getLocation();
       final int total = 60;
       int progress = 0;
-      final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Time");
-      final int amplifier = MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Amplifier");
-      final int multiplier = MedCraft.getPlugin().getConfig().getInt("Bandage.Warmup-Speed");
+      int duration = 20 * MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Time");
+      int amplifier = MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Amplifier");
+      int multiplier = MedCraft.getPlugin().getConfig().getInt("Bandage.Warmup-Speed");
 
       public void cancel()
       {
@@ -48,7 +48,7 @@ public class BandageHandler
           }
           BandageHandler.bandagingPlayers.remove(p);
           cancel();
-        } else if (this.progress == total) {
+        } else if (this.progress == 60) {
           if (p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           else {
