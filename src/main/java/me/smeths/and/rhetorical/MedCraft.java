@@ -2,8 +2,7 @@ package me.smeths.and.rhetorical;
 
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.ItemManager.ItemLoader;
-import me.smeths.and.rhetorical.Listeners.BandageItemListener;
-import me.smeths.and.rhetorical.Listeners.MedKitItemListener;
+import me.smeths.and.rhetorical.Listeners.MedCraftListeners;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,8 +22,7 @@ public class MedCraft extends JavaPlugin
         new ItemLoader();
         new PacketHandler();
 
-        Bukkit.getPluginManager().registerEvents(new BandageItemListener(), getPlugin());
-        Bukkit.getPluginManager().registerEvents(new MedKitItemListener(), getPlugin());
+        Bukkit.getPluginManager().registerEvents(new MedCraftListeners(), getPlugin());
 
         loadConfiguration();
     }
