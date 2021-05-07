@@ -6,6 +6,7 @@ import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.ItemManager.ItemLoader;
 import me.smeths.and.rhetorical.MedCraft;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,15 +18,13 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class MedCraftListeners
-        implements Listener {
-
+public class MedCraftListeners implements Listener {
     @EventHandler
     public void onPlayerUseMedKit(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             return;
         }
-        Player p = e.getPlayer();
         ItemStack[] toCheck;
         try {
             toCheck = new ItemStack[2];
@@ -45,7 +44,7 @@ public class MedCraftListeners
             toCheck[0] = p.getInventory().getItemInHand();
         }
         for (ItemStack i : toCheck)
-            if ((i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData() == true && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData"))) {
+            if ((i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData() && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData"))) {
                 if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("medkit.use")) {
                     int heldslot = p.getInventory().getHeldItemSlot();
                     p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
@@ -66,7 +65,7 @@ public class MedCraftListeners
                 }
             }
         for (ItemStack i : toCheck)
-            if ((i.getType().equals(ItemLoader.getBandageItem().getType())) && i.getItemMeta().hasCustomModelData() == true && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))) {
+            if ((i.getType().equals(ItemLoader.getBandageItem().getType())) && i.getItemMeta().hasCustomModelData() && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))) {
                 if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("bandage.use")) {
                     int heldslot = p.getInventory().getHeldItemSlot();
                     p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
