@@ -1,10 +1,9 @@
 package me.smeths.and.rhetorical;
 
-import me.smeths.and.rhetorical.BandageItemManagement.BandageItemListener;
-import me.smeths.and.rhetorical.BandageItemManagement.BandageItemLoader;
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
-import me.smeths.and.rhetorical.MedKitItemManagement.MedKitItemListener;
-import me.smeths.and.rhetorical.MedKitItemManagement.MedKitItemLoader;
+import me.smeths.and.rhetorical.ItemManager.ItemLoader;
+import me.smeths.and.rhetorical.Listeners.BandageItemListener;
+import me.smeths.and.rhetorical.Listeners.MedKitItemListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,8 +20,7 @@ public class MedCraft extends JavaPlugin
         }
         instance = this;
 
-        new BandageItemLoader();
-        new MedKitItemLoader();
+        new ItemLoader();
         new PacketHandler();
 
         Bukkit.getPluginManager().registerEvents(new BandageItemListener(), getPlugin());
@@ -33,6 +31,7 @@ public class MedCraft extends JavaPlugin
     public void loadConfiguration(){
         try {
             if (!getDataFolder().exists()) {
+                //noinspection ResultOfMethodCallIgnored
                 getDataFolder().mkdirs();
             }
             File file = new File(getDataFolder(), "config.yml");
@@ -50,7 +49,7 @@ public class MedCraft extends JavaPlugin
     }
     public void onDisable()
     {
-        Bukkit.removeRecipe(MedKitItemLoader.getInstance().Medrecipekey);
+        Bukkit.removeRecipe(ItemLoader.getInstance().Medrecipekey);
     }
     public static JavaPlugin getPlugin() {
         return instance;

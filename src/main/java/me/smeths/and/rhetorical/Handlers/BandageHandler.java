@@ -1,6 +1,6 @@
 package me.smeths.and.rhetorical.Handlers;
 
-import me.smeths.and.rhetorical.BandageItemManagement.BandageItemLoader;
+import me.smeths.and.rhetorical.ItemManager.ItemLoader;
 import me.smeths.and.rhetorical.MedCraft;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -22,7 +22,7 @@ public class BandageHandler
     if (bandagingPlayers.containsKey(p)) {
       bandagingPlayers.get(p).cancel();
       bandagingPlayers.remove(p);
-      p.getInventory().addItem(BandageItemLoader.getBandageItem());
+      p.getInventory().addItem(ItemLoader.getBandageItem());
     }
     bandagingPlayers.put(p, new BukkitRunnable()
     {
@@ -44,7 +44,7 @@ public class BandageHandler
         if ((this.progress > 60) || (cancelled))
         {
           if (cancelled) {
-            p.getInventory().addItem(BandageItemLoader.getBandageItem());
+            p.getInventory().addItem(ItemLoader.getBandageItem());
           }
           BandageHandler.bandagingPlayers.remove(p);
           cancel();
@@ -52,7 +52,7 @@ public class BandageHandler
           if (p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           else {
-            p.getInventory().addItem(BandageItemLoader.getBandageItem());
+            p.getInventory().addItem(ItemLoader.getBandageItem());
             BandageHandler.bandagingPlayers.remove(p);
             cancel();
           }

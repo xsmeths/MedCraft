@@ -1,7 +1,7 @@
 package me.smeths.and.rhetorical.Handlers;
 
+import me.smeths.and.rhetorical.ItemManager.ItemLoader;
 import me.smeths.and.rhetorical.MedCraft;
-import me.smeths.and.rhetorical.MedKitItemManagement.MedKitItemLoader;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
@@ -16,23 +16,23 @@ import java.util.Objects;
 
 public class MedKitHandler
 {
-  private static Map<Player, BukkitRunnable> MedKitPlayers = new HashMap<>();
+  private static final Map<Player, BukkitRunnable> MedKitPlayers = new HashMap<>();
 
   public MedKitHandler(final Player p) {
     if (MedKitPlayers.containsKey(p)) {
       MedKitPlayers.get(p).cancel();
       MedKitPlayers.remove(p);
-      p.getInventory().addItem(MedKitItemLoader.getMedKitItem());
+      p.getInventory().addItem(ItemLoader.getMedKitItem());
     }
 
     MedKitPlayers.put(p, new BukkitRunnable()
     {
-      Location position = p.getLocation();
+      final Location position = p.getLocation();
       final int total = 60;
       int progress = 0;
-      int duration = 20 * MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Time");
-      int amplifier = MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Amplifier");
-      int multiplier = MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup-Speed");
+      final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Time");
+      final int amplifier = MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Amplifier");
+      final int multiplier = MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup-Speed");
 
       public void cancel()
       {
@@ -43,10 +43,10 @@ public class MedKitHandler
       {
         boolean cancelled = p.getLocation().distance(this.position) > 0.75D;
 
-        if ((this.progress > 60) || (cancelled))
+        if ((this.progress > total) || (cancelled))
         {
           if (cancelled) {
-            p.getInventory().addItem(MedKitItemLoader.getMedKitItem());
+            p.getInventory().addItem(ItemLoader.getMedKitItem());
           }
 
           MedKitHandler.MedKitPlayers.remove(p);
@@ -55,7 +55,7 @@ public class MedKitHandler
           if (p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           else {
-            p.getInventory().addItem(MedKitItemLoader.getMedKitItem());
+            p.getInventory().addItem(ItemLoader.getMedKitItem());
             MedKitHandler.MedKitPlayers.remove(p);
             cancel();
           }

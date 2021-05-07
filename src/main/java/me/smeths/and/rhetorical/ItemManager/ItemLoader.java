@@ -1,4 +1,4 @@
-package me.smeths.and.rhetorical.MedKitItemManagement;
+package me.smeths.and.rhetorical.ItemManager;
 
 import me.smeths.and.rhetorical.MedCraft;
 import org.bukkit.Bukkit;
@@ -10,14 +10,17 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
-public class MedKitItemLoader {
+public class ItemLoader {
     private Plugin medCraft = MedCraft.getPlugin();
-    private static MedKitItemLoader instance;
+    private static ItemLoader instance;
     private ItemStack MedKitItem;
     private ItemStack MedKitItemcraftd;
+    private ItemStack bandageItem;
+    private ItemStack craftedbandageItem;
+
     public NamespacedKey Medrecipekey = new NamespacedKey(medCraft, "MedKit");
 
-    public MedKitItemLoader() {
+    public ItemLoader() {
         if (instance != null) {
             return;
         }
@@ -26,9 +29,12 @@ public class MedKitItemLoader {
         setupMedKitItem();
         setupCraftedMedKitItem();
         setupMedKitRecipe();
+        setupBandageItem();
+        setupCraftedBandageItem();
+        setupBandageRecipe();
     }
 
-    public static MedKitItemLoader getInstance() {
+    public static ItemLoader getInstance() {
         return instance;
     }
 
@@ -36,6 +42,38 @@ public class MedKitItemLoader {
         return getInstance().MedKitItem;
     }
 
+    public static ItemStack getBandageItem() {
+        return getInstance().bandageItem;
+    }
+
+    private void setupBandageItem() {
+        String BandageName = MedCraft.getPlugin().getConfig().getString("Bandage.Name");
+        bandageItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), 1);
+        ItemMeta BandageMeta = bandageItem.getItemMeta();
+        BandageMeta.setCustomModelData(medCraft.getConfig().getInt("Bandage.ModelData"));
+        BandageMeta.setDisplayName(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',BandageName));
+        this.bandageItem.setItemMeta(BandageMeta);
+    }
+    private void setupCraftedBandageItem() {
+        craftedbandageItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), medCraft.getConfig().getInt("Bandage.Result-Amount"));
+        ItemMeta craftedBandageMeta = bandageItem.getItemMeta();
+        craftedbandageItem.setItemMeta(craftedBandageMeta);
+    }
+    private void setupBandageRecipe() {
+        NamespacedKey recipekey = new NamespacedKey(medCraft, "Bandage");
+        ShapedRecipe Bandagerecipe = new ShapedRecipe(recipekey, craftedbandageItem);
+        Bandagerecipe.shape("123", "456", "789");
+        Bandagerecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-left")));
+        Bandagerecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-middle")));
+        Bandagerecipe.setIngredient('3', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-right")));
+        Bandagerecipe.setIngredient('4', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-middle-left")));
+        Bandagerecipe.setIngredient('5', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-center")));
+        Bandagerecipe.setIngredient('6', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-middle-right")));
+        Bandagerecipe.setIngredient('7', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-left")));
+        Bandagerecipe.setIngredient('8', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-middle")));
+        Bandagerecipe.setIngredient('9', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-right")));
+        Bukkit.addRecipe(Bandagerecipe);
+    }
     private void setupMedKitItem() {
         String MedKitName = MedCraft.getPlugin().getConfig().getString("MedKit.Name");
         MedKitItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Material")),1 );

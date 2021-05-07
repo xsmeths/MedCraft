@@ -1,7 +1,8 @@
-package me.smeths.and.rhetorical.BandageItemManagement;
+package me.smeths.and.rhetorical.Listeners;
 
-import me.smeths.and.rhetorical.Handlers.BandageHandler;
+import me.smeths.and.rhetorical.Handlers.MedKitHandler;
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
+import me.smeths.and.rhetorical.ItemManager.ItemLoader;
 import me.smeths.and.rhetorical.MedCraft;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,11 +16,11 @@ import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class BandageItemListener
+public class MedKitItemListener
   implements Listener {
 
   @EventHandler
-  public void onPlayerUseBandage(PlayerInteractEvent e) {
+  public void onPlayerUseMedKit(PlayerInteractEvent e) {
     if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
       return;
     }
@@ -43,32 +44,35 @@ public class BandageItemListener
       toCheck[0] = p.getInventory().getItemInHand();
     }
     for (ItemStack i : toCheck)
-      if ((i.getType().equals(BandageItemLoader.getBandageItem().getType())) && i.getItemMeta().hasCustomModelData() == true && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))) {
-        if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("bandage.use")) {
+      if ((i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData() == true && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData"))) {
+        if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("medkit.use")) {
           int heldslot = p.getInventory().getHeldItemSlot();
           p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
           p.updateInventory();
-          new BandageHandler(p);
+          new MedKitHandler(p);
           return;
-        } if (i.getAmount() >= 2 && p.hasPermission("bandage.use")) {
+        }
+        if (i.getAmount() >= 2 && p.hasPermission("medkit.use")) {
           i.setAmount(i.getAmount() - 1);
           p.updateInventory();
-          new BandageHandler(p);
+          new MedKitHandler(p);
           return;
-        }if (!p.hasPermission("bandage.use")){
-          PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RED + "No Permissions: you need bandage.use");
+        }
+        if (!p.hasPermission("medkit.use")) {
+          PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RED + "No Permissions: you need medkit.use");
         } else {
           e.setCancelled(true);
+
         }
       }
   }
   @EventHandler
-  public void StopCraftBandage(CraftItemEvent e) {
-    if (e.getInventory().getResult().getType() == BandageItemLoader.getBandageItem().getType() && e.getInventory().getResult().getItemMeta().hasCustomModelData() == true && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")) {
+  public void StopCraftMedKit(CraftItemEvent e) {
+    if (e.getInventory().getResult().getType() == ItemLoader.getMedKitItem().getType() && e.getInventory().getResult().getItemMeta().hasCustomModelData() == true && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) {
       Player crafter = (Player) e.getWhoClicked();
-      if (!crafter.hasPermission("bandage.craft")) {
+      if (!crafter.hasPermission("medkit.craft")) {
         e.setCancelled(true);
-        PacketHandler.getInstance().sendActionBarMessage(crafter,ChatColor.RED + "No permissions: you need bandage.craft");
+        PacketHandler.getInstance().sendActionBarMessage(crafter,ChatColor.RED + "No permissions: you need medkit.craft");
       }
     }
   }
