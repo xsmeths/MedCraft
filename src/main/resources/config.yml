@@ -1,6 +1,6 @@
 Bandage:
   Material: PAPER
-  Warmup-Speed: 2.00
+  Warmup-Speed: 1.55
   Result-Amount: 2
   ModelData: 16
   Name: '&4✚&fBandage&4✚'
@@ -23,7 +23,7 @@ Bandage:
   NoPermUse: 'No Permissions: you need bandage.use'
 MedKit:
   Material: PAPER
-  Warmup-Speed: 1.00
+  Warmup-Speed: 0.42
   Result-Amount: 1
   ModelData: 18
   Name: '&c✚&fMedKit&c✚'
