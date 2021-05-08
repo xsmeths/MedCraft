@@ -42,7 +42,7 @@ public class BandageHandler
       {
 
         boolean cancelled = p.getLocation().distance(this.position) > 0.75D;
-        if (MedKitHandler.isMedding(p) || (cancelled))
+        if ((cancelled))
         {
           if (cancelled) {
             p.getInventory().addItem(ItemLoader.getBandageItem());
