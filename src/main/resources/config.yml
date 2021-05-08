@@ -4,7 +4,9 @@ Bandage:
   Result-Amount: 2
   ModelData: 16
   Name: '&4✚&fBandage&4✚'
-  Lore-1: '&6Right/Left click to use this MedKit'
+  Lore:
+    - '&6Right/Left click to use this Bandage'
+    - '&6Because smeths is cool'
   Regen-Time: 3
   Regen-Amplifier: 1
   Crafting-Material-top-left: AIR
@@ -28,7 +30,8 @@ MedKit:
   ModelData: 18
   Name: '&c✚&fMedKit&c✚'
   Lore:
-  - '&6Right/Left click to use this MedKit'
+    - '&6Right/Left click to use this MedKit'
+    - '&6Because floris is cool'
   Regen-Time: 6
   Regen-Amplifier: 2
   Crafting-Material-top-left: PAPER
