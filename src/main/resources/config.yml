@@ -1,10 +1,10 @@
 Bandage:
   Material: PAPER
-  Warmup-Speed: 1
+  Warmup-Speed: 2
   Result-Amount: 2
-  movecancel-threshhold: 0.75D
   ModelData: 16
   Name: '&4✚&fBandage&4✚'
+  Lore-1: '&6Right/Left click to use this MedKit'
   Regen-Time: 3
   Regen-Amplifier: 1
   Crafting-Material-top-left: AIR
@@ -16,12 +16,16 @@ Bandage:
   Crafting-Material-bottom-left: AIR
   Crafting-Material-bottom-middle: PAPER
   Crafting-Material-bottom-right: AIR
+  PerformCMD: false
+  ConsoleCMD: true
+  CMD: 'tell [playername] your server admin did not configure this plugin'
 MedKit:
   Material: PAPER
   Warmup-Speed: 1
   Result-Amount: 1
   ModelData: 18
   Name: '&c✚&fMedKit&c✚'
+  Lore-1: '&6Right/Left click to use this MedKit'
   Regen-Time: 6
   Regen-Amplifier: 2
   Crafting-Material-top-left: PAPER
@@ -33,3 +37,6 @@ MedKit:
   Crafting-Material-bottom-left: PAPER
   Crafting-Material-bottom-middle: PAPER
   Crafting-Material-bottom-right: PAPER
+  PerformCMD: false
+  ConsoleCMD: true
+  CMD: 'tell [playername] your server admin did not configure this plugin'

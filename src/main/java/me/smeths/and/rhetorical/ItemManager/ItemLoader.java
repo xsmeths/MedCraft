@@ -5,10 +5,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemLoader {
     private Plugin medCraft = MedCraft.getPlugin();
@@ -48,12 +53,16 @@ public class ItemLoader {
     }
 
     private void setupBandageItem() {
+        List<String> Bandagelore = new ArrayList<String>();
         String BandageName = MedCraft.getPlugin().getConfig().getString("Bandage.Name");
         bandageItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), 1);
         ItemMeta BandageMeta = bandageItem.getItemMeta();
         BandageMeta.setCustomModelData(medCraft.getConfig().getInt("Bandage.ModelData"));
         BandageMeta.setDisplayName(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',BandageName));
-        this.bandageItem.setItemMeta(BandageMeta);
+        BandageMeta.addEnchant(Enchantment.DURABILITY,1,true);
+        BandageMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        Bandagelore.add(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',MedCraft.getPlugin().getConfig().getString("Bandage.Lore-1")));
+        bandageItem.setItemMeta(BandageMeta);
     }
     private void setupCraftedBandageItem() {
         craftedbandageItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), medCraft.getConfig().getInt("Bandage.Result-Amount"));
@@ -75,11 +84,16 @@ public class ItemLoader {
         Bukkit.addRecipe(Bandagerecipe);
     }
     private void setupMedKitItem() {
+        List<String> Medkitlore = new ArrayList<String>();
         String MedKitName = MedCraft.getPlugin().getConfig().getString("MedKit.Name");
         MedKitItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Material")),1 );
         ItemMeta MedKitMeta = MedKitItem.getItemMeta();
         MedKitMeta.setCustomModelData(medCraft.getConfig().getInt("MedKit.ModelData"));
         MedKitMeta.setDisplayName(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',MedKitName));
+        MedKitMeta.addEnchant(Enchantment.DURABILITY,1,true);
+        MedKitMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        Medkitlore.add(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',MedCraft.getPlugin().getConfig().getString("MedKit.Lore-1")));
+        MedKitMeta.setLore(Medkitlore);
         MedKitItem.setItemMeta(MedKitMeta);
     }
     private void setupCraftedMedKitItem() {

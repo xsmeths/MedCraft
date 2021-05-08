@@ -49,7 +49,8 @@ public class MedCraftListeners implements Listener {
                     int heldslot = p.getInventory().getHeldItemSlot();
                     p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
                     p.updateInventory();
-                    new MedKitHandler(p);                    return;
+                    new MedKitHandler(p);
+                    return;
                 }
                 if (i.getAmount() >= 2 && p.hasPermission("medkit.use")) {
                     i.setAmount(i.getAmount() - 1);
