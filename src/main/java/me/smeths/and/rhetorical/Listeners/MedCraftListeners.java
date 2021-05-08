@@ -59,7 +59,7 @@ public class MedCraftListeners implements Listener {
                     return;
                 }
                 if (!p.hasPermission("medkit.use")) {
-                    PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RED + "No Permissions: you need medkit.use");
+                    PacketHandler.getInstance().sendActionBarMessage(p,ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',MedCraft.getPlugin().getConfig().getString("MedKit.NoPermUse")));
                 } else {
                     e.setCancelled(true);
                 }
@@ -78,7 +78,7 @@ public class MedCraftListeners implements Listener {
                     new BandageHandler(p);
                     return;
                 }if (!p.hasPermission("bandage.use")){
-                    PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RED + "No Permissions: you need bandage.use");
+                    PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', MedCraft.getPlugin().getConfig().getString("Bandage.NoPermUse")));
                 } else {
                     e.setCancelled(true);
                 }
@@ -90,14 +90,14 @@ public class MedCraftListeners implements Listener {
             Player crafter = (Player) e.getWhoClicked();
             if (!crafter.hasPermission("medkit.craft")) {
                 e.setCancelled(true);
-                PacketHandler.getInstance().sendActionBarMessage(crafter,ChatColor.RED + "No permissions: you need medkit.craft");
+                PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', MedCraft.getPlugin().getConfig().getString("MedKit.NoPermCraft")));;
             }
         }
         if (e.getInventory().getResult().getType() == ItemLoader.getBandageItem().getType() && e.getInventory().getResult().getItemMeta().hasCustomModelData() && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")) {
             Player crafter = (Player) e.getWhoClicked();
             if (!crafter.hasPermission("bandage.craft")) {
                 e.setCancelled(true);
-                PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RED + "No permissions: you need bandage.craft");
+                PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', MedCraft.getPlugin().getConfig().getString("Bandage.NoPermCraft")));
             }
         }
     }

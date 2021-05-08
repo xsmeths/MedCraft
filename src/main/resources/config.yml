@@ -19,6 +19,8 @@ Bandage:
   PerformCMD: false
   ConsoleCMD: true
   CMD: 'tell [playername] your server admin did not configure this plugin'
+  NoPermCraft: 'No Permissions: you need baanage.craft'
+  NoPermUse: 'No Permissions: you need bandage.use'
 MedKit:
   Material: PAPER
   Warmup-Speed: 1
@@ -40,3 +42,5 @@ MedKit:
   PerformCMD: false
   ConsoleCMD: true
   CMD: 'tell [playername] your server admin did not configure this plugin'
+  NoPermCraft: 'No Permissions: you need medkit.craft'
+  NoPermUse: 'No Permissions: you need medkit.use'
