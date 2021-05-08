@@ -44,7 +44,7 @@ public class MedKitHandler
       {
         boolean cancelled = p.getLocation().distance(this.position) > 0.75D;
 
-        if ((this.progress > total) || (cancelled))
+        if ((cancelled))
         {
           if (cancelled) {
             p.getInventory().addItem(ItemLoader.getMedKitItem());
@@ -52,7 +52,7 @@ public class MedKitHandler
 
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
-        } else if (this.progress == total) {
+        } else if (this.progress >= total) {
           if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.PerformCMD") == true && MedCraft.getPlugin().getConfig().getBoolean("MedKit.ConsoleCMD") == true && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.valueOf(MedCraft.getPlugin().getConfig().get("MedKit.CMD")).replace("[playername]", p.getName()));
