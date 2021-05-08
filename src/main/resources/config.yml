@@ -27,7 +27,8 @@ MedKit:
   Result-Amount: 1
   ModelData: 18
   Name: '&c✚&fMedKit&c✚'
-  Lore-1: '&6Right/Left click to use this MedKit'
+  Lore:
+  - '&6Right/Left click to use this MedKit'
   Regen-Time: 6
   Regen-Amplifier: 2
   Crafting-Material-top-left: PAPER
