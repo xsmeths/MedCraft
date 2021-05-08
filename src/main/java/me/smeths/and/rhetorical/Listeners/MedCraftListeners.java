@@ -22,7 +22,7 @@ public class MedCraftListeners implements Listener {
     @EventHandler
     public void onPlayerUseMedKit(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType() != Material.CHEST && e.getClickedBlock().getType() != Material.FURNACE && e.getClickedBlock().getType() != Material.BLAST_FURNACE && e.getClickedBlock().getType() != Material.SMOKER && e.getClickedBlock().getType() != Material.TRAPPED_CHEST && e.getClickedBlock().getType() != Material.CHEST_MINECART && e.getClickedBlock().getType() != Material.FURNACE_MINECART && e.getClickedBlock().getType() != Material.HOPPER_MINECART && e.getClickedBlock().getType() != Material.CRAFTING_TABLE && e.getClickedBlock().getType() != Material.HOPPER && e.getClickedBlock().getType() != Material.ENDER_CHEST && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.BARREL && e.getClickedBlock().getType() != Material.FLETCHING_TABLE && e.getClickedBlock().getType() != Material.CARTOGRAPHY_TABLE && e.getClickedBlock().getType() != Material.GRINDSTONE && e.getClickedBlock().getType() != Material.STONECUTTER && e.getClickedBlock().getType() != Material.SMITHING_TABLE && e.getClickedBlock().getType() != Material.LOOM) {
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             return;
         }
         ItemStack[] toCheck;
@@ -44,7 +44,7 @@ public class MedCraftListeners implements Listener {
             toCheck[0] = p.getInventory().getItemInHand();
         }
         for (ItemStack i : toCheck)
-            if ((i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData()  && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData"))) {
+            if ((i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData() && e.getClickedBlock() != null && !e.getClickedBlock().getType().toString().contains("BED") && e.getClickedBlock().getType() != Material.CHEST && e.getClickedBlock().getType() != Material.FURNACE && e.getClickedBlock().getType() != Material.BLAST_FURNACE && e.getClickedBlock().getType() != Material.SMOKER && e.getClickedBlock().getType() != Material.TRAPPED_CHEST && e.getClickedBlock().getType() != Material.CHEST_MINECART && e.getClickedBlock().getType() != Material.FURNACE_MINECART && e.getClickedBlock().getType() != Material.HOPPER_MINECART && e.getClickedBlock().getType() != Material.CRAFTING_TABLE && e.getClickedBlock().getType() != Material.HOPPER && e.getClickedBlock().getType() != Material.ENDER_CHEST && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.BARREL && e.getClickedBlock().getType() != Material.FLETCHING_TABLE && e.getClickedBlock().getType() != Material.CARTOGRAPHY_TABLE && e.getClickedBlock().getType() != Material.GRINDSTONE && e.getClickedBlock().getType() != Material.STONECUTTER && e.getClickedBlock().getType() != Material.SMITHING_TABLE && e.getClickedBlock().getType() != Material.LOOM && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) || (i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData() && e.getClickedBlock() == null && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData"))) {
                 if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("medkit.use")) {
                     int heldslot = p.getInventory().getHeldItemSlot();
                     p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
@@ -65,7 +65,7 @@ public class MedCraftListeners implements Listener {
                 }
             }
         for (ItemStack i : toCheck)
-            if ((i.getType().equals(ItemLoader.getBandageItem().getType())) && i.getItemMeta().hasCustomModelData() && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))) {
+            if ((i.getType().equals(ItemLoader.getBandageItem().getType())) && e.getClickedBlock() != null && !e.getClickedBlock().getType().toString().contains("BED") && e.getClickedBlock().getType() != Material.CHEST && e.getClickedBlock().getType() != Material.FURNACE && e.getClickedBlock().getType() != Material.BLAST_FURNACE && e.getClickedBlock().getType() != Material.SMOKER && e.getClickedBlock().getType() != Material.TRAPPED_CHEST && e.getClickedBlock().getType() != Material.CHEST_MINECART && e.getClickedBlock().getType() != Material.FURNACE_MINECART && e.getClickedBlock().getType() != Material.HOPPER_MINECART && e.getClickedBlock().getType() != Material.CRAFTING_TABLE && e.getClickedBlock().getType() != Material.HOPPER && e.getClickedBlock().getType() != Material.ENDER_CHEST && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.BARREL && e.getClickedBlock().getType() != Material.FLETCHING_TABLE && e.getClickedBlock().getType() != Material.CARTOGRAPHY_TABLE && e.getClickedBlock().getType() != Material.GRINDSTONE && e.getClickedBlock().getType() != Material.STONECUTTER && e.getClickedBlock().getType() != Material.SMITHING_TABLE && e.getClickedBlock().getType() != Material.LOOM && i.getItemMeta().hasCustomModelData() && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")) || (i.getType().equals(ItemLoader.getBandageItem().getType())) && e.getClickedBlock() == null && i.getItemMeta().hasCustomModelData() && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))) {
                 if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("bandage.use")) {
                     int heldslot = p.getInventory().getHeldItemSlot();
                     p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
@@ -86,14 +86,14 @@ public class MedCraftListeners implements Listener {
     }
     @EventHandler
     public void StopCraftMedKit(CraftItemEvent e) {
-        if (e.getInventory().getResult().getType() == ItemLoader.getMedKitItem().getType() && e.getInventory().getResult().getItemMeta().hasCustomModelData() == true && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) {
+        if (e.getInventory().getResult().getType() == ItemLoader.getMedKitItem().getType() && e.getInventory().getResult().getItemMeta().hasCustomModelData() && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) {
             Player crafter = (Player) e.getWhoClicked();
             if (!crafter.hasPermission("medkit.craft")) {
                 e.setCancelled(true);
                 PacketHandler.getInstance().sendActionBarMessage(crafter,ChatColor.RED + "No permissions: you need medkit.craft");
             }
         }
-        if (e.getInventory().getResult().getType() == ItemLoader.getBandageItem().getType() && e.getInventory().getResult().getItemMeta().hasCustomModelData() == true && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")) {
+        if (e.getInventory().getResult().getType() == ItemLoader.getBandageItem().getType() && e.getInventory().getResult().getItemMeta().hasCustomModelData() && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")) {
             Player crafter = (Player) e.getWhoClicked();
             if (!crafter.hasPermission("bandage.craft")) {
                 e.setCancelled(true);
