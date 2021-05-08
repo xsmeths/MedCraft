@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 public class ItemLoader {
-    private Plugin medCraft = MedCraft.getPlugin();
+    private final Plugin medCraft = MedCraft.getPlugin();
     private static ItemLoader instance;
     private ItemStack MedKitItem;
     private ItemStack MedKitItemcraftd;
@@ -49,9 +49,8 @@ public class ItemLoader {
 
     private void setupBandageItem() {
         String BandageName = MedCraft.getPlugin().getConfig().getString("Bandage.Name");
-        bandageItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), 1);
+        bandageItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")),1, (short)medCraft.getConfig().get("Bandage.DamageValue"));
         ItemMeta BandageMeta = bandageItem.getItemMeta();
-        BandageMeta.setCustomModelData(medCraft.getConfig().getInt("Bandage.ModelData"));
         BandageMeta.setDisplayName(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',BandageName));
         this.bandageItem.setItemMeta(BandageMeta);
     }
@@ -76,9 +75,8 @@ public class ItemLoader {
     }
     private void setupMedKitItem() {
         String MedKitName = MedCraft.getPlugin().getConfig().getString("MedKit.Name");
-        MedKitItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Material")),1 );
+        MedKitItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Material")),1, (short)medCraft.getConfig().getInt("MedKit.DamageValue"));
         ItemMeta MedKitMeta = MedKitItem.getItemMeta();
-        MedKitMeta.setCustomModelData(medCraft.getConfig().getInt("MedKit.ModelData"));
         MedKitMeta.setDisplayName(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',MedKitName));
         MedKitItem.setItemMeta(MedKitMeta);
     }

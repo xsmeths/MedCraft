@@ -3,7 +3,7 @@ Bandage:
   Warmup-Speed: 1
   Result-Amount: 2
   movecancel-threshhold: 0.75D
-  ModelData: 16
+  DamageValue: 16
   Name: '&4✚&fBandage&4✚'
   Regen-Time: 3
   Regen-Amplifier: 1
@@ -20,7 +20,7 @@ MedKit:
   Material: PAPER
   Warmup-Speed: 1
   Result-Amount: 1
-  ModelData: 18
+  DamageValue: 18
   Name: '&c✚&fMedKit&c✚'
   Regen-Time: 6
   Regen-Amplifier: 2
