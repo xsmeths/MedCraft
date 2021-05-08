@@ -28,11 +28,11 @@ public class BandageHandler
     bandagingPlayers.put(p, new BukkitRunnable()
     {
       final Location position = p.getLocation();
-      final int total = 60;
-      int progress = 0;
+      final double total = 60;
+      double progress = 0.0;
       final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Time");
       final int amplifier = MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Amplifier");
-      final int multiplier = MedCraft.getPlugin().getConfig().getInt("Bandage.Warmup-Speed");
+      final double multiplier = MedCraft.getPlugin().getConfig().getInt("Bandage.Warmup-Speed");
 
       public void cancel()
       {
@@ -64,17 +64,17 @@ public class BandageHandler
             cancel();
           }
         }
-        int a = Math.round(this.progress / 60.0F * 10.0F);
-        int b = 10 - a;
+        double a = Math.round(this.progress / 60.0F * 10.0F);
+        double b = 10.00 - a;
 
         StringBuilder sb = new StringBuilder();
 
         sb.append(ChatColor.GREEN);
-        for (int i = 0; i < a; i++) {
+        for (double i = 0.0; i < a; i++) {
           sb.append("■");
         }
         sb.append(ChatColor.RED);
-        for (int i = 0; i < b; i++) {
+        for (double i = 0.0; i < b; i++) {
           sb.append("■");
         }
 
