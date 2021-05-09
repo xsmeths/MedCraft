@@ -86,7 +86,7 @@ public class MedCraftListeners implements Listener {
             }
     }
     @EventHandler
-    public void StopCraftMedKit(CraftItemEvent e) {
+    public void StopCraftM(CraftItemEvent e) {
         if (e.getInventory().getResult().getType() == ItemLoader.getMedKitItem().getType() && e.getInventory().getResult().getItemMeta().hasCustomModelData() && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) {
             Player crafter = (Player) e.getWhoClicked();
             if (!crafter.hasPermission("medkit.craft")) {

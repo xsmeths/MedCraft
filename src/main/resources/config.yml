@@ -1,6 +1,6 @@
 Bandage:
   Material: PAPER
-  Warmup-Speed: 1.55
+  Warmup-Speed: 2
   Result-Amount: 2
   ModelData: 16
   Name: '&4✚&fBandage&4✚'
@@ -25,14 +25,14 @@ Bandage:
   NoPermUse: 'No Permissions: you need bandage.use'
 MedKit:
   Material: PAPER
-  Warmup-Speed: 0.42
+  Warmup-Speed: 1
   Result-Amount: 1
   ModelData: 18
   Name: '&c✚&fMedKit&c✚'
   Lore:
   - '&6Right/Left click to use this MedKit'
   - '&6Because floris is cool'
-  Regen-Time: 6
+  Regen-Time: 9
   Regen-Amplifier: 2
   Crafting-Material-top-left: PAPER
   Crafting-Material-top-middle: PAPER

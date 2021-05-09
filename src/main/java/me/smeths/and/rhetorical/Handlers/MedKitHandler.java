@@ -29,11 +29,11 @@ public class MedKitHandler
     MedKitPlayers.put(p, new BukkitRunnable()
     {
       final Location position = p.getLocation();
-      final double total = 60;
-      double progress = 0.0;
+      final int total = 60;
+      int progress = 0;
       final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Time");
       final int amplifier = MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Amplifier");
-      final double multiplier = MedCraft.getPlugin().getConfig().getDouble("MedKit.Warmup-Speed");
+      final int multiplier = MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup-Speed");
 
       public void cancel()
       {
@@ -44,7 +44,7 @@ public class MedKitHandler
       {
         boolean cancelled = p.getLocation().distance(this.position) > 0.75D;
 
-        if ((cancelled))
+        if ((this.progress > total) || (cancelled))
         {
           if (cancelled) {
             p.getInventory().addItem(ItemLoader.getMedKitItem());
@@ -52,14 +52,14 @@ public class MedKitHandler
 
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
-        } else if (this.progress >= total) {
-          if (!p.hasPotionEffect(PotionEffectType.REGENERATION) && MedCraft.getPlugin().getConfig().getBoolean("MedKit.PerformCMD") == true && MedCraft.getPlugin().getConfig().getBoolean("MedKit.ConsoleCMD") == true && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
+        } else if (this.progress == 60) {
+          if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.PerformCMD") == true && MedCraft.getPlugin().getConfig().getBoolean("MedKit.ConsoleCMD") == true && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.valueOf(MedCraft.getPlugin().getConfig().get("MedKit.CMD")).replace("[playername]", p.getName()));
-          } else if (!p.hasPotionEffect(PotionEffectType.REGENERATION) && MedCraft.getPlugin().getConfig().getBoolean("MedKit.PerformCMD") == true && MedCraft.getPlugin().getConfig().getBoolean("MedKit.ConsoleCMD") == false && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
+          } else if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.PerformCMD") == true && MedCraft.getPlugin().getConfig().getBoolean("MedKit.ConsoleCMD") == false && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(p.getPlayer(),String.valueOf(MedCraft.getPlugin().getConfig().get("MedKit.CMD")).replace("[playername]", p.getName()));
-          } else if (!p.hasPotionEffect(PotionEffectType.REGENERATION) && MedCraft.getPlugin().getConfig().getBoolean("MedKit.PerformCMD") == false && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
+          } else if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.PerformCMD") == false && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           } else {
             p.getInventory().addItem(ItemLoader.getMedKitItem());
@@ -68,17 +68,17 @@ public class MedKitHandler
           }
         }
 
-        double a = Math.round(this.progress / 60.00F * 10.00F);
-        double b = 10.00 - a;
+        int a = Math.round(this.progress / 60.0F * 10.0F);
+        int b = 10 - a;
 
         StringBuilder sb = new StringBuilder();
 
         sb.append(ChatColor.GREEN);
-        for (double i = 0.0; i < a; i++) {
+        for (int i = 0; i < a; i++) {
           sb.append("■");
         }
         sb.append(ChatColor.RED);
-        for (double i = 0.0; i < b; i++) {
+        for (int i = 0; i < b; i++) {
           sb.append("■");
         }
 
