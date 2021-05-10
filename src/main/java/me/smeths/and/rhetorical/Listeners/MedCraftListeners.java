@@ -17,7 +17,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-
 public class MedCraftListeners implements Listener {
     @EventHandler
     public void onPlayerUse(PlayerInteractEvent e) {
@@ -65,7 +64,6 @@ public class MedCraftListeners implements Listener {
             }
         }
     }
-
     @EventHandler
     public void StopCraftM(CraftItemEvent e) {
         if (e.getInventory().getResult().getType() == ItemLoader.getMedKitItem().getType() && e.getInventory().getResult().getItemMeta().hasCustomModelData() && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) {

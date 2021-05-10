@@ -22,16 +22,13 @@ public class ItemLoader {
     private ItemStack CraftedMedKit;
     private ItemStack BandageItem;
     private ItemStack CraftedBandage;
-
     public NamespacedKey Medrecipekey = new NamespacedKey(medCraft, "MedKit");
     public NamespacedKey Bandagerecipekey = new NamespacedKey(medCraft, "Bandage");
-
     public ItemLoader() {
         if (instance != null) {
             return;
         }
         instance = this;
-
         setupMedKitItem();
         setupCraftedMedKit();
         setupMedKitRecipe();
@@ -39,19 +36,15 @@ public class ItemLoader {
         setupCraftedBandage();
         setupBandageRecipe();
     }
-
     public static ItemLoader getInstance() {
         return instance;
     }
-
     public static ItemStack getMedKitItem() {
         return getInstance().MedKitItem;
     }
-
     public static ItemStack getBandageItem() {
         return getInstance().BandageItem;
     }
-
     private void setupBandageItem() {
         List<String> Bandagelore = new ArrayList<String>();
         String BandageName = MedCraft.getPlugin().getConfig().getString("Bandage.Name");
@@ -106,7 +99,6 @@ public class ItemLoader {
         ItemMeta CraftedMedKitMeta = MedKitItem.getItemMeta();
         CraftedMedKit.setItemMeta(CraftedMedKitMeta);
     }
-
     private void setupMedKitRecipe()
     {
         ShapedRecipe MedKitrecipe = new ShapedRecipe(Medrecipekey, CraftedMedKit);

@@ -11,19 +11,15 @@ import java.io.File;
 public class MedCraft extends JavaPlugin
 {
     private static MedCraft instance;
-
     public void onEnable()
     {
         if (instance != null) {
             return;
         }
         instance = this;
-
         new ItemLoader();
         new PacketHandler();
-
         Bukkit.getPluginManager().registerEvents(new MedCraftListeners(), getPlugin());
-
         loadConfiguration();
     }
     public void loadConfiguration(){

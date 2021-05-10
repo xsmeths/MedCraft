@@ -7,18 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class PacketHandler {
-
 	private static PacketHandler instance;
-
 	private String nmsVersion;
 	private Class craftPlayer;
-
 	public PacketHandler() {
 		if (instance != null)
 			return;
-
 		instance = this;
-
 		nmsVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 		try {
 			craftPlayer = Class.forName("org.bukkit.craftbukkit." + nmsVersion + ".entity.CraftPlayer");
@@ -27,16 +22,12 @@ public class PacketHandler {
 			e.printStackTrace();
 		}
 	}
-
-
 	public static PacketHandler getInstance() {
 		return instance;
 	}
-
 	public Class getCraftPlayer() {
 		return craftPlayer;
 	}
-
 	public static Class<?> getNmsClass(String name){
 		try {
 			return Class.forName("net.minecraft.server." + getInstance().nmsVersion + "." + name);
@@ -46,7 +37,6 @@ public class PacketHandler {
 			return null;
 		}
 	}
-
 	public void sendActionBarMessage(Player p, String message) {
 		try {
 			Object chatComponent = getNmsClass("ChatComponentText").getConstructor(String.class).newInstance(message);
