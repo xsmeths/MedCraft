@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemLoader {
-    private Plugin medCraft = MedCraft.getPlugin();
+    private final Plugin medCraft = MedCraft.getPlugin();
     private static ItemLoader instance;
     private ItemStack MedKitItem;
-    private ItemStack MedKitItemcraftd;
+    private ItemStack CraftedMedKit;
     private ItemStack bandageItem;
-    private ItemStack craftedbandageItem;
+    private ItemStack CraftedBandage;
 
     public NamespacedKey Medrecipekey = new NamespacedKey(medCraft, "MedKit");
     public NamespacedKey Bandagerecipekey = new NamespacedKey(medCraft, "Bandage");
@@ -33,10 +33,10 @@ public class ItemLoader {
         instance = this;
 
         setupMedKitItem();
-        setupCraftedMedKitItem();
+        setupCraftedMedKit();
         setupMedKitRecipe();
         setupBandageItem();
-        setupCraftedBandageItem();
+        setupCraftedBandage();
         setupBandageRecipe();
     }
 
@@ -67,13 +67,13 @@ public class ItemLoader {
         BandageMeta.setLore(Bandagelore);
         bandageItem.setItemMeta(BandageMeta);
     }
-    private void setupCraftedBandageItem() {
-        craftedbandageItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), medCraft.getConfig().getInt("Bandage.Result-Amount"));
+    private void setupCraftedBandage() {
+        CraftedBandage = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), medCraft.getConfig().getInt("Bandage.Result-Amount"));
         ItemMeta craftedBandageMeta = bandageItem.getItemMeta();
-        craftedbandageItem.setItemMeta(craftedBandageMeta);
+        CraftedBandage.setItemMeta(craftedBandageMeta);
     }
     private void setupBandageRecipe() {
-        ShapedRecipe Bandagerecipe = new ShapedRecipe(Bandagerecipekey, craftedbandageItem);
+        ShapedRecipe Bandagerecipe = new ShapedRecipe(Bandagerecipekey, CraftedBandage);
         Bandagerecipe.shape("123", "456", "789");
         Bandagerecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-left")));
         Bandagerecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-middle")));
@@ -101,15 +101,15 @@ public class ItemLoader {
         MedKitMeta.setLore(Medkitlore);
         MedKitItem.setItemMeta(MedKitMeta);
     }
-    private void setupCraftedMedKitItem() {
-        MedKitItemcraftd = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Material")), medCraft.getConfig().getInt("MedKit.Result-Amount"));
+    private void setupCraftedMedKit() {
+        CraftedMedKit = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Material")), medCraft.getConfig().getInt("MedKit.Result-Amount"));
         ItemMeta CraftedMedKitMeta = MedKitItem.getItemMeta();
-        MedKitItemcraftd.setItemMeta(CraftedMedKitMeta);
+        CraftedMedKit.setItemMeta(CraftedMedKitMeta);
     }
 
     private void setupMedKitRecipe()
     {
-        ShapedRecipe MedKitrecipe = new ShapedRecipe(Medrecipekey, MedKitItemcraftd);
+        ShapedRecipe MedKitrecipe = new ShapedRecipe(Medrecipekey, CraftedMedKit);
         MedKitrecipe.shape("123", "456", "789");
         MedKitrecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-left")));
         MedKitrecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-middle")));
