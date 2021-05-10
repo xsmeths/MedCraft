@@ -18,6 +18,9 @@ Bandage:
   Crafting-Material-bottom-left: AIR
   Crafting-Material-bottom-middle: PAPER
   Crafting-Material-bottom-right: AIR
+  Crafting-Shape-top-row: '123'
+  Crafting-Shape-middle-row: '456'
+  Crafting-Shape-bottom-row: '789'
   PerformCMD: true
   ConsoleCMD: true
   CMD: 'tell [playername] change this message in your config.yml'
@@ -43,6 +46,9 @@ MedKit:
   Crafting-Material-bottom-left: PAPER
   Crafting-Material-bottom-middle: PAPER
   Crafting-Material-bottom-right: PAPER
+  Crafting-Shape-top-row: '123'
+  Crafting-Shape-middle-row: '456'
+  Crafting-Shape-bottom-row: '789'
   PerformCMD: true
   ConsoleCMD: true
   CMD: 'tell [playername] change this message in your config.yml'

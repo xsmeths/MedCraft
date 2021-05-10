@@ -67,16 +67,26 @@ public class ItemLoader {
     }
     private void setupBandageRecipe() {
         ShapedRecipe Bandagerecipe = new ShapedRecipe(Bandagerecipekey, CraftedBandage);
-        Bandagerecipe.shape("123", "456", "789");
-        Bandagerecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-left").toUpperCase()));
-        Bandagerecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-middle").toUpperCase()));
-        Bandagerecipe.setIngredient('3', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-right").toUpperCase()));
-        Bandagerecipe.setIngredient('4', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-middle-left").toUpperCase()));
-        Bandagerecipe.setIngredient('5', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-center").toUpperCase()));
-        Bandagerecipe.setIngredient('6', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-middle-right").toUpperCase()));
-        Bandagerecipe.setIngredient('7', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-left").toUpperCase()));
-        Bandagerecipe.setIngredient('8', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-middle").toUpperCase()));
-        Bandagerecipe.setIngredient('9', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-right").toUpperCase()));
+        Bandagerecipe.shape(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Shape-top-row"), MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Shape-middle-row"), MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Shape-bottom-row"));
+        if (Bandagerecipe.getIngredientMap().containsKey('1')) {
+            Bandagerecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-left").toUpperCase()));
+        }if (Bandagerecipe.getIngredientMap().containsKey('2')){
+            Bandagerecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-middle").toUpperCase()));
+        }if (Bandagerecipe.getIngredientMap().containsKey('3')){
+            Bandagerecipe.setIngredient('3', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-right").toUpperCase()));
+        }if (Bandagerecipe.getIngredientMap().containsKey('4')){
+            Bandagerecipe.setIngredient('4', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-middle-left").toUpperCase()));
+        }if (Bandagerecipe.getIngredientMap().containsKey('5')){
+            Bandagerecipe.setIngredient('5', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-center").toUpperCase()));
+        }if (Bandagerecipe.getIngredientMap().containsKey('6')){
+            Bandagerecipe.setIngredient('6', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-middle-right").toUpperCase()));
+        }if (Bandagerecipe.getIngredientMap().containsKey('7')){
+            Bandagerecipe.setIngredient('7', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-left").toUpperCase()));
+        }if (Bandagerecipe.getIngredientMap().containsKey('8')){
+            Bandagerecipe.setIngredient('8', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-middle").toUpperCase()));
+        }if (Bandagerecipe.getIngredientMap().containsKey('9')){
+            Bandagerecipe.setIngredient('9', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-right").toUpperCase()));
+        }
         Bukkit.addRecipe(Bandagerecipe);
     }
     private void setupMedKitItem() {
@@ -99,19 +109,28 @@ public class ItemLoader {
         ItemMeta CraftedMedKitMeta = MedKitItem.getItemMeta();
         CraftedMedKit.setItemMeta(CraftedMedKitMeta);
     }
-    private void setupMedKitRecipe()
-    {
+    private void setupMedKitRecipe() {
         ShapedRecipe MedKitrecipe = new ShapedRecipe(Medrecipekey, CraftedMedKit);
-        MedKitrecipe.shape("123", "456", "789");
-        MedKitrecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-left").toUpperCase()));
-        MedKitrecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-middle").toUpperCase()));
-        MedKitrecipe.setIngredient('3', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-right").toUpperCase()));
-        MedKitrecipe.setIngredient('4', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-middle-left").toUpperCase()));
-        MedKitrecipe.setIngredient('5', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-center").toUpperCase()));
-        MedKitrecipe.setIngredient('6', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-middle-right").toUpperCase()));
-        MedKitrecipe.setIngredient('7', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-bottom-left").toUpperCase()));
-        MedKitrecipe.setIngredient('8', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-bottom-middle").toUpperCase()));
-        MedKitrecipe.setIngredient('9', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-bottom-right").toUpperCase()));
+        MedKitrecipe.shape(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Shape-top-row"), MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Shape-middle-row"), MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Shape-bottom-row"));
+        if (MedKitrecipe.getIngredientMap().containsKey('1')) {
+            MedKitrecipe.setIngredient('1', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-left").toUpperCase()));
+        }if (MedKitrecipe.getIngredientMap().containsKey('2')) {
+            MedKitrecipe.setIngredient('2', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-middle").toUpperCase()));
+        }if (MedKitrecipe.getIngredientMap().containsKey('3')) {
+            MedKitrecipe.setIngredient('3', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-right").toUpperCase()));
+        }if (MedKitrecipe.getIngredientMap().containsKey('4')) {
+            MedKitrecipe.setIngredient('4', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-middle-left").toUpperCase()));
+        }if (MedKitrecipe.getIngredientMap().containsKey('5')) {
+            MedKitrecipe.setIngredient('5', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-center").toUpperCase()));
+        }if (MedKitrecipe.getIngredientMap().containsKey('6')) {
+            MedKitrecipe.setIngredient('6', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-middle-right").toUpperCase()));
+        }if (MedKitrecipe.getIngredientMap().containsKey('7')) {
+            MedKitrecipe.setIngredient('7', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-bottom-left").toUpperCase()));
+        }if (MedKitrecipe.getIngredientMap().containsKey('8')) {
+            MedKitrecipe.setIngredient('8', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-bottom-middle").toUpperCase()));
+        }if (MedKitrecipe.getIngredientMap().containsKey('9')) {
+            MedKitrecipe.setIngredient('9', Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-bottom-right").toUpperCase()));
+        }
         Bukkit.addRecipe(MedKitrecipe);
     }
 }
