@@ -18,14 +18,12 @@ import java.util.Objects;
 public class MedKitHandler
 {
   public static Map<Player, BukkitRunnable> MedKitPlayers = new HashMap<>();
-
   public MedKitHandler(final Player p) {
     if (MedKitPlayers.containsKey(p)) {
       MedKitPlayers.get(p).cancel();
       MedKitPlayers.remove(p);
       p.getInventory().addItem(ItemLoader.getMedKitItem());
     }
-
     MedKitPlayers.put(p, new BukkitRunnable()
     {
       final Location position = p.getLocation();
@@ -34,25 +32,21 @@ public class MedKitHandler
       final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Time");
       final int amplifier = MedCraft.getPlugin().getConfig().getInt("MedKit.Regen-Amplifier");
       final int multiplier = MedCraft.getPlugin().getConfig().getInt("MedKit.Warmup-Speed");
-
       public void cancel()
       {
         super.cancel();
       }
-
       public void run()
       {
-        boolean cancelled = p.getLocation().distance(this.position) > 0.75D;
-
-        if ((this.progress > total) || (cancelled))
+        boolean cancelled = p.getLocation().distance(position) > 0.75D;
+        if ((progress > total) || (cancelled))
         {
           if (cancelled) {
             p.getInventory().addItem(ItemLoader.getMedKitItem());
           }
-
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
-        } else if (this.progress == total) {
+        } else if (progress == total) {
           if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.PerformCMD") && MedCraft.getPlugin().getConfig().getBoolean("MedKit.ConsoleCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.valueOf(MedCraft.getPlugin().getConfig().get("MedKit.CMD")).replace("[playername]", p.getName()));
@@ -67,12 +61,9 @@ public class MedKitHandler
             cancel();
           }
         }
-
-        int a = Math.round(this.progress / 60.0F * 10.0F);
+        int a = Math.round(progress / 60.0F * 10.0F);
         int b = 10 - a;
-
         StringBuilder sb = new StringBuilder();
-
         sb.append(ChatColor.GREEN);
         for (int i = 0; i < a; i++) {
           sb.append("■");
@@ -81,14 +72,11 @@ public class MedKitHandler
         for (int i = 0; i < b; i++) {
           sb.append("■");
         }
-
         PacketHandler.getInstance().sendActionBarMessage(p,sb.toString());
-
-        this.progress += multiplier;
+        progress += multiplier;
       }
     });
     MedKitPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
   }
-
   public static boolean isMedding(Player p) { return !MedKitPlayers.containsKey(p);}
 }

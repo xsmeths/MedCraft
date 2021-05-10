@@ -15,10 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class BandageHandler
-{
+public class BandageHandler {
   private static final Map<Player, BukkitRunnable> bandagingPlayers = new HashMap<>();
-
   public BandageHandler(final Player p) {
     if (bandagingPlayers.containsKey(p)) {
       bandagingPlayers.get(p).cancel();
@@ -33,16 +31,11 @@ public class BandageHandler
       final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Time");
       final int amplifier = MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Amplifier");
       final int multiplier = MedCraft.getPlugin().getConfig().getInt("Bandage.Warmup-Speed");
-
-      public void cancel()
-      {
-        super.cancel();
-      }
+      public void cancel() { super.cancel(); }
       public void run()
       {
-
-        boolean cancelled = p.getLocation().distance(this.position) > 0.75D;
-        if ((this.progress > total) || (cancelled))
+        boolean cancelled = p.getLocation().distance(position) > 0.75D;
+        if ((progress > total) || (cancelled))
         {
           if (cancelled) {
             p.getInventory().addItem(ItemLoader.getBandageItem());
@@ -66,9 +59,7 @@ public class BandageHandler
         }
         int a = Math.round(this.progress / 60.0F * 10.0F);
         int b = 10 - a;
-
         StringBuilder sb = new StringBuilder();
-
         sb.append(ChatColor.GREEN);
         for (int i = 0; i < a; i++) {
           sb.append("■");
@@ -77,10 +68,8 @@ public class BandageHandler
         for (int i = 0; i < b; i++) {
           sb.append("■");
         }
-
         PacketHandler.getInstance().sendActionBarMessage(p,sb.toString());
-
-        this.progress += multiplier;
+        progress += multiplier;
       }
     });
     bandagingPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
