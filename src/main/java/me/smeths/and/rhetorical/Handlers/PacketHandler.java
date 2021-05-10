@@ -6,6 +6,9 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
+@SuppressWarnings("rawtypes")
 public class PacketHandler {
 	private static PacketHandler instance;
 	private String nmsVersion;
@@ -25,9 +28,7 @@ public class PacketHandler {
 	public static PacketHandler getInstance() {
 		return instance;
 	}
-	public Class getCraftPlayer() {
-		return craftPlayer;
-	}
+	public Class getCraftPlayer() { return craftPlayer; }
 	public static Class<?> getNmsClass(String name){
 		try {
 			return Class.forName("net.minecraft.server." + getInstance().nmsVersion + "." + name);
@@ -39,8 +40,8 @@ public class PacketHandler {
 	}
 	public void sendActionBarMessage(Player p, String message) {
 		try {
-			Object chatComponent = getNmsClass("ChatComponentText").getConstructor(String.class).newInstance(message);
-			Object packetPlayOutChat = getNmsClass("PacketPlayOutChat").getConstructor(getNmsClass("IChatBaseComponent"), byte.class).newInstance(chatComponent, (byte) 2);
+			Object chatComponent = Objects.requireNonNull(getNmsClass("ChatComponentText")).getConstructor(String.class).newInstance(message);
+			Object packetPlayOutChat = Objects.requireNonNull(getNmsClass("PacketPlayOutChat")).getConstructor(getNmsClass("IChatBaseComponent"), byte.class).newInstance(chatComponent, (byte) 2);
 			Object handle = p.getClass().getMethod("getHandle").invoke(p);
 			Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
 			playerConnection.getClass().getMethod("sendPacket", getNmsClass("Packet")).invoke(playerConnection, packetPlayOutChat);

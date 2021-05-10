@@ -19,6 +19,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Objects;
 
+@SuppressWarnings("InstantiationOfUtilityClass")
 public class MedCraftListeners implements Listener {
     @EventHandler
     public void onPlayerUse(PlayerInteractEvent e) {
@@ -69,7 +70,7 @@ public class MedCraftListeners implements Listener {
         }
     }
     @EventHandler
-    public void StopCraftM(CraftItemEvent e) {
+    public void StopCraft(CraftItemEvent e) {
         if (Objects.requireNonNull(e.getInventory().getResult()).getType() == ItemLoader.getMedKitItem().getType() && e.getInventory().getResult().getItemMeta() != null && e.getInventory().getResult().getItemMeta().hasCustomModelData() && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) {
             Player crafter = (Player) e.getWhoClicked();
             if (!crafter.hasPermission("medkit.craft")) {
