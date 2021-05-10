@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class MedKitHandler
 {
-  private static final Map<Player, BukkitRunnable> MedKitPlayers = new HashMap<>();
+  public static Map<Player, BukkitRunnable> MedKitPlayers = new HashMap<>();
 
   public MedKitHandler(final Player p) {
     if (MedKitPlayers.containsKey(p)) {
@@ -90,6 +90,5 @@ public class MedKitHandler
     MedKitPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
   }
 
-  public static boolean isMedding(Player p) { return MedKitPlayers.containsKey(p);
-  }
+  public static boolean isMedding(Player p) { return MedKitPlayers.containsKey(p);}
 }

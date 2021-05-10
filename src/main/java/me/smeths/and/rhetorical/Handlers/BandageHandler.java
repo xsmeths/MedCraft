@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class BandageHandler
 {
-  private static Map<Player, BukkitRunnable> bandagingPlayers = new HashMap<>();
+  private static final Map<Player, BukkitRunnable> bandagingPlayers = new HashMap<>();
 
   public BandageHandler(final Player p) {
     if (bandagingPlayers.containsKey(p)) {
@@ -50,13 +50,13 @@ public class BandageHandler
           BandageHandler.bandagingPlayers.remove(p);
           cancel();
         } else if (this.progress == total) {
-          if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") == true && MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD") == true && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
+          if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.valueOf(MedCraft.getPlugin().getConfig().get("Bandage.CMD")).replace("[playername]", p.getName()));
-          } else if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") == true && MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD") == false && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
+          } else if (p.getPlayer() != null && MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && !MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(p.getPlayer(),String.valueOf(MedCraft.getPlugin().getConfig().get("Bandage.CMD")).replace("[playername]", p.getName()));
-          } else if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") == false && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
+          } else if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           } else {
             p.getInventory().addItem(ItemLoader.getBandageItem());
@@ -85,8 +85,5 @@ public class BandageHandler
     });
     bandagingPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
   }
-  public static boolean isBandaging(Player p)
-  {
-    return bandagingPlayers.containsKey(p);
-  }
+  public static boolean isBandaging(Player p){return !bandagingPlayers.containsKey(p);}
 }
