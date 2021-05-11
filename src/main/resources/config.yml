@@ -30,6 +30,7 @@ Bandage:
 MedKit:
   Material: PAPER
   Glows: true
+  Radius: 5
   Warmup-Speed: 1
   Result-Amount: 1
   ModelData: 18
