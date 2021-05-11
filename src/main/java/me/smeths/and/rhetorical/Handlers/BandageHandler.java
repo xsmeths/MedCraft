@@ -38,26 +38,26 @@ public class BandageHandler {
         if ((progress > total) || (cancelled))
         {
           if (cancelled) {
-            p.getInventory().addItem(ItemLoader.getBandageItem());
+            p.getWorld().dropItem(p.getLocation(),ItemLoader.getBandageItem());
           }
           BandageHandler.bandagingPlayers.remove(p);
           cancel();
-        } else if (this.progress == total) {
+        } else if (progress == total) {
           if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.valueOf(MedCraft.getPlugin().getConfig().get("Bandage.CMD")).replace("[playername]", p.getName()));
           } else if (p.getPlayer() != null && MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && !MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
-            Bukkit.dispatchCommand(p.getPlayer(),String.valueOf(MedCraft.getPlugin().getConfig().get("Bandage.CMD")).replace("[playername]", p.getName()));
+            Bukkit.dispatchCommand(p.getPlayer(), String.valueOf(MedCraft.getPlugin().getConfig().get("Bandage.CMD")).replace("[playername]", p.getName()));
           } else if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           } else {
-            p.getInventory().addItem(ItemLoader.getBandageItem());
+            p.getWorld().dropItem(p.getLocation(),ItemLoader.getBandageItem());
             BandageHandler.bandagingPlayers.remove(p);
             cancel();
           }
         }
-        int a = Math.round(this.progress / 60.0F * 10.0F);
+        int a = Math.round(progress / 60.0F * 10.0F);
         int b = 10 - a;
         StringBuilder sb = new StringBuilder();
         sb.append(ChatColor.GREEN);

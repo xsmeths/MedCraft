@@ -52,8 +52,10 @@ public class ItemLoader {
         ItemMeta BandageMeta = BandageItem.getItemMeta();
         BandageMeta.setCustomModelData(medCraft.getConfig().getInt("Bandage.ModelData"));
         BandageMeta.setDisplayName(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',BandageName));
-        BandageMeta.addEnchant(Enchantment.DURABILITY,1,true);
-        BandageMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.Glows")) {
+            BandageMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+            BandageMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         for (String bandagelorelines : MedCraft.getPlugin().getConfig().getStringList("Bandage.Lore")) {
             Bandagelore.add(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', bandagelorelines));
         }
@@ -96,8 +98,10 @@ public class ItemLoader {
         ItemMeta MedKitMeta = MedKitItem.getItemMeta();
         MedKitMeta.setCustomModelData(medCraft.getConfig().getInt("MedKit.ModelData"));
         MedKitMeta.setDisplayName(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',MedKitName));
-        MedKitMeta.addEnchant(Enchantment.DURABILITY,1,true);
-        MedKitMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.Glows")) {
+            MedKitMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+            MedKitMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         for (String medkitlorelines : MedCraft.getPlugin().getConfig().getStringList("MedKit.Lore")) {
             Medkitlore.add(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', medkitlorelines));
         }

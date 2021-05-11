@@ -1,5 +1,6 @@
 Bandage:
   Material: PAPER
+  Glows: false
   Warmup-Speed: 2
   Result-Amount: 2
   ModelData: 16
@@ -28,6 +29,7 @@ Bandage:
   NoPermUse: 'No Permissions: you need bandage.use'
 MedKit:
   Material: PAPER
+  Glows: true
   Warmup-Speed: 1
   Result-Amount: 1
   ModelData: 18

@@ -42,7 +42,7 @@ public class MedKitHandler
         if ((progress > total) || (cancelled))
         {
           if (cancelled) {
-            p.getInventory().addItem(ItemLoader.getMedKitItem());
+            p.getWorld().dropItem(p.getLocation(),ItemLoader.getMedKitItem());
           }
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
@@ -56,7 +56,7 @@ public class MedKitHandler
           } else if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.PerformCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           } else {
-            p.getInventory().addItem(ItemLoader.getMedKitItem());
+            p.getWorld().dropItem(p.getLocation(),ItemLoader.getMedKitItem());
             MedKitHandler.MedKitPlayers.remove(p);
             cancel();
           }
