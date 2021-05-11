@@ -85,14 +85,12 @@ public class MedCraftListeners implements Listener {
             if (oi.getAmount() == 1 && p.hasPermission("bandage.use")) {
                 p.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
                 p.updateInventory();
-                p.sendMessage(String.valueOf(oi.getAmount()));
                 new BandageHandler(recipient);
                 return;
             }
             if (oi.getAmount() >= 2 && p.hasPermission("bandage.use")) {
                 oi.setAmount(oi.getAmount() - 1);
                 p.updateInventory();
-                p.sendMessage(String.valueOf(oi.getAmount()));
                 new BandageHandler(recipient);
                 return;
             }
