@@ -21,7 +21,12 @@ public class BandageHandler {
     if (bandagingPlayers.containsKey(p)) {
       bandagingPlayers.get(p).cancel();
       bandagingPlayers.remove(p);
-      p.getInventory().addItem(ItemLoader.getBandageItem());
+      if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+        p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+      }
+      if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+        p.getInventory().addItem(ItemLoader.getBandageItem());
+      }
     }
     bandagingPlayers.put(p, new BukkitRunnable()
     {
@@ -38,7 +43,12 @@ public class BandageHandler {
         if ((progress > total) || (cancelled))
         {
           if (cancelled) {
-            p.getInventory().addItem(ItemLoader.getBandageItem());
+            if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+              p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+            }
+            if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+              p.getInventory().addItem(ItemLoader.getBandageItem());
+            }
           }
           BandageHandler.bandagingPlayers.remove(p);
           cancel();
@@ -52,7 +62,12 @@ public class BandageHandler {
           } else if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           } else {
-            p.getInventory().addItem(ItemLoader.getBandageItem());
+            if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+              p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+            }
+            if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+              p.getInventory().addItem(ItemLoader.getBandageItem());
+            }
             BandageHandler.bandagingPlayers.remove(p);
             cancel();
           }

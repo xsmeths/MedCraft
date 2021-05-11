@@ -23,7 +23,12 @@ public class MedKitHandler
     if (MedKitPlayers.containsKey(p)) {
       MedKitPlayers.get(p).cancel();
       MedKitPlayers.remove(p);
-      p.getInventory().addItem(ItemLoader.getMedKitItem());
+      if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
+        p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+      }
+      if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
+        p.getInventory().addItem(ItemLoader.getBandageItem());
+      }
     }
     MedKitPlayers.put(p, new BukkitRunnable()
     {
@@ -43,7 +48,12 @@ public class MedKitHandler
         if ((progress > total) || (cancelled))
         {
           if (cancelled) {
-            p.getInventory().addItem(ItemLoader.getMedKitItem());
+            if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
+              p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+            }
+            if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
+              p.getInventory().addItem(ItemLoader.getBandageItem());
+            }
           }
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
@@ -72,7 +82,12 @@ public class MedKitHandler
                   ((Player)e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             }
           } else {
-            p.getInventory().addItem(ItemLoader.getMedKitItem());
+            if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
+              p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+            }
+            if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
+              p.getInventory().addItem(ItemLoader.getBandageItem());
+            }
             MedKitHandler.MedKitPlayers.remove(p);
             cancel();
           }
