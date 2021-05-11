@@ -38,7 +38,7 @@ public class BandageHandler {
         if ((progress > total) || (cancelled))
         {
           if (cancelled) {
-            p.getWorld().dropItem(p.getLocation(),ItemLoader.getBandageItem());
+            p.getInventory().addItem(ItemLoader.getBandageItem());
           }
           BandageHandler.bandagingPlayers.remove(p);
           cancel();
@@ -52,7 +52,7 @@ public class BandageHandler {
           } else if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           } else {
-            p.getWorld().dropItem(p.getLocation(),ItemLoader.getBandageItem());
+            p.getInventory().addItem(ItemLoader.getBandageItem());
             BandageHandler.bandagingPlayers.remove(p);
             cancel();
           }

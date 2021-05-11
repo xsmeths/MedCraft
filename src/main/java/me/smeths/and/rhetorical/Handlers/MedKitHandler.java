@@ -43,7 +43,7 @@ public class MedKitHandler
         if ((progress > total) || (cancelled))
         {
           if (cancelled) {
-            p.getWorld().dropItem(p.getLocation(),ItemLoader.getMedKitItem());
+            p.getInventory().addItem(ItemLoader.getMedKitItem());
           }
           MedKitHandler.MedKitPlayers.remove(p);
           cancel();
@@ -72,7 +72,7 @@ public class MedKitHandler
                   ((Player)e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             }
           } else {
-            p.getWorld().dropItem(p.getLocation(),ItemLoader.getMedKitItem());
+            p.getInventory().addItem(ItemLoader.getMedKitItem());
             MedKitHandler.MedKitPlayers.remove(p);
             cancel();
           }
