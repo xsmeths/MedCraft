@@ -11,6 +11,7 @@ Bandage:
   - '&6Because smeths is cool'
   Regen-Time: 4
   Regen-Amplifier: 1
+  Craftable: true
   Crafting-Material-top-left: AIR
   Crafting-Material-top-middle: PAPER
   Crafting-Material-top-right: AIR
@@ -43,6 +44,7 @@ MedKit:
   - '&6Because floris is cool'
   Regen-Time: 9
   Regen-Amplifier: 3
+  Craftable: true
   Crafting-Material-top-left: PAPER
   Crafting-Material-top-middle: PAPER
   Crafting-Material-top-right: PAPER
