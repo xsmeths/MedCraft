@@ -62,7 +62,7 @@ public class MedKitHandler
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             for (Entity e : p.getNearbyEntities(MedCraft.getPlugin().getConfig().getDouble("MedKit.Radius"),MedCraft.getPlugin().getConfig().getDouble("MedKit.Radius"),MedCraft.getPlugin().getConfig().getDouble("MedKit.Radius"))){
               if (e instanceof Player)
-                if (!((Player) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((Player) e).getHealth() < ((Player) e).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                if (!((Player) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((Player) e).getHealth() < Objects.requireNonNull(((Player) e).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
                   ((Player)e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             }
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.valueOf(MedCraft.getPlugin().getConfig().get("MedKit.CMD")).replace("[playername]", p.getName()));
@@ -70,7 +70,7 @@ public class MedKitHandler
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             for (Entity e : p.getNearbyEntities(MedCraft.getPlugin().getConfig().getDouble("MedKit.Radius"),MedCraft.getPlugin().getConfig().getDouble("MedKit.Radius"),MedCraft.getPlugin().getConfig().getDouble("MedKit.Radius"))){
               if (e instanceof Player)
-                if (!((Player) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((Player) e).getHealth() < ((Player) e).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                if (!((Player) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((Player) e).getHealth() < Objects.requireNonNull(((Player) e).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
                 ((Player)e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             }
             Bukkit.dispatchCommand(p.getPlayer(),String.valueOf(MedCraft.getPlugin().getConfig().get("MedKit.CMD")).replace("[playername]", p.getName()));
@@ -78,7 +78,7 @@ public class MedKitHandler
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             for (Entity e : p.getNearbyEntities(MedCraft.getPlugin().getConfig().getDouble("MedKit.Radius"),MedCraft.getPlugin().getConfig().getDouble("MedKit.Radius"),MedCraft.getPlugin().getConfig().getDouble("MedKit.Radius"))){
               if (e instanceof Player)
-                if (!((Player) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((Player) e).getHealth() < ((Player) e).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())
+                if (!((Player) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((Player) e).getHealth() < Objects.requireNonNull(((Player) e).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
                   ((Player)e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             }
           } else {

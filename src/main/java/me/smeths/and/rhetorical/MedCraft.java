@@ -8,11 +8,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
-public class MedCraft extends JavaPlugin
-{
+public class MedCraft extends JavaPlugin {
     private static MedCraft instance;
-    public void onEnable()
-    {
+
+    public void onEnable() {
         if (instance != null) {
             return;
         }
@@ -22,7 +21,8 @@ public class MedCraft extends JavaPlugin
         Bukkit.getPluginManager().registerEvents(new MedCraftListeners(), getPlugin());
         loadConfiguration();
     }
-    public void loadConfiguration(){
+
+    public void loadConfiguration() {
         try {
             if (!getDataFolder().exists()) {
                 //noinspection ResultOfMethodCallIgnored
@@ -41,10 +41,12 @@ public class MedCraft extends JavaPlugin
             e.printStackTrace();
         }
     }
-    public void onDisable()
-    {
+
+    public void onDisable() {
         Bukkit.removeRecipe(ItemLoader.getInstance().Medrecipekey);
         Bukkit.removeRecipe(ItemLoader.getInstance().Bandagerecipekey);
+    }
+    public void onLoad(){
     }
     public static JavaPlugin getPlugin() {
         return instance;

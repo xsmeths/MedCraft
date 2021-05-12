@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -181,15 +182,41 @@ public class MedCraftListeners implements Listener {
     @EventHandler
     public void StopCraft(CraftItemEvent e) {
         if (e.getInventory().getResult() != null)
-            if (Objects.requireNonNull(e.getInventory().getResult()).getType() == ItemLoader.getMedKitItem().getType()
-                    && e.getInventory().getResult().getItemMeta() != null && e.getInventory().getResult().getItemMeta().hasCustomModelData()
-                    && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) {
-                Player crafter = (Player) e.getWhoClicked();
-                if (!crafter.hasPermission("medkit.craft")) {
-                    e.setCancelled(true);
-                    PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("MedKit.NoPermCraft"))));
+            if (e.getWhoClicked().getType() == EntityType.PLAYER)
+                if (e.getInventory().getResult().getType() == Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-left"))
+                        || e.getInventory().getResult().getType() == Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-middle"))
+                        || e.getInventory().getResult().getType() == Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-top-right"))
+                        || e.getInventory().getResult().getType() == Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-middle-left"))
+                        || e.getInventory().getResult().getType() == Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-center"))
+                        || e.getInventory().getResult().getType() == Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-middle-right"))
+                        || e.getInventory().getResult().getType() == Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-bottom-left"))
+                        || e.getInventory().getResult().getType() == Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-bottom-middle"))
+                        || e.getInventory().getResult().getType() == Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Crafting-Material-bottom-right"))){
+                    e.getWhoClicked().getDiscoveredRecipes().add(ItemLoader.getInstance().Medrecipekey);
                 }
+        if (Objects.requireNonNull(e.getInventory().getResult()).getType() == ItemLoader.getMedKitItem().getType()
+                && e.getInventory().getResult().getItemMeta() != null && e.getInventory().getResult().getItemMeta().hasCustomModelData()
+                && e.getInventory().getResult().getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")) {
+            Player crafter = (Player) e.getWhoClicked();
+            if (!crafter.hasPermission("medkit.craft")) {
+                e.setCancelled(true);
+                PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("MedKit.NoPermCraft"))));
             }
+        }
+        if (e.getInventory().getResult() != null)
+            if (e.getWhoClicked().getType() == EntityType.PLAYER)
+                if (!e.getWhoClicked().getDiscoveredRecipes().contains(ItemLoader.getInstance().Bandagerecipekey))
+                    if (e.getInventory().getResult() == new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-left")))
+                        || e.getInventory().getResult() == new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-middle")))
+                        || e.getInventory().getResult() == new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-top-right")))
+                        || e.getInventory().getResult() == new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-middle-left")))
+                        || e.getInventory().getResult() == new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-center")))
+                        || e.getInventory().getResult() == new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-middle-right")))
+                        || e.getInventory().getResult() == new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-left")))
+                        || e.getInventory().getResult() == new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-middle")))
+                        || e.getInventory().getResult() == new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Crafting-Material-bottom-right")))){
+                        e.getWhoClicked().discoverRecipe(ItemLoader.getInstance().Bandagerecipekey);
+                }
         if (e.getInventory().getResult() != null)
             if (Objects.requireNonNull(e.getInventory().getResult()).getType() == ItemLoader.getBandageItem().getType()
                     && e.getInventory().getResult().getItemMeta() != null && e.getInventory().getResult().getItemMeta().hasCustomModelData()
