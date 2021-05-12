@@ -53,19 +53,23 @@ public class BandageHandler {
           BandageHandler.bandagingPlayers.remove(p);
           cancel();
         } else if (progress == total) {
-          if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
+          if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD")
+                  && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.valueOf(MedCraft.getPlugin().getConfig().get("Bandage.CMD")).replace("[playername]", p.getName()));
-          } else if (p.getPlayer() != null && MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && !MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
+          } else if (p.getPlayer() != null && MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && !MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD")
+                  && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(p.getPlayer(), String.valueOf(MedCraft.getPlugin().getConfig().get("Bandage.CMD")).replace("[playername]", p.getName()));
-          } else if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
+          } else if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD")
+                  && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           } else {
             if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
               p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
             }
             if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+              p.sendMessage(String.valueOf(p.getInventory().getContents().length));
               p.getInventory().addItem(ItemLoader.getBandageItem());
             }
             BandageHandler.bandagingPlayers.remove(p);

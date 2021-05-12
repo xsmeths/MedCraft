@@ -41,7 +41,6 @@ public class MedCraftListeners implements Listener {
                     && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
                     && p.getGameMode() != GameMode.CREATIVE
                     && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData"))
-
                     || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_BLOCK
                     && !p.hasPotionEffect(PotionEffectType.REGENERATION) && BandageHandler.isBandaging(p) && MedKitHandler.isMedding(p)
                     && (i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData()
@@ -52,13 +51,11 @@ public class MedCraftListeners implements Listener {
                     && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
                     && p.getGameMode() != GameMode.CREATIVE
                     && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData"))
-
                     || e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_AIR
                     && BandageHandler.isBandaging(p) && MedKitHandler.isMedding(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
                     && (i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData()
                     && p.getGameMode() != GameMode.CREATIVE
                     && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData"))
-
                     || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_AIR
                     && BandageHandler.isBandaging(p) && MedKitHandler.isMedding(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
                     && (i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData()
@@ -91,7 +88,6 @@ public class MedCraftListeners implements Listener {
                 && !e.getClickedBlock().getType().toString().contains("TABLE") && !e.getClickedBlock().getType().toString().contains("HOPPER")
                 && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
                 && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))
-
                 || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_BLOCK
                 && !p.hasPotionEffect(PotionEffectType.REGENERATION) && BandageHandler.isBandaging(p) && MedKitHandler.isMedding(p)
                 && (i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData() && e.getClickedBlock() != null
@@ -100,12 +96,10 @@ public class MedCraftListeners implements Listener {
                 && !e.getClickedBlock().getType().toString().contains("TABLE") && !e.getClickedBlock().getType().toString().contains("HOPPER")
                 && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
                 && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))
-
                 || e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_AIR
                 && BandageHandler.isBandaging(p) && MedKitHandler.isMedding(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
                 && (i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData()
                 && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))
-
                 || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_AIR
                 && BandageHandler.isBandaging(p) && MedKitHandler.isMedding(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
                 && (i.getType().equals(ItemLoader.getMedKitItem().getType())) && i.getItemMeta().hasCustomModelData()
@@ -130,21 +124,35 @@ public class MedCraftListeners implements Listener {
                 }
             }
     }
-
     @EventHandler
     public void offhandbandage(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
         Player recipient;
         ItemStack oi = p.getInventory().getItemInOffHand();
+        ItemStack i = p.getInventory().getItemInMainHand();
         if (!(e.getRightClicked() instanceof Player))
             return;
         recipient = (Player) e.getRightClicked();
         if (oi.getType() == ItemLoader.getBandageItem().getType()
-                && oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData()
+                && oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == ItemLoader.getBandageItem().getType()
                 && oi.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")
                 && !recipient.hasPotionEffect(PotionEffectType.REGENERATION)
                 && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()
-                && BandageHandler.isBandaging(recipient) && MedKitHandler.isMedding(recipient)) {
+                && BandageHandler.isBandaging(recipient) && MedKitHandler.isMedding(recipient)
+                && i.getItemMeta() != null && i.getItemMeta().hasCustomModelData() && !i.getType().equals(ItemLoader.getMedKitItem().getType())
+                && i.getItemMeta().getCustomModelData() != MedCraft.getPlugin().getConfig().getInt("MedKit.ModelData")
+                || oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == ItemLoader.getBandageItem().getType()
+                && oi.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")
+                && !recipient.hasPotionEffect(PotionEffectType.REGENERATION)
+                && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()
+                && BandageHandler.isBandaging(recipient) && MedKitHandler.isMedding(recipient)
+                && i.getType() == Material.AIR
+                || oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == ItemLoader.getBandageItem().getType()
+                && oi.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData")
+                && !recipient.hasPotionEffect(PotionEffectType.REGENERATION)
+                && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()
+                && BandageHandler.isBandaging(recipient) && MedKitHandler.isMedding(recipient)
+                && i.getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()) {
             if (oi.getAmount() == 1 && p.hasPermission("bandage.use.offhand")) {
                 p.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
                 p.updateInventory();
@@ -164,7 +172,6 @@ public class MedCraftListeners implements Listener {
             }
         }
     }
-
     @EventHandler
     public void StopCraft(CraftItemEvent e) {
         if (e.getInventory().getResult() != null)
