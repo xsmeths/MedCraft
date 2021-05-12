@@ -24,10 +24,10 @@ public class MedKitHandler
       MedKitPlayers.get(p).cancel();
       MedKitPlayers.remove(p);
       if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-        p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+        p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
       }
       if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-        p.getInventory().addItem(ItemLoader.getBandageItem());
+        p.getInventory().addItem(ItemLoader.getMedKitItem());
       }
     }
     MedKitPlayers.put(p, new BukkitRunnable()
@@ -49,10 +49,10 @@ public class MedKitHandler
         {
           if (cancelled) {
             if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-              p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+              p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
             }
             if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-              p.getInventory().addItem(ItemLoader.getBandageItem());
+              p.getInventory().addItem(ItemLoader.getMedKitItem());
             }
           }
           MedKitHandler.MedKitPlayers.remove(p);
@@ -83,10 +83,10 @@ public class MedKitHandler
             }
           } else {
             if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-              p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+              p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
             }
             if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-              p.getInventory().addItem(ItemLoader.getBandageItem());
+              p.getInventory().addItem(ItemLoader.getMedKitItem());
             }
             MedKitHandler.MedKitPlayers.remove(p);
             cancel();
