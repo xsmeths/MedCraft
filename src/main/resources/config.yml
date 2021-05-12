@@ -28,6 +28,7 @@ Bandage:
   CMD: 'tell [playername] change this message in your config.yml'
   NoPermCraft: 'No Permissions: you need bandage.craft'
   NoPermUse: 'No Permissions: you need bandage.use'
+  NoPermUseOffhand: 'No permissions: you need bandage.use.offhand'
 MedKit:
   Material: PAPER
   Glows: true

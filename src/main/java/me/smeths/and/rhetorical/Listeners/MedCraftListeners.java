@@ -170,7 +170,7 @@ public class MedCraftListeners implements Listener {
                 return;
             }
             if (!p.hasPermission("bandage.use.offhand")) {
-                PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Bandage.NoPermUse"))));
+                PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Bandage.NoPermUseOffhand"))));
             } else {
                 e.setCancelled(true);
             }
