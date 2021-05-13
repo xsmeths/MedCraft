@@ -21,35 +21,110 @@ public class BandageHandler {
     if (bandagingPlayers.containsKey(p)) {
       bandagingPlayers.get(p).cancel();
       bandagingPlayers.remove(p);
-      if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
-        p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
-      }
-      if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
-        p.getInventory().addItem(ItemLoader.getBandageItem());
-      }
+        if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+            p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+        }
+        if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+            if (p.getInventory().firstEmpty() == -1
+                    && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && !p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() > -1
+                    && MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")
+                    || p.getInventory().firstEmpty() == -1
+                    && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() > -1
+                    && MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")
+                    || p.getInventory().firstEmpty() == -1
+                    && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() == -1
+                    && MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")) {
+                p.getEnderChest().addItem(ItemLoader.getBandageItem());
+            } else if (p.getInventory().firstEmpty() == -1
+                    && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && !p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() == -1
+                    || p.getInventory().firstEmpty() == -1
+                    && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                    && !MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")) {
+                p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+            }else {
+                p.getInventory().addItem(ItemLoader.getBandageItem());
+            }
+        }
     }
-    bandagingPlayers.put(p, new BukkitRunnable()
-    {
-      final Location position = p.getLocation();
-      final int total = 60;
-      int progress = 0;
-      final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Time");
-      final int amplifier = MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Amplifier");
-      final int multiplier = MedCraft.getPlugin().getConfig().getInt("Bandage.Warmup-Speed");
-      public void cancel() { super.cancel(); }
-      public void run()
-      {
-        boolean cancelled = p.getLocation().distance(position) > 0.75D;
-        if ((progress > total) || (cancelled))
-        {
-          if (cancelled) {
-            if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
-              p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
-            }
-            if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
-              p.getInventory().addItem(ItemLoader.getBandageItem());
-            }
-          }
+    bandagingPlayers.put(p, new BukkitRunnable() {
+              final Location position = p.getLocation();
+              final int total = 60;
+              int progress = 0;
+              final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Time");
+              final int amplifier = MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Amplifier");
+              final int multiplier = MedCraft.getPlugin().getConfig().getInt("Bandage.Warmup-Speed");
+
+              public void cancel() {
+                super.cancel();
+              }
+
+              public void run() {
+                boolean cancelled = p.getLocation().distance(position) > 0.75D;
+                if ((progress > total) || (cancelled)) {
+                  if (cancelled) {
+                    if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+                      p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+                    }
+                    if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
+                      if (p.getInventory().firstEmpty() == -1
+                              && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && !p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() > -1
+                              && MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")
+                              || p.getInventory().firstEmpty() == -1
+                              && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() > -1
+                              && MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")
+                              || p.getInventory().firstEmpty() == -1
+                              && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() == -1
+                              && MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")) {
+                        p.getEnderChest().addItem(ItemLoader.getBandageItem());
+                      } else if (p.getInventory().firstEmpty() == -1
+                              && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && !p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() == -1
+                              || p.getInventory().firstEmpty() == -1
+                              && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                              && !MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")) {
+                        p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+                      }else {
+                        p.getInventory().addItem(ItemLoader.getBandageItem());
+                      }
+                    }
+                  }
           BandageHandler.bandagingPlayers.remove(p);
           cancel();
         } else if (progress == total) {
@@ -69,8 +144,44 @@ public class BandageHandler {
               p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
             }
             if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
-              p.sendMessage(String.valueOf(p.getInventory().getContents().length));
-              p.getInventory().addItem(ItemLoader.getBandageItem());
+                if (p.getInventory().firstEmpty() == -1
+                        && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && !p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() > -1
+                        && MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")
+                        || p.getInventory().firstEmpty() == -1
+                        && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() > -1
+                        && MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")
+                        || p.getInventory().firstEmpty() == -1
+                        && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() == -1
+                        && MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")) {
+                    p.getEnderChest().addItem(ItemLoader.getBandageItem());
+                } else if (p.getInventory().firstEmpty() == -1
+                        && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && !p.getEnderChest().contains(ItemLoader.getBandageItem()) && p.getEnderChest().firstEmpty() == -1
+                        || p.getInventory().firstEmpty() == -1
+                        && p.getInventory().getItemInMainHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getType() != ItemLoader.getBandageItem().getType()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getBandageItem().getItemMeta()
+                        && !MedCraft.getPlugin().getConfig().getBoolean("Bandage.UseEnderchestIfInvFull")) {
+                    p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+                } else {
+                    p.getInventory().addItem(ItemLoader.getBandageItem());
+                }
             }
             BandageHandler.bandagingPlayers.remove(p);
             cancel();

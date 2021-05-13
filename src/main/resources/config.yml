@@ -2,6 +2,7 @@ Bandage:
   Material: PAPER
   Glows: false
   DropIfNotUsed: false
+  UseEnderchestIfInvFull: true
   Warmup-Speed: 2
   Result-Amount: 2
   ModelData: 16
@@ -34,6 +35,7 @@ MedKit:
   Material: PAPER
   Glows: true
   DropIfNotUsed: false
+  UseEnderchestIfInvFull: true
   Radius: 5
   Warmup-Speed: 1
   Result-Amount: 1
