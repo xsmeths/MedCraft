@@ -46,13 +46,111 @@ public class CustomItemUtil {
         plugin = mainplugin;
     }
 
+
+    public static class CustomItem {
+
+        private String internalName;
+        private Material material;
+        private String displayname;
+        private int custommodeldata;
+        private List<String> lore;
+        private ItemEvents itemeventtype;
+
+        public CustomItem(String internalName, Material material, String displayname, int custommodeldata) {
+            this(internalName, material, displayname, custommodeldata, null, ItemEvents.DEFAULT);
+        }
+
+        public CustomItem(String internalName, Material material, String displayname, int custommodeldata, List<String> lore) {
+            this(internalName, material, displayname, custommodeldata, lore, ItemEvents.DEFAULT);
+        }
+
+        public CustomItem(String internalName, Material material, String displayname, int custommodeldata, ItemEvents type) {
+            this(internalName, material, displayname, custommodeldata, null, type);
+        }
+
+        public CustomItem(String internalName, Material material, String displayname, int custommodeldata, List<String> lore, ItemEvents type) {
+            this.material = material;
+            this.displayname = displayname;
+            this.internalName = internalName;
+            this.custommodeldata = custommodeldata;
+            this.lore = lore;
+            this.itemeventtype = type;
+        }
+
+        public ItemStack asItemStack() {
+            ItemStack is = new ItemStack(material);
+            ItemMeta im = is.getItemMeta();
+            im.setDisplayName(displayname);
+            if (lore != null) {
+                im.setLore(lore);
+            }
+            im.setCustomModelData(custommodeldata);
+            return is;
+        }
+
+        public String getInternalName() {
+            return internalName;
+        }
+
+        public boolean isSimilar(ItemStack base) {
+            if (base.getType() == material) {
+                if ((!base.getItemMeta().hasDisplayName() && displayname == null) || base.getItemMeta().getDisplayName().equals(displayname)) {
+                    if (base.getItemMeta().getCustomModelData() == custommodeldata) {
+                        //TODO: You may want to also check fore lore if you want items to be lore specific, but I don't think you need to.
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public ItemEvents getItemEvents() {
+            return itemeventtype;
+        }
+    }
+
+    public static abstract class ItemEvents {
+
+        public static ItemEvents DEFAULT = new ItemEvents() {
+            @Override
+            public void onLeftCLick(PlayerInteractEvent event) {
+            }
+
+            @Override
+            public void onRightClick(PlayerInteractEvent event) {
+            }
+
+            @Override
+            public void onRightClickEntity(PlayerInteractEntityEvent event) {
+            }
+
+            @Override
+            public void onConsume(PlayerItemConsumeEvent event) {
+            }
+
+            @Override
+            public void onDrop(PlayerDropItemEvent event) {
+            }
+        };
+
+        public abstract void onLeftCLick(PlayerInteractEvent event);
+
+        public abstract void onRightClick(PlayerInteractEvent event);
+
+        public abstract void onRightClickEntity(PlayerInteractEntityEvent event);
+
+        public abstract void onConsume(PlayerItemConsumeEvent event);
+
+        public abstract void onDrop(PlayerDropItemEvent event);
+    }
+
 }
 
 class CustomItemListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-        CustomItem customItem = CustomItemUtil.getCustomItem(event.getItem());
+        CustomItemUtil.CustomItem customItem = CustomItemUtil.getCustomItem(event.getItem());
         if (customItem != null) {
             if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
                 customItem.getItemEvents().onLeftCLick(event);
@@ -64,7 +162,7 @@ class CustomItemListener implements Listener {
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
-        CustomItem customItem = CustomItemUtil.getCustomItem(event.getItemDrop().getItemStack());
+        CustomItemUtil.CustomItem customItem = CustomItemUtil.getCustomItem(event.getItemDrop().getItemStack());
         if (customItem != null) {
             customItem.getItemEvents().onDrop(event);
         }
@@ -72,7 +170,7 @@ class CustomItemListener implements Listener {
 
     @EventHandler
     public void onConsume(PlayerItemConsumeEvent event) {
-        CustomItem customItem = CustomItemUtil.getCustomItem(event.getItem());
+        CustomItemUtil.CustomItem customItem = CustomItemUtil.getCustomItem(event.getItem());
         if (customItem != null) {
             customItem.getItemEvents().onConsume(event);
         }
@@ -80,7 +178,7 @@ class CustomItemListener implements Listener {
 
     @EventHandler
     public void onRightClick(PlayerInteractEntityEvent event) {
-        CustomItem customItem = CustomItemUtil.getCustomItem(event.getPlayer().getInventory().getItemInMainHand());
+        CustomItemUtil.CustomItem customItem = CustomItemUtil.getCustomItem(event.getPlayer().getInventory().getItemInMainHand());
         if (customItem != null) {
             customItem.getItemEvents().onRightClickEntity(event);
         }
@@ -98,102 +196,4 @@ class CustomItemListener implements Listener {
             }
         }
     }
-
-}
-
-abstract class CustomItem {
-
-    private String internalName;
-    private Material material;
-    private String displayname;
-    private int custommodeldata;
-    private List<String> lore;
-    private ItemEvents itemeventtype;
-
-    public CustomItem(String internalName, Material material, String displayname, int custommodeldata) {
-        this(internalName, material, displayname, custommodeldata, null, ItemEvents.DEFAULT);
-    }
-
-    public CustomItem(String internalName, Material material, String displayname, int custommodeldata, List<String> lore) {
-        this(internalName, material, displayname, custommodeldata, lore, ItemEvents.DEFAULT);
-    }
-
-    public CustomItem(String internalName, Material material, String displayname, int custommodeldata, ItemEvents type) {
-        this(internalName, material, displayname, custommodeldata, null, type);
-    }
-
-    public CustomItem(String internalName, Material material, String displayname, int custommodeldata, List<String> lore, ItemEvents type) {
-        this.material = material;
-        this.displayname = displayname;
-        this.internalName = internalName;
-        this.custommodeldata = custommodeldata;
-        this.lore = lore;
-        this.itemeventtype = type;
-    }
-
-    public ItemStack asItemStack() {
-        ItemStack is = new ItemStack(material);
-        ItemMeta im = is.getItemMeta();
-        im.setDisplayName(displayname);
-        if (lore != null) {
-            im.setLore(lore);
-        }
-        im.setCustomModelData(custommodeldata);
-        return is;
-    }
-
-    public String getInternalName() {
-        return internalName;
-    }
-
-    public boolean isSimilar(ItemStack base) {
-        if (base.getType() == material) {
-            if ((!base.getItemMeta().hasDisplayName() && displayname == null) || base.getItemMeta().getDisplayName().equals(displayname)) {
-                if (base.getItemMeta().getCustomModelData() == custommodeldata) {
-                    //TODO: You may want to also check fore lore if you want items to be lore specific, but I don't think you need to.
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public ItemEvents getItemEvents() {
-        return itemeventtype;
-    }
-}
-
-abstract class ItemEvents {
-
-    public static ItemEvents DEFAULT = new ItemEvents() {
-        @Override
-        public void onLeftCLick(PlayerInteractEvent event) {
-        }
-
-        @Override
-        public void onRightClick(PlayerInteractEvent event) {
-        }
-
-        @Override
-        public void onRightClickEntity(PlayerInteractEntityEvent event) {
-        }
-
-        @Override
-        public void onConsume(PlayerItemConsumeEvent event) {
-        }
-
-        @Override
-        public void onDrop(PlayerDropItemEvent event) {
-        }
-    };
-
-    public abstract void onLeftCLick(PlayerInteractEvent event);
-
-    public abstract void onRightClick(PlayerInteractEvent event);
-
-    public abstract void onRightClickEntity(PlayerInteractEntityEvent event);
-
-    public abstract void onConsume(PlayerItemConsumeEvent event);
-
-    public abstract void onDrop(PlayerDropItemEvent event);
 }
