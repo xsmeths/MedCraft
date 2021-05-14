@@ -27,39 +27,19 @@ public class MedKitHandler
         p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
       }
       if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-        if (p.getInventory().firstEmpty() == -1
-                && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                && !p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() > -1
+        if (p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() > -1
+                && !p.getInventory().contains(ItemLoader.getMedKitItem()) && !p.getEnderChest().contains(ItemLoader.getMedKitItem())
                 && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")
-                || p.getInventory().firstEmpty() == -1
-                && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                && p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() > -1
+                || p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() > -1
+                && !p.getInventory().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().contains(ItemLoader.getMedKitItem())
                 && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")
-                || p.getInventory().firstEmpty() == -1
-                && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                && p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() == -1
+                || p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() == -1
+                && !p.getInventory().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().contains(ItemLoader.getMedKitItem())
                 && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")) {
           p.getEnderChest().addItem(ItemLoader.getMedKitItem());
-        } else if (p.getInventory().firstEmpty() == -1
-                && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                && !p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() == -1
-                || p.getInventory().firstEmpty() == -1
-                && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
+        } else if (p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() == -1
+                && !p.getInventory().contains(ItemLoader.getMedKitItem()) && !p.getEnderChest().contains(ItemLoader.getMedKitItem())
+                || p.getInventory().firstEmpty() == -1 && !p.getInventory().contains(ItemLoader.getMedKitItem())
                 && !MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")) {
           p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
         }else {
@@ -89,39 +69,19 @@ public class MedKitHandler
               p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
             }
             if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-              if (p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && !p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() > -1
+              if (p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() > -1
+                      && !p.getInventory().contains(ItemLoader.getMedKitItem()) && !p.getEnderChest().contains(ItemLoader.getMedKitItem())
                       && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")
-                      || p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() > -1
+                      || p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() > -1
+                      && !p.getInventory().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().contains(ItemLoader.getMedKitItem())
                       && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")
-                      || p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() == -1
+                      || p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() == -1
+                      && !p.getInventory().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().contains(ItemLoader.getMedKitItem())
                       && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")) {
                 p.getEnderChest().addItem(ItemLoader.getMedKitItem());
-              } else if (p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && !p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() == -1
-                      || p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
+              } else if (p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() == -1
+                      && !p.getInventory().contains(ItemLoader.getMedKitItem()) && !p.getEnderChest().contains(ItemLoader.getMedKitItem())
+                      || p.getInventory().firstEmpty() == -1 && !p.getInventory().contains(ItemLoader.getMedKitItem())
                       && !MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")) {
                 p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
               }else {
@@ -163,39 +123,19 @@ public class MedKitHandler
               p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
             }
             if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-              if (p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && !p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() > -1
+              if (p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() > -1
+                      && !p.getInventory().contains(ItemLoader.getMedKitItem()) && !p.getEnderChest().contains(ItemLoader.getMedKitItem())
                       && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")
-                      || p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() > -1
+                      || p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() > -1
+                      && !p.getInventory().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().contains(ItemLoader.getMedKitItem())
                       && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")
-                      || p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() == -1
+                      || p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() == -1
+                      && !p.getInventory().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().contains(ItemLoader.getMedKitItem())
                       && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")) {
                 p.getEnderChest().addItem(ItemLoader.getMedKitItem());
-              } else if (p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && !p.getEnderChest().contains(ItemLoader.getMedKitItem()) && p.getEnderChest().firstEmpty() == -1
-                      || p.getInventory().firstEmpty() == -1
-                      && p.getInventory().getItemInMainHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getType() != ItemLoader.getMedKitItem().getType()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
-                      && p.getInventory().getItemInOffHand().getItemMeta() != ItemLoader.getMedKitItem().getItemMeta()
+              } else if (p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() == -1
+                      && !p.getInventory().contains(ItemLoader.getMedKitItem()) && !p.getEnderChest().contains(ItemLoader.getMedKitItem())
+                      || p.getInventory().firstEmpty() == -1 && !p.getInventory().contains(ItemLoader.getMedKitItem())
                       && !MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")) {
                 p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
               }else {

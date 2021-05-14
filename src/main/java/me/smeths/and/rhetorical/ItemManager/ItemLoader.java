@@ -229,7 +229,7 @@ public class ItemLoader {
     public static ItemStack getSixtyThreeMedKits() { return getInstance().SixtyThreeMedKits; }
     public static ItemStack getSixtyFourMedKits() { return getInstance().SixtyFourMedKits; }
     public static ItemStack getBandageItem() { return getInstance().BandageItem; }
-    public static ItemStack getCraftedBandage() { return getInstance().CraftedBandage; }
+
     public static ItemStack getTwoBandages() { return getInstance().TwoBandages; }
     public static ItemStack getThreeBandages() { return getInstance().ThreeBandages; }
     public static ItemStack getFourBandages() { return getInstance().FourBandages; }
@@ -294,11 +294,13 @@ public class ItemLoader {
     public static ItemStack getSixtyThreeBandages() { return getInstance().SixtyThreeBandages; }
     public static ItemStack getSixtyFourBandages() { return getInstance().SixtyFourBandages; }
     private void setupBandageItem() {
-        List<String> Bandagelore = new ArrayList<String>();
+        List<String> Bandagelore = new ArrayList<>();
         String BandageName = MedCraft.getPlugin().getConfig().getString("Bandage.Name");
         BandageItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), 1);
         ItemMeta BandageMeta = BandageItem.getItemMeta();
+        assert BandageMeta != null;
         BandageMeta.setCustomModelData(medCraft.getConfig().getInt("Bandage.ModelData"));
+        assert BandageName != null;
         BandageMeta.setDisplayName(ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',BandageName));
         if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.Glows")) {
             BandageMeta.addEnchant(Enchantment.DURABILITY, 1, true);
