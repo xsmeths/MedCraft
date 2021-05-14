@@ -1,6 +1,6 @@
-package me.smeths.and.rhetorical.Handlers;
+package me.smeths.and.rhetorical.handlers;
 
-import me.smeths.and.rhetorical.ItemManager.ItemLoader;
+import me.smeths.and.rhetorical.itemmanager.ItemLoader;
 import me.smeths.and.rhetorical.MedCraft;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

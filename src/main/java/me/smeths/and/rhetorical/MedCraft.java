@@ -1,7 +1,7 @@
 package me.smeths.and.rhetorical;
 
-import me.smeths.and.rhetorical.Handlers.PacketHandler;
-import me.smeths.and.rhetorical.ItemManager.ItemLoader;
+import me.smeths.and.rhetorical.handlers.PacketHandler;
+import me.smeths.and.rhetorical.itemmanager.ItemLoader;
 import me.smeths.and.rhetorical.Listeners.MedCraftListeners;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
