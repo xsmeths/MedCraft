@@ -7,8 +7,6 @@ import me.smeths.and.rhetorical.itemmanager.ItemLoader;
 import me.smeths.and.rhetorical.Listeners.MedCraftListeners;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;

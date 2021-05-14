@@ -24,7 +24,7 @@ import java.util.Objects;
 
 @SuppressWarnings("InstantiationOfUtilityClass")
 public class MedCraftListeners implements Listener {
-    @EventHandler
+   /*& @EventHandler
     public void onPlayerUse(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         ItemStack i = p.getInventory().getItemInMainHand();
@@ -133,7 +133,7 @@ public class MedCraftListeners implements Listener {
                 e.setCancelled(true);
             }
         }
-    }
+    }*/
 
     @EventHandler
     public void StopCraft(CraftItemEvent e) {
