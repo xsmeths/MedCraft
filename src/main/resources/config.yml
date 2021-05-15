@@ -4,11 +4,12 @@ PAPER:
     DropIfNotUsed: false
     HasRange: false
     Radius: 1
-    Warmup-Speed: 2
+    Warmup-Speed: 3
     Result-Amount: 2
     Name: '&4✚&fBandage&4✚&r'
     Lore:
       - '&6Right/Left click to use this Bandage'
+      - '&3-------------------------------------'
       - '&6Because floris is my lord and saviour'
     Regen-Time: 4
     Regen-Amplifier: 1
@@ -29,20 +30,19 @@ PAPER:
     ConsoleCMD: true
     CMD: tell [playername] change this message in your config.yml
     InternalName: BANDAGE
-  '18':
-    Glows: true
+  '17':
+    Glows: false
     DropIfNotUsed: false
-    UseEnderchestIfInvFull: true
-    HasRange: true
-    Radius: 5
-    Warmup-Speed: 5
-    Result-Amount: 1
-    Name: '&4✚&fMedKit&4✚&r'
+    HasRange: false
+    Radius: 1
+    Warmup-Speed: 60
+    Result-Amount: 3
+    Name: '&4✚&fSmallBandage&4✚&r'
     Lore:
-      - '&6Right/Left click to use a'
-      - '&3User Defined Bandage'
+      - '&6Right/Left click to use this custom'
+      - '&4✚&fSmallBandage&4✚&r'
       - '&6Because zombie_striker is epic'
-    Regen-Time: 4
+    Regen-Time: 2
     Regen-Amplifier: 1
     Craftable: true
     Crafting-Material-top-left: PAPER
@@ -56,12 +56,43 @@ PAPER:
     Crafting-Material-bottom-right: PAPER
     Crafting-Shape-top-row: '   '
     Crafting-Shape-middle-row: '456'
-    Crafting-Shape-bottom-row: '   '
+    Crafting-Shape-bottom-row: ' 8 '
+    PerformCMD: true
+    ConsoleCMD: true
+    CMD: tell [playername] change this message in your config.yml
+    InternalName: SMALLBANDAGE
+  '18':
+    Glows: true
+    DropIfNotUsed: false
+    HasRange: true
+    Radius: 6
+    Warmup-Speed: 1
+    Result-Amount: 1
+    Name: '&4✚&fMedKit&4✚&r'
+    Lore:
+      - '&6Right/Left click to use a &4✚&fMedKit&4✚&r'
+      - '&3------------------------------------------'
+      - '&6Because smeths is cool'
+    Regen-Time: 9
+    Regen-Amplifier: 2
+    Craftable: true
+    Crafting-Material-top-left: PAPER
+    Crafting-Material-top-middle: PAPER
+    Crafting-Material-top-right: PAPER
+    Crafting-Material-middle-left: PAPER
+    Crafting-Material-center: PAPER
+    Crafting-Material-middle-right: PAPER
+    Crafting-Material-bottom-left: PAPER
+    Crafting-Material-bottom-middle: PAPER
+    Crafting-Material-bottom-right: PAPER
+    Crafting-Shape-top-row: '123'
+    Crafting-Shape-middle-row: '456'
+    Crafting-Shape-bottom-row: '789'
     PerformCMD: true
     ConsoleCMD: true
     CMD: tell [playername] ayyyyyyyy
     InternalName: MEDICALKIT
 Messages:
-  NoPermCraft: 'No Permissions: you need bandage.craft'
-  NoPermUse: 'No Permissions: you need bandage.use'
-  NoPermUseOffhand: 'No permissions: you need bandage.use.offhand'
+  NoPermCraft: 'You cannot craft [item] without bandage.craft'
+  NoPermUse: 'You cannot use [item] without bandage.use'
+  NoPermUseOffhand: 'You cannot use [item] in offhand without bandage.use.offhand'
