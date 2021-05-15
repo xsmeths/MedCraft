@@ -1,36 +1,36 @@
-Bandage:
-  Material: PAPER
-  Glows: false
-  DropIfNotUsed: false
-  UseEnderchestIfInvFull: true
-  Warmup-Speed: 2
-  Result-Amount: 2
-  ModelData: 16
-  Name: '&4✚&fBandage&4✚'
-  Lore:
-  - '&6Right/Left click to use this Bandage'
-  - '&6Because smeths is cool'
-  Regen-Time: 4
-  Regen-Amplifier: 1
-  Craftable: true
-  Crafting-Material-top-left: AIR
-  Crafting-Material-top-middle: PAPER
-  Crafting-Material-top-right: AIR
-  Crafting-Material-middle-left: PAPER
-  Crafting-Material-center: PAPER
-  Crafting-Material-middle-right: PAPER
-  Crafting-Material-bottom-left: AIR
-  Crafting-Material-bottom-middle: PAPER
-  Crafting-Material-bottom-right: AIR
-  Crafting-Shape-top-row: '123'
-  Crafting-Shape-middle-row: '456'
-  Crafting-Shape-bottom-row: '789'
-  PerformCMD: true
-  ConsoleCMD: true
-  CMD: 'tell [playername] change this message in your config.yml'
-  NoPermCraft: 'No Permissions: you need bandage.craft'
-  NoPermUse: 'No Permissions: you need bandage.use'
-  NoPermUseOffhand: 'No permissions: you need bandage.use.offhand'
+PAPER:
+  16:
+    Glows: false
+    DropIfNotUsed: false
+    UseEnderchestIfInvFull: true
+    Warmup-Speed: 2
+    Result-Amount: 2
+    Name: '&4✚&fBandage&4✚'
+    Lore:
+      - '&6Right/Left click to use this Bandage'
+      - '&6Because smeths is cool'
+    Regen-Time: 4
+    Regen-Amplifier: 1
+    Craftable: true
+    Crafting-Material-top-left: AIR
+    Crafting-Material-top-middle: PAPER
+    Crafting-Material-top-right: AIR
+    Crafting-Material-middle-left: PAPER
+    Crafting-Material-center: PAPER
+    Crafting-Material-middle-right: PAPER
+    Crafting-Material-bottom-left: AIR
+    Crafting-Material-bottom-middle: PAPER
+    Crafting-Material-bottom-right: AIR
+    Crafting-Shape-top-row: '123'
+    Crafting-Shape-middle-row: '456'
+    Crafting-Shape-bottom-row: '789'
+    PerformCMD: true
+    ConsoleCMD: true
+    CMD: tell [playername] change this message in your config.yml
+    NoPermCraft: 'No Permissions: you need bandage.craft'
+    NoPermUse: 'No Permissions: you need bandage.use'
+    NoPermUseOffhand: 'No permissions: you need bandage.use.offhand'
+    InternalName: 'BANDAGE'
 MedKit:
   Material: PAPER
   Glows: true
