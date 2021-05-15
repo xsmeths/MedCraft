@@ -21,7 +21,6 @@ public class CustomItem {
     private int regen_amplifier;
     private int warmupspeed;
     private int radius;
-    private boolean useRadius;
     private boolean permissionOffhand;
     private String internalName;
 
@@ -68,10 +67,6 @@ public class CustomItem {
         this.regen_time = regen_time;
     }
 
-    public void setUseRadius(boolean useRadius) {
-        this.useRadius = useRadius;
-    }
-
     public void setWarmupspeed(int warmupspeed) {
         this.warmupspeed = warmupspeed;
     }
@@ -100,7 +95,7 @@ public class CustomItem {
         return dropifnotused;
     }
 
-    public boolean isEnderchest() {
+    public boolean UseEnderchestIfInvFull() {
         return enderchest;
     }
 
@@ -134,10 +129,6 @@ public class CustomItem {
 
     public ItemStack getItem() {
         return item;
-    }
-
-    public boolean isUseRadius() {
-        return useRadius;
     }
 
     public boolean isPermissionOffhand() {
