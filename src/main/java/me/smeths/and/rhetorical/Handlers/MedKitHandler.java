@@ -20,31 +20,31 @@ import java.util.Objects;
 public class MedKitHandler
 {
   public static Map<Player, BukkitRunnable> MedKitPlayers = new HashMap<>();
-  public MedKitHandler(final Player p, CustomItem item) {
+  public MedKitHandler(final Player p) {
     if (MedKitPlayers.containsKey(p)) {
       MedKitPlayers.get(p).cancel();
       MedKitPlayers.remove(p);
       if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
-        p.getWorld().dropItem(p.getLocation(), item.getItem());
+        p.getWorld().dropItem(p.getLocation(), ItemLoader.getMedKitItem());
       }
       if (!MedCraft.getPlugin().getConfig().getBoolean("MedKit.DropIfNotUsed")) {
         if (p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() > -1
-                && !p.getInventory().contains( item.getItem()) && !p.getEnderChest().contains( item.getItem())
+                && !p.getInventory().contains( ItemLoader.getMedKitItem()) && !p.getEnderChest().contains( ItemLoader.getMedKitItem())
                 && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")
                 || p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() > -1
-                && !p.getInventory().contains( item.getItem()) && p.getEnderChest().contains( item.getItem())
+                && !p.getInventory().contains( ItemLoader.getMedKitItem()) && p.getEnderChest().contains( ItemLoader.getMedKitItem())
                 && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")
                 || p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() == -1
-                && !p.getInventory().contains( item.getItem()) && p.getEnderChest().contains( item.getItem())
+                && !p.getInventory().contains( ItemLoader.getMedKitItem()) && p.getEnderChest().contains( ItemLoader.getMedKitItem())
                 && MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")) {
-          p.getEnderChest().addItem( item.getItem());
+          p.getEnderChest().addItem( ItemLoader.getMedKitItem());
         } else if (p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() == -1
-                && !p.getInventory().contains( item.getItem()) && !p.getEnderChest().contains( item.getItem())
-                || p.getInventory().firstEmpty() == -1 && !p.getInventory().contains( item.getItem())
+                && !p.getInventory().contains( ItemLoader.getMedKitItem()) && !p.getEnderChest().contains( ItemLoader.getMedKitItem())
+                || p.getInventory().firstEmpty() == -1 && !p.getInventory().contains( ItemLoader.getMedKitItem())
                 && !MedCraft.getPlugin().getConfig().getBoolean("MedKit.UseEnderchestIfInvFull")) {
-          p.getWorld().dropItem(p.getLocation(),  item.getItem());
+          p.getWorld().dropItem(p.getLocation(),  ItemLoader.getMedKitItem());
         }else {
-          p.getInventory().addItem( item.getItem());
+          p.getInventory().addItem( ItemLoader.getMedKitItem());
         }
       }
     }

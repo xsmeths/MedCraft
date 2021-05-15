@@ -57,7 +57,6 @@ public class MedCraftListeners implements Listener {
                         && BandageHandler.isBandaging(p) && MedKitHandler.isMedding(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
                         && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData()
                         && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())) {
-                    p.sendMessage("TEst");
                     if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("bandage.use")) {
                         int heldslot = p.getInventory().getHeldItemSlot();
                         p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
@@ -119,13 +118,13 @@ public class MedCraftListeners implements Listener {
                     int heldslot = p.getInventory().getHeldItemSlot();
                     p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
                     p.updateInventory();
-                    new MedKitHandler(p,null);
+                    new MedKitHandler(p);
                     return;
                 }
                 if (i.getAmount() >= 2 && p.hasPermission("medkit.use")) {
                     i.setAmount(i.getAmount() - 1);
                     p.updateInventory();
-                    new MedKitHandler(p,null);
+                    new MedKitHandler(p);
                     return;
                 }
                 if (!p.hasPermission("medkit.use")) {
@@ -250,7 +249,7 @@ public class MedCraftListeners implements Listener {
     @EventHandler
     public void VanillaOnly(PrepareItemCraftEvent e) {
         for (CustomItem customitem : CustomItem.getCustomItems()) {
-            for (int i = 0; i < 64; i++) {
+            for (int i = 0; i <= 64; i++) {
                 ItemStack is = customitem.getItem().clone();
                 is.setAmount(i);
                 if (Arrays.stream(e.getInventory().getMatrix()).anyMatch(Predicate.isEqual(is))) {

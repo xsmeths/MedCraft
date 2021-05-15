@@ -1,6 +1,5 @@
 PAPER:
   16:
-    Material: PAPER
     Glows: false
     DropIfNotUsed: false
     UseEnderchestIfInvFull: true
