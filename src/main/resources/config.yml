@@ -1,66 +1,67 @@
-Bandage:
-  Material: PAPER
-  Glows: false
-  DropIfNotUsed: false
-  UseEnderchestIfInvFull: true
-  Warmup-Speed: 2
-  Result-Amount: 2
-  ModelData: 16
-  Name: '&4✚&fBandage&4✚'
-  Lore:
-  - '&6Right/Left click to use this Bandage'
-  - '&6Because smeths is cool'
-  Regen-Time: 4
-  Regen-Amplifier: 1
-  Craftable: true
-  Crafting-Material-top-left: AIR
-  Crafting-Material-top-middle: PAPER
-  Crafting-Material-top-right: AIR
-  Crafting-Material-middle-left: PAPER
-  Crafting-Material-center: PAPER
-  Crafting-Material-middle-right: PAPER
-  Crafting-Material-bottom-left: AIR
-  Crafting-Material-bottom-middle: PAPER
-  Crafting-Material-bottom-right: AIR
-  Crafting-Shape-top-row: '123'
-  Crafting-Shape-middle-row: '456'
-  Crafting-Shape-bottom-row: '789'
-  PerformCMD: true
-  ConsoleCMD: true
-  CMD: 'tell [playername] change this message in your config.yml'
+PAPER:
+  '16':
+    Glows: true
+    DropIfNotUsed: false
+    HasRange: false
+    Radius: 1
+    Warmup-Speed: 2
+    Result-Amount: 2
+    Name: '&4✚&fBandage&4✚&r'
+    Lore:
+      - '&6Right/Left click to use this Bandage'
+      - '&6Because floris is my lord and saviour'
+    Regen-Time: 4
+    Regen-Amplifier: 1
+    Craftable: true
+    Crafting-Material-top-left: PAPER
+    Crafting-Material-top-middle: PAPER
+    Crafting-Material-top-right: PAPER
+    Crafting-Material-middle-left: PAPER
+    Crafting-Material-center: PAPER
+    Crafting-Material-middle-right: PAPER
+    Crafting-Material-bottom-left: PAPER
+    Crafting-Material-bottom-middle: PAPER
+    Crafting-Material-bottom-right: PAPER
+    Crafting-Shape-top-row: ' 2 '
+    Crafting-Shape-middle-row: '456'
+    Crafting-Shape-bottom-row: ' 8 '
+    PerformCMD: true
+    ConsoleCMD: true
+    CMD: tell [playername] change this message in your config.yml
+    InternalName: BANDAGE
+  '18':
+    Glows: true
+    DropIfNotUsed: false
+    UseEnderchestIfInvFull: true
+    HasRange: true
+    Radius: 5
+    Warmup-Speed: 5
+    Result-Amount: 1
+    Name: '&4✚&fMedKit&4✚&r'
+    Lore:
+      - '&6Right/Left click to use a'
+      - '&3User Defined Bandage'
+      - '&6Because zombie_striker is epic'
+    Regen-Time: 4
+    Regen-Amplifier: 1
+    Craftable: true
+    Crafting-Material-top-left: PAPER
+    Crafting-Material-top-middle: PAPER
+    Crafting-Material-top-right: PAPER
+    Crafting-Material-middle-left: PAPER
+    Crafting-Material-center: PAPER
+    Crafting-Material-middle-right: PAPER
+    Crafting-Material-bottom-left: PAPER
+    Crafting-Material-bottom-middle: PAPER
+    Crafting-Material-bottom-right: PAPER
+    Crafting-Shape-top-row: '   '
+    Crafting-Shape-middle-row: '456'
+    Crafting-Shape-bottom-row: '   '
+    PerformCMD: true
+    ConsoleCMD: true
+    CMD: tell [playername] ayyyyyyyy
+    InternalName: MEDICALKIT
+Messages:
   NoPermCraft: 'No Permissions: you need bandage.craft'
   NoPermUse: 'No Permissions: you need bandage.use'
   NoPermUseOffhand: 'No permissions: you need bandage.use.offhand'
-MedKit:
-  Material: PAPER
-  Glows: true
-  DropIfNotUsed: false
-  UseEnderchestIfInvFull: true
-  Radius: 5
-  Warmup-Speed: 1
-  Result-Amount: 1
-  ModelData: 18
-  Name: '&c✚&fMedKit&c✚'
-  Lore:
-  - '&6Right/Left click to use this MedKit'
-  - '&6Because floris is cool'
-  Regen-Time: 9
-  Regen-Amplifier: 3
-  Craftable: true
-  Crafting-Material-top-left: PAPER
-  Crafting-Material-top-middle: PAPER
-  Crafting-Material-top-right: PAPER
-  Crafting-Material-middle-left: PAPER
-  Crafting-Material-center: PAPER
-  Crafting-Material-middle-right: PAPER
-  Crafting-Material-bottom-left: PAPER
-  Crafting-Material-bottom-middle: PAPER
-  Crafting-Material-bottom-right: PAPER
-  Crafting-Shape-top-row: '123'
-  Crafting-Shape-middle-row: '456'
-  Crafting-Shape-bottom-row: '789'
-  PerformCMD: true
-  ConsoleCMD: true
-  CMD: 'tell [playername] change this message in your config.yml'
-  NoPermCraft: 'No Permissions: you need medkit.craft'
-  NoPermUse: 'No Permissions: you need medkit.use'
