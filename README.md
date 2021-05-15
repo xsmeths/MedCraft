@@ -6,7 +6,7 @@ https://www.spigotmc.org/resources/resource-pack-now-included-medcraft-a-realist
 # Contributors
 
 Zombie_Striker -> Hugely improved the codebase with config parsing and custom item handler, also
-many many improvements that I'd probably have never done with them, thank you, you're epic!
+many many improvements that I'd probably have never done without them, thank you, you're epic!
 
 MrRhetorical -> Has helped me lots over the last few years and continues to help me whenever i get stuck, thanks bro :)
 
