@@ -47,17 +47,37 @@ public class MedicalHandler {
                 boolean cancelled = p.getLocation().distance(position) > 0.75D;
                 if ((progress > total) || (cancelled)) {
                   if (cancelled) {
-                      if (item.isDropifnotused()) {
-                          p.getWorld().dropItem(p.getLocation(), item.getItem());
-                      }
-                      if (!item.isDropifnotused()) {
+                      if (item.isPerformFailureCMD() && item.isConsoleFailureCMD()) {
+                          Bukkit.dispatchCommand(Bukkit.getConsoleSender(), item.getSuccessCMD().replace("[playername]", p.getName()));
+                          if (item.isDropifnotused()) {
+                              p.getWorld().dropItem(p.getLocation(), item.getItem());
+                          }
+                          if (!item.isDropifnotused()) {
                               p.getInventory().addItem(item.getItem());
                           }
                       }
+                      if (item.isPerformFailureCMD() && !item.isConsoleFailureCMD() && p.getPlayer() != null) {
+                          Bukkit.dispatchCommand(p.getPlayer(), item.getSuccessCMD().replace("[playername]", p.getName()));
+                          if (item.isDropifnotused()) {
+                              p.getWorld().dropItem(p.getLocation(), item.getItem());
+                          }
+                          if (!item.isDropifnotused()) {
+                              p.getInventory().addItem(item.getItem());
+                          }
+                      }
+                      if (!item.isPerformFailureCMD() && !item.isConsoleFailureCMD()) {
+                          if (item.isDropifnotused()) {
+                              p.getWorld().dropItem(p.getLocation(), item.getItem());
+                          }
+                          if (!item.isDropifnotused()) {
+                              p.getInventory().addItem(item.getItem());
+                          }
+                      }
+                  }
           MedicalHandler.bandagingPlayers.remove(p);
           cancel();
         } else if (progress == total) {
-          if (item.isPerformCMD() && item.isConsoleCMD()
+          if (item.isPerformSuccessCMD() && item.isConsoleSuccessCMD()
                   && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
               if (item.HasRange()) {
                   for (Entity e : p.getNearbyEntities(item.getRadius(), item.getRadius(), item.getRadius())) {
@@ -67,8 +87,8 @@ public class MedicalHandler {
                   }
               }
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), item.getCommand().replace("[playername]", p.getName()));
-          } else if (p.getPlayer() != null && item.isPerformCMD() && !item.isConsoleCMD()
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), item.getSuccessCMD().replace("[playername]", p.getName()));
+          } else if (p.getPlayer() != null && item.isPerformSuccessCMD() && !item.isConsoleSuccessCMD()
                   && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
               if (item.HasRange()) {
                   for (Entity e : p.getNearbyEntities(item.getRadius(), item.getRadius(), item.getRadius())) {
@@ -78,8 +98,8 @@ public class MedicalHandler {
                   }
               }
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
-            Bukkit.dispatchCommand(p.getPlayer(), item.getCommand().replace("[playername]", p.getName()));
-          } else if (!item.isPerformCMD()
+            Bukkit.dispatchCommand(p.getPlayer(), item.getSuccessCMD().replace("[playername]", p.getName()));
+          } else if (!item.isPerformSuccessCMD()
                   && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
               if (item.HasRange()) {
                   for (Entity e : p.getNearbyEntities(item.getRadius(), item.getRadius(), item.getRadius())) {

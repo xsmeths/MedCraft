@@ -23,9 +23,12 @@ public class ConfigParser {
     public static final String KEY_DROPIFNOTUSED = "DropIfNotUsed";
     public static final String KEY_WARMUPSPEED = "Warmup-Speed";
     public static final String KEY_CRAFTABLE = "Craftable";
-    public static final String KEY_PERFORMCMD = "PerformCMD";
-    public static final String KEY_CONSOLECMD = "ConsoleCMD";
-    public static final String KEY_CMD = "CMD";
+    public static final String KEY_PERFORMSUCCESSCMD = "PerformSuccessCMD";
+    public static final String KEY_CONSOLESUCCESSCMD = "ConsoleSuccessCMD";
+    public static final String KEY_SUCCESSCMD = "SuccessCMD";
+    public static final String KEY_PERFORMFAILURECMD = "PerformSuccessCMD";
+    public static final String KEY_CONSOLEFAILURECMD = "ConsoleSuccessCMD";
+    public static final String KEY_FAILURECMD = "FailureCMD";
     public static final String KEY_REGEN_TIME = "Regen-Time";
     public static final String KEY_REGEN_AMPLIFIER = "Regen-Amplifier";
     public static final String KEY_GLOWS = "Glows";
@@ -77,9 +80,12 @@ public class ConfigParser {
                 }
                 im.setLore(lore);
                 item.setItemMeta(im);
-                customitem.setConsoleCMD(getValueForBoolean(material, custommodeldataint, KEY_CONSOLECMD));
-                customitem.setPerformCMD(getValueForBoolean(material, custommodeldataint, KEY_PERFORMCMD));
-                customitem.setCommand(getValueForString(material, custommodeldataint, KEY_CMD));
+                customitem.setConsoleSuccessCMD(getValueForBoolean(material, custommodeldataint, KEY_CONSOLESUCCESSCMD));
+                customitem.setPerformSuccessCMD(getValueForBoolean(material, custommodeldataint, KEY_PERFORMSUCCESSCMD));
+                customitem.setSuccessCMD(getValueForString(material, custommodeldataint, KEY_SUCCESSCMD));
+                customitem.setConsoleFailureCMD(getValueForBoolean(material, custommodeldataint, KEY_CONSOLEFAILURECMD));
+                customitem.setPerformFailureCMD(getValueForBoolean(material, custommodeldataint, KEY_PERFORMFAILURECMD));
+                customitem.setFailureCMD(getValueForString(material, custommodeldataint, KEY_FAILURECMD));
                 customitem.setDropIfNotUsed(getValueForBoolean(material, custommodeldataint, KEY_DROPIFNOTUSED));
                 customitem.setCraftable(getValueForBoolean(material, custommodeldataint, KEY_CRAFTABLE));
                 customitem.setWarmupspeed(getValueForInt(material, custommodeldataint, KEY_WARMUPSPEED));

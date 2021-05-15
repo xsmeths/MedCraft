@@ -54,21 +54,20 @@ public class MedCraftListeners implements Listener {
                         && MedicalHandler.isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
                         && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData()
                         && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())) {
-                   p.sendMessage(String.valueOf(item.HasRange()));
-                   if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("bandage.use")) {
+                   if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission(item.getInternalName() + ".use")) {
                         int heldslot = p.getInventory().getHeldItemSlot();
                         p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
                         p.updateInventory();
                         new MedicalHandler(p,item);
                         return;
                     }
-                    if (i.getAmount() >= 2 && p.hasPermission("bandage.use")) {
+                    if (i.getAmount() >= 2 && p.hasPermission(item.getInternalName() + ".use")) {
                         i.setAmount(i.getAmount() - 1);
                         p.updateInventory();
                         new MedicalHandler(p,item);
                         return;
                     }
-                    if (!p.hasPermission("bandage.use")) {
+                    if (!p.hasPermission(item.getInternalName() + ".use")) {
                         PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse")).replace("[item]",p.getInventory().getItemInMainHand().getItemMeta().getDisplayName()));;
                     } else {
                         e.setCancelled(true);
@@ -88,19 +87,19 @@ public class MedCraftListeners implements Listener {
         recipient = (Player) e.getRightClicked();
         for (CustomItem item : CustomItem.getCustomItems()) {
             if (oi == item.getItem() && i != item.getItem() && !item.HasRange())
-                if (oi.getAmount() == 1 && p.hasPermission("bandage.use.offhand")) {
+                if (oi.getAmount() == 1 && p.hasPermission(item.getInternalName() + ".use.offhand")) {
                     p.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
                     p.updateInventory();
                     new MedicalHandler(recipient, item);
                     return;
                 }
-                if (oi.getAmount() >= 2 && p.hasPermission("bandage.use.offhand")) {
+                if (oi.getAmount() >= 2 && p.hasPermission(item.getInternalName() + ".use.offhand")) {
                     oi.setAmount(oi.getAmount() - 1);
                     p.updateInventory();
                     new MedicalHandler(recipient, item);
                     return;
                 }
-                if (!p.hasPermission("bandage.use.offhand")) {
+                if (!p.hasPermission(item.getInternalName() + ".use.offhand")) {
                     PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Bandage.NoPermUseOffhand"))));
                 } else {
                     e.setCancelled(true);
@@ -118,7 +117,7 @@ public class MedCraftListeners implements Listener {
                         Player crafter = (Player) e.getWhoClicked();
                         if (!crafter.hasPermission(customItem.getInternalName() + ".craft")) {
                             e.setCancelled(true);
-                            PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', MedCraft.getPlugin().getConfig().getString("Messages.NoPermsCraft")).replace("[item]", e.getInventory().getResult().getItemMeta().getDisplayName()));
+                            PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', MedCraft.getPlugin().getConfig().getString("Messages.NoPermsCraft")).replace("[item]", e.getInventory().getResult().getItemMeta().getDisplayName()).replace("[permission]",customItem.getInternalName() + ".craft"));
                         }
                     }
                 }

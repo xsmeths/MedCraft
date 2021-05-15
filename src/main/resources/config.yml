@@ -4,7 +4,7 @@ PAPER:
     DropIfNotUsed: false
     HasRange: false
     Radius: 1
-    Warmup-Speed: 3
+    Warmup-Speed: 2
     Result-Amount: 2
     Name: '&4✚&fBandage&4✚&r'
     Lore:
@@ -26,9 +26,9 @@ PAPER:
     Crafting-Shape-top-row: ' 2 '
     Crafting-Shape-middle-row: '456'
     Crafting-Shape-bottom-row: ' 8 '
-    PerformCMD: true
-    ConsoleCMD: true
-    CMD: tell [playername] change this message in your config.yml
+    PerformSuccessCMD: true
+    ConsoleSuccessCMD: true
+    SuccessCMD: tell [playername] change this message in your config.yml
     InternalName: BANDAGE
   '17':
     Glows: false
@@ -58,12 +58,13 @@ PAPER:
     Crafting-Shape-middle-row: '456'
     Crafting-Shape-bottom-row: ' 8 '
     PerformCMD: true
-    ConsoleCMD: true
-    CMD: tell [playername] change this message in your config.yml
+    ConsoleSuccessCMD: true
+    SuccessCMD: tell [playername] change this message in your config.yml
     InternalName: SMALLBANDAGE
   '18':
     Glows: true
     DropIfNotUsed: false
+    UseEnderchestIfInvFull: true
     HasRange: true
     Radius: 6
     Warmup-Speed: 1
@@ -88,9 +89,9 @@ PAPER:
     Crafting-Shape-top-row: '123'
     Crafting-Shape-middle-row: '456'
     Crafting-Shape-bottom-row: '789'
-    PerformCMD: true
-    ConsoleCMD: true
-    CMD: tell [playername] ayyyyyyyy
+    PerformSuccessCMD: true
+    ConsoleSuccessCMD: true
+    SuccessCMD: tell [playername] ayyyyyyyy
     InternalName: MEDICALKIT
 Messages:
   NoPermCraft: 'You cannot craft [item] without bandage.craft'

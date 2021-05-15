@@ -3,10 +3,3 @@ main: me.smeths.and.rhetorical.MedCraft
 author: smeths&rhetorical
 version: 1.3.5.8
 api-version: 1.13
-permissions:
-  medcraft.craft:
-    default: true
-  medcraft.use:
-    default: true
-  medcraft.use.offhand:
-    default: true

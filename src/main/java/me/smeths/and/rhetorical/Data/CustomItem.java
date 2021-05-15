@@ -13,9 +13,12 @@ public class CustomItem {
     private boolean isglows;
     private boolean craftable;
     private boolean DropIfNotUsed;
-    private boolean performCMD;
-    private boolean consoleCMD;
-    private String command;
+    private boolean PerformSuccessCMD;
+    private boolean consoleSuccessCMD;
+    private String SuccessCMD;
+    private boolean PerformFailureCMD;
+    private boolean consoleFailureCMD;
+    private String FailureCMD;
     private int regen_time;
     private int regen_amplifier;
     private int warmupspeed;
@@ -34,13 +37,20 @@ public class CustomItem {
         return customitems.values();
     }
 
-
-    public void setCommand(String command) {
-        this.command = command;
+    public void setSuccessCMD(String SuccessCMD) {
+        this.SuccessCMD = SuccessCMD;
     }
 
-    public void setConsoleCMD(boolean consoleCMD) {
-        this.consoleCMD = consoleCMD;
+    public void setConsoleSuccessCMD(boolean consoleSuccessCMD) {
+        this.consoleSuccessCMD = consoleSuccessCMD;
+    }
+
+    public void setFailureCMD(String FailureCMD) {
+        this.FailureCMD = FailureCMD;
+    }
+
+    public void setConsoleFailureCMD(boolean consoleFailureCMD) {
+        this.consoleFailureCMD = consoleFailureCMD;
     }
 
     public void setCraftable(boolean craftable) {
@@ -75,16 +85,24 @@ public class CustomItem {
         this.isglows = isglows;
     }
 
-    public void setPerformCMD(boolean performCMD) {
-        this.performCMD = performCMD;
+    public void setPerformSuccessCMD(boolean PerformSuccessCMD) {
+        this.PerformSuccessCMD = PerformSuccessCMD;
+    }
+
+    public void setPerformFailureCMD(boolean PerformFailureCMD) {
+        this.PerformFailureCMD = PerformFailureCMD;
     }
 
     public void setRadius(int Radius) {
         this.Radius = Radius;
     }
 
-    public boolean isConsoleCMD() {
-        return consoleCMD;
+    public boolean isConsoleSuccessCMD() {
+        return consoleSuccessCMD;
+    }
+
+    public boolean isConsoleFailureCMD() {
+        return consoleFailureCMD;
     }
 
     public boolean isCraftable() {
@@ -103,8 +121,12 @@ public class CustomItem {
         return Radius;
     }
 
-    public boolean isPerformCMD() {
-        return performCMD;
+    public boolean isPerformSuccessCMD() {
+        return PerformSuccessCMD;
+    }
+
+    public boolean isPerformFailureCMD() {
+        return PerformFailureCMD;
     }
 
     public int getRegen_amplifier() {
@@ -119,8 +141,12 @@ public class CustomItem {
         return warmupspeed;
     }
 
-    public String getCommand() {
-        return command;
+    public String getSuccessCMD() {
+        return SuccessCMD;
+    }
+
+    public String getFailureCMD() {
+        return FailureCMD;
     }
 
     public ItemStack getItem() {
