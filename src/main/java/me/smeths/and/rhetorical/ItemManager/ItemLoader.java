@@ -18,7 +18,7 @@ import java.util.List;
 public class ItemLoader {
     private final Plugin medCraft = MedCraft.getPlugin();
     private static ItemLoader instance;
-    private ItemStack MedKitItem;
+   /* private ItemStack MedKitItem;
     private ItemStack CraftedMedKit;
     private ItemStack TwoMedKits;
     private ItemStack ThreeMedKits;
@@ -147,7 +147,7 @@ public class ItemLoader {
     private ItemStack SixtyOneBandages;
     private ItemStack SixtyTwoBandages;
     private ItemStack SixtyThreeBandages;
-    private ItemStack SixtyFourBandages;
+    private ItemStack SixtyFourBandages;*/
 
     public NamespacedKey Medrecipekey = new NamespacedKey(medCraft, "MedKit");
     public NamespacedKey Bandagerecipekey = new NamespacedKey(medCraft, "Bandage");
@@ -164,7 +164,7 @@ public class ItemLoader {
         setupBandageRecipe();
     }
     public static ItemLoader getInstance() { return instance; }
-    public static ItemStack getMedKitItem() { return getInstance().MedKitItem; }
+    /*public static ItemStack getMedKitItem() { return getInstance().MedKitItem; }
     public static ItemStack getTwoMedKits() { return getInstance().TwoMedKits; }
     public static ItemStack getThreeMedKits() { return getInstance().ThreeMedKits; }
     public static ItemStack getFourMedKits() { return getInstance().FourMedKits; }
@@ -292,8 +292,8 @@ public class ItemLoader {
     public static ItemStack getSixtyOneBandages() { return getInstance().SixtyOneBandages; }
     public static ItemStack getSixtyTwoBandages() { return getInstance().SixtyTwoBandages; }
     public static ItemStack getSixtyThreeBandages() { return getInstance().SixtyThreeBandages; }
-    public static ItemStack getSixtyFourBandages() { return getInstance().SixtyFourBandages; }
-    private void setupBandageItem() {
+    public static ItemStack getSixtyFourBandages() { return getInstance().SixtyFourBandages; }*/
+    /*private void setupBandageItem() {
         List<String> Bandagelore = new ArrayList<>();
         String BandageName = MedCraft.getPlugin().getConfig().getString("Bandage.Name");
         BandageItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), 1);
@@ -442,7 +442,7 @@ public class ItemLoader {
         CraftedBandage = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("Bandage.Material")), medCraft.getConfig().getInt("Bandage.Result-Amount"));
         ItemMeta craftedBandageMeta = BandageItem.getItemMeta();
         CraftedBandage.setItemMeta(craftedBandageMeta);
-    }
+    }*/
     private void setupBandageRecipe() {
         if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.Craftable")) {
             ShapedRecipe Bandagerecipe = new ShapedRecipe(Bandagerecipekey, CraftedBandage);
@@ -477,7 +477,7 @@ public class ItemLoader {
             Bukkit.addRecipe(Bandagerecipe);
         }
     }
-    private void setupMedKitItem() {
+    /*private void setupMedKitItem() {
         List<String> Medkitlore = new ArrayList<String>();
         String MedKitName = MedCraft.getPlugin().getConfig().getString("MedKit.Name");
         MedKitItem = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Material")),1 );
@@ -624,7 +624,7 @@ public class ItemLoader {
         CraftedMedKit = new ItemStack(Material.getMaterial(MedCraft.getPlugin().getConfig().getString("MedKit.Material")), medCraft.getConfig().getInt("MedKit.Result-Amount"));
         ItemMeta CraftedMedKitMeta = MedKitItem.getItemMeta();
         CraftedMedKit.setItemMeta(CraftedMedKitMeta);
-    }
+    }*/
     private void setupMedKitRecipe() {
         if (MedCraft.getPlugin().getConfig().getBoolean("MedKit.Craftable")) {
             ShapedRecipe MedKitrecipe = new ShapedRecipe(Medrecipekey, CraftedMedKit);

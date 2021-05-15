@@ -3,6 +3,7 @@ package me.smeths.and.rhetorical;
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.ItemManager.ItemLoader;
 import me.smeths.and.rhetorical.Listeners.MedCraftListeners;
+import me.smeths.and.rhetorical.Config.ConfigParser;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,6 +11,7 @@ import java.io.File;
 
 public class MedCraft extends JavaPlugin {
     private static MedCraft instance;
+    private static ConfigParser parser;
 
     public void onEnable() {
         if (instance != null) {
@@ -40,6 +42,8 @@ public class MedCraft extends JavaPlugin {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        parser = new ConfigParser(getConfig());
+        parser.loadItems();
     }
 
     public void onDisable() {
