@@ -8,7 +8,6 @@ import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -19,7 +18,6 @@ import java.util.Objects;
 
 public class MedicalHandler {
   private static final Map<Player, BukkitRunnable> bandagingPlayers = new HashMap<>();
-    private static Map<Player, ItemMeta> ItemUsed = new HashMap<>();
   public MedicalHandler(final Player p, CustomItem item) {
     if (bandagingPlayers.containsKey(p)) {
         bandagingPlayers.get(p).cancel();
@@ -47,8 +45,8 @@ public class MedicalHandler {
                 boolean cancelled = p.getLocation().distance(position) > 0.75D;
                 if ((progress > total) || (cancelled)) {
                   if (cancelled) {
-                      if (item.isPerformFailureCMD() && item.isConsoleFailureCMD()) {
-                          Bukkit.dispatchCommand(Bukkit.getConsoleSender(), item.getSuccessCMD().replace("[playername]", p.getName()));
+                      if (item.isPerformCancelCMD() && item.isConsoleCancelCMD()) {
+                          Bukkit.dispatchCommand(Bukkit.getConsoleSender(), item.getCancelCMD().replace("[playername]", p.getName()));
                           if (item.isDropifnotused()) {
                               p.getWorld().dropItem(p.getLocation(), item.getItem());
                           }
@@ -56,8 +54,8 @@ public class MedicalHandler {
                               p.getInventory().addItem(item.getItem());
                           }
                       }
-                      if (item.isPerformFailureCMD() && !item.isConsoleFailureCMD() && p.getPlayer() != null) {
-                          Bukkit.dispatchCommand(p.getPlayer(), item.getSuccessCMD().replace("[playername]", p.getName()));
+                      if (item.isPerformCancelCMD() && !item.isConsoleCancelCMD() && p.getPlayer() != null) {
+                          Bukkit.dispatchCommand(p.getPlayer(), item.getCancelCMD().replace("[playername]", p.getName()));
                           if (item.isDropifnotused()) {
                               p.getWorld().dropItem(p.getLocation(), item.getItem());
                           }
@@ -65,7 +63,7 @@ public class MedicalHandler {
                               p.getInventory().addItem(item.getItem());
                           }
                       }
-                      if (!item.isPerformFailureCMD() && !item.isConsoleFailureCMD()) {
+                      if (!item.isPerformCancelCMD() && !item.isConsoleCancelCMD()) {
                           if (item.isDropifnotused()) {
                               p.getWorld().dropItem(p.getLocation(), item.getItem());
                           }
@@ -110,11 +108,31 @@ public class MedicalHandler {
               }
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
           } else {
-              if (item.isDropifnotused()) {
-                  p.getWorld().dropItem(p.getLocation(), item.getItem());
+              if (item.isPerformFailureCMD() && item.isConsoleFailureCMD()) {
+                  Bukkit.dispatchCommand(Bukkit.getConsoleSender(), item.getFailureCMD().replace("[playername]", p.getName()));
+                  if (item.isDropifnotused()) {
+                      p.getWorld().dropItem(p.getLocation(), item.getItem());
+                  }
+                  if (!item.isDropifnotused()) {
+                      p.getInventory().addItem(item.getItem());
+                  }
               }
-              if (!item.isDropifnotused()) {
-                  p.getInventory().addItem(item.getItem());
+              if (item.isPerformFailureCMD() && !item.isConsoleFailureCMD() && p.getPlayer() != null) {
+                  Bukkit.dispatchCommand(p.getPlayer(), item.getFailureCMD().replace("[playername]", p.getName()));
+                  if (item.isDropifnotused()) {
+                      p.getWorld().dropItem(p.getLocation(), item.getItem());
+                  }
+                  if (!item.isDropifnotused()) {
+                      p.getInventory().addItem(item.getItem());
+                  }
+              }
+              if (!item.isPerformFailureCMD() && !item.isConsoleFailureCMD()) {
+                  if (item.isDropifnotused()) {
+                      p.getWorld().dropItem(p.getLocation(), item.getItem());
+                  }
+                  if (!item.isDropifnotused()) {
+                      p.getInventory().addItem(item.getItem());
+                  }
               }
             MedicalHandler.bandagingPlayers.remove(p);
             cancel();

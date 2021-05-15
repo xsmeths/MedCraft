@@ -16,6 +16,9 @@ public class CustomItem {
     private boolean PerformSuccessCMD;
     private boolean consoleSuccessCMD;
     private String SuccessCMD;
+    private boolean PerformCancelCMD;
+    private boolean consoleCancelCMD;
+    private String CancelCMD;
     private boolean PerformFailureCMD;
     private boolean consoleFailureCMD;
     private String FailureCMD;
@@ -43,6 +46,14 @@ public class CustomItem {
 
     public void setConsoleSuccessCMD(boolean consoleSuccessCMD) {
         this.consoleSuccessCMD = consoleSuccessCMD;
+    }
+
+    public void setCancelCMD(String CancelCMD) {
+        this.CancelCMD = CancelCMD;
+    }
+
+    public void setConsoleCancelCMD(boolean consoleCancelCMD) {
+        this.consoleCancelCMD = consoleCancelCMD;
     }
 
     public void setFailureCMD(String FailureCMD) {
@@ -89,6 +100,10 @@ public class CustomItem {
         this.PerformSuccessCMD = PerformSuccessCMD;
     }
 
+    public void setPerformCancelCMD(boolean PerformCancelCMD) {
+        this.PerformCancelCMD = PerformCancelCMD;
+    }
+
     public void setPerformFailureCMD(boolean PerformFailureCMD) {
         this.PerformFailureCMD = PerformFailureCMD;
     }
@@ -99,6 +114,10 @@ public class CustomItem {
 
     public boolean isConsoleSuccessCMD() {
         return consoleSuccessCMD;
+    }
+
+    public boolean isConsoleCancelCMD() {
+        return PerformCancelCMD;
     }
 
     public boolean isConsoleFailureCMD() {
@@ -125,6 +144,10 @@ public class CustomItem {
         return PerformSuccessCMD;
     }
 
+    public boolean isPerformCancelCMD() {
+        return consoleCancelCMD;
+    }
+
     public boolean isPerformFailureCMD() {
         return PerformFailureCMD;
     }
@@ -143,6 +166,10 @@ public class CustomItem {
 
     public String getSuccessCMD() {
         return SuccessCMD;
+    }
+
+    public String getCancelCMD() {
+        return CancelCMD;
     }
 
     public String getFailureCMD() {

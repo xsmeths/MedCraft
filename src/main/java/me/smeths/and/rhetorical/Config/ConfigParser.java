@@ -26,9 +26,12 @@ public class ConfigParser {
     public static final String KEY_PERFORMSUCCESSCMD = "PerformSuccessCMD";
     public static final String KEY_CONSOLESUCCESSCMD = "ConsoleSuccessCMD";
     public static final String KEY_SUCCESSCMD = "SuccessCMD";
-    public static final String KEY_PERFORMFAILURECMD = "PerformSuccessCMD";
-    public static final String KEY_CONSOLEFAILURECMD = "ConsoleSuccessCMD";
+    public static final String KEY_PERFORMFAILURECMD = "PerformFailureCMD";
+    public static final String KEY_CONSOLEFAILURECMD = "ConsoleFailureCMD";
     public static final String KEY_FAILURECMD = "FailureCMD";
+    public static final String KEY_PERFORMCANCELCMD = "PerformCancelCMD";
+    public static final String KEY_CONSOLECANCELCMD = "ConsoleCancelCMD";
+    public static final String KEY_CANCELCMD = "CancelCMD";
     public static final String KEY_REGEN_TIME = "Regen-Time";
     public static final String KEY_REGEN_AMPLIFIER = "Regen-Amplifier";
     public static final String KEY_GLOWS = "Glows";
@@ -83,6 +86,9 @@ public class ConfigParser {
                 customitem.setConsoleSuccessCMD(getValueForBoolean(material, custommodeldataint, KEY_CONSOLESUCCESSCMD));
                 customitem.setPerformSuccessCMD(getValueForBoolean(material, custommodeldataint, KEY_PERFORMSUCCESSCMD));
                 customitem.setSuccessCMD(getValueForString(material, custommodeldataint, KEY_SUCCESSCMD));
+                customitem.setConsoleCancelCMD(getValueForBoolean(material, custommodeldataint, KEY_CONSOLECANCELCMD));
+                customitem.setPerformCancelCMD(getValueForBoolean(material, custommodeldataint, KEY_PERFORMCANCELCMD));
+                customitem.setCancelCMD(getValueForString(material, custommodeldataint, KEY_CANCELCMD));
                 customitem.setConsoleFailureCMD(getValueForBoolean(material, custommodeldataint, KEY_CONSOLEFAILURECMD));
                 customitem.setPerformFailureCMD(getValueForBoolean(material, custommodeldataint, KEY_PERFORMFAILURECMD));
                 customitem.setFailureCMD(getValueForString(material, custommodeldataint, KEY_FAILURECMD));

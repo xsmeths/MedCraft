@@ -28,7 +28,13 @@ PAPER:
     Crafting-Shape-bottom-row: ' 8 '
     PerformSuccessCMD: true
     ConsoleSuccessCMD: true
-    SuccessCMD: tell [playername] change this message in your config.yml
+    SuccessCMD: tell [playername] ayyyyyyyy
+    PerformCancelCMD: true
+    ConsoleCancelCMD: true
+    CancelCMD: tell [playername] you cancelled your warmup, oof, try again maybe?
+    PerformFailureCMD: true
+    ConsoleFailureCMD: true
+    FailureCMD: tell [playername] Could not use Healing Item you, oof, try again maybe?
     InternalName: BANDAGE
   '17':
     Glows: false
@@ -57,9 +63,15 @@ PAPER:
     Crafting-Shape-top-row: '   '
     Crafting-Shape-middle-row: '456'
     Crafting-Shape-bottom-row: ' 8 '
-    PerformCMD: true
+    PerformSuccessCMD: true
     ConsoleSuccessCMD: true
-    SuccessCMD: tell [playername] change this message in your config.yml
+    SuccessCMD: tell [playername] ayyyyyyyy
+    PerformCancelCMD: true
+    ConsoleCancelCMD: true
+    CancelCMD: tell [playername] you cancelled your warmup, oof, try again maybe?
+    PerformFailureCMD: true
+    ConsoleFailureCMD: true
+    FailureCMD: tell [playername] Could not use Healing Item you, oof, try again maybe?
     InternalName: SMALLBANDAGE
   '18':
     Glows: true
@@ -71,8 +83,8 @@ PAPER:
     Result-Amount: 1
     Name: '&4✚&fMedKit&4✚&r'
     Lore:
-      - '&6Right/Left click to use a &4✚&fMedKit&4✚&r'
-      - '&3------------------------------------------'
+      - '&6Right/Left click to use'
+      - '&3-----------------------'
       - '&6Because smeths is cool'
     Regen-Time: 9
     Regen-Amplifier: 2
@@ -92,6 +104,12 @@ PAPER:
     PerformSuccessCMD: true
     ConsoleSuccessCMD: true
     SuccessCMD: tell [playername] ayyyyyyyy
+    PerformCancelCMD: true
+    ConsoleCancelCMD: true
+    CancelCMD: tell [playername] you cancelled your warmup, oof, try again maybe?
+    PerformFailureCMD: true
+    ConsoleFailureCMD: true
+    FailureCMD: tell [playername] Could not use Healing Item you, oof, try again maybe?
     InternalName: MEDICALKIT
 Messages:
   NoPermCraft: 'You cannot craft [item] without bandage.craft'
