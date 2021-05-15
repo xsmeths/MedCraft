@@ -19,14 +19,25 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
 @SuppressWarnings("InstantiationOfUtilityClass")
 public class MedCraftListeners implements Listener {
+    private static MedCraftListeners instance;
+    public Map<Player, ItemStack> ItemUsed = new HashMap<>();
+    public MedCraftListeners() {
+        if (instance != null) {
+            return;
+        }
+        instance = this;
+    }
     @EventHandler
     public void onPlayerUse(PlayerInteractEvent e) {
         Player p = e.getPlayer();
@@ -106,12 +117,14 @@ public class MedCraftListeners implements Listener {
                 && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == MedCraft.getPlugin().getConfig().getInt("Bandage.ModelData"))) {
                 if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("bandage.use")) {
                     int heldslot = p.getInventory().getHeldItemSlot();
+                    ItemUsed.put(p,p.getInventory().getItemInMainHand());
                     p.getInventory().setItem(heldslot, new ItemStack(Material.AIR));
                     p.updateInventory();
                     new BandageHandler(p);
                     return;
                 }
                 if (i.getAmount() >= 2 && p.hasPermission("bandage.use")) {
+                    ItemUsed.put(p,p.getInventory().getItemInMainHand());
                     i.setAmount(i.getAmount() - 1);
                     p.updateInventory();
                     new BandageHandler(p);
@@ -330,5 +343,5 @@ public class MedCraftListeners implements Listener {
         {
             e.getInventory().setResult(new ItemStack(Material.AIR));
         }
-    }
+    } public static MedCraftListeners getInstance() { return instance; }
 }

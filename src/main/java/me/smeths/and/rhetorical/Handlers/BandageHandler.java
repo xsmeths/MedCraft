@@ -1,6 +1,7 @@
 package me.smeths.and.rhetorical.Handlers;
 
 import me.smeths.and.rhetorical.ItemManager.ItemLoader;
+import me.smeths.and.rhetorical.Listeners.MedCraftListeners;
 import me.smeths.and.rhetorical.MedCraft;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,7 +23,7 @@ public class BandageHandler {
       bandagingPlayers.get(p).cancel();
       bandagingPlayers.remove(p);
         if (MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
-            p.getWorld().dropItem(p.getLocation(), ItemLoader.getBandageItem());
+            p.getWorld().dropItem(p.getLocation(), MedCraftListeners.getInstance().ItemUsed.get(p));
         }
         if (!MedCraft.getPlugin().getConfig().getBoolean("Bandage.DropIfNotUsed")) {
             if (p.getInventory().firstEmpty() == -1 && p.getEnderChest().firstEmpty() > -1
@@ -52,11 +53,7 @@ public class BandageHandler {
               final int duration = 20 * MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Time");
               final int amplifier = MedCraft.getPlugin().getConfig().getInt("Bandage.Regen-Amplifier");
               final int multiplier = MedCraft.getPlugin().getConfig().getInt("Bandage.Warmup-Speed");
-
-              public void cancel() {
-                super.cancel();
-              }
-
+              public void cancel() { super.cancel(); }
               public void run() {
                 boolean cancelled = p.getLocation().distance(position) > 0.75D;
                 if ((progress > total) || (cancelled)) {
@@ -92,7 +89,8 @@ public class BandageHandler {
                   && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), String.valueOf(MedCraft.getPlugin().getConfig().get("Bandage.CMD")).replace("[playername]", p.getName()));
-          } else if (p.getPlayer() != null && MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD") && !MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD")
+          } else if (p.getPlayer() != null && MedCraft.getPlugin().getConfig().getBoolean("Bandage.PerformCMD")
+                  && !MedCraft.getPlugin().getConfig().getBoolean("Bandage.ConsoleCMD")
                   && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(p.getPlayer(), String.valueOf(MedCraft.getPlugin().getConfig().get("Bandage.CMD")).replace("[playername]", p.getName()));

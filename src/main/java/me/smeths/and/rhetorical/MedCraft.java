@@ -4,9 +4,13 @@ import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.ItemManager.ItemLoader;
 import me.smeths.and.rhetorical.Listeners.MedCraftListeners;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MedCraft extends JavaPlugin {
     private static MedCraft instance;
@@ -21,12 +25,10 @@ public class MedCraft extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MedCraftListeners(), getPlugin());
         loadConfiguration();
     }
-
     public void loadConfiguration() {
-        try {
-            if (!getDataFolder().exists()) {
+        try { if (!getDataFolder().exists()) {
                 //noinspection ResultOfMethodCallIgnored
-                getDataFolder().mkdirs();
+            getDataFolder().mkdirs();
             }
             File file = new File(getDataFolder(), "config.yml");
             if (!file.exists()) {
@@ -40,9 +42,7 @@ public class MedCraft extends JavaPlugin {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void onDisable() {
+    } public void onDisable() {
         Bukkit.removeRecipe(ItemLoader.getInstance().Medrecipekey);
         Bukkit.removeRecipe(ItemLoader.getInstance().Bandagerecipekey);
     }

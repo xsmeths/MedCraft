@@ -1,8 +1,9 @@
 Bandage:
   Material: PAPER
   Glows: false
-  DropIfNotUsed: false
-  UseEnderchestIfInvFull: true
+  DropIfNotUsed: true
+  UseEnderchestIfInvFull: false
+  Offhnad: true
   Warmup-Speed: 2
   Result-Amount: 2
   ModelData: 16
@@ -28,9 +29,9 @@ Bandage:
   PerformCMD: true
   ConsoleCMD: true
   CMD: 'tell [playername] change this message in your config.yml'
-  NoPermCraft: 'No Permissions: you need bandage.craft'
-  NoPermUse: 'No Permissions: you need bandage.use'
-  NoPermUseOffhand: 'No permissions: you need bandage.use.offhand'
+  NoPermCraft: 'No Permissions: you need medcraft.bandage.craft'
+  NoPermUse: 'No Permissions: you need medcraft.bandage.use'
+  NoPermUseOffhand: 'No permissions: you need medcraft.bandage.offhand'
 MedKit:
   Material: PAPER
   Glows: true
@@ -62,5 +63,5 @@ MedKit:
   PerformCMD: true
   ConsoleCMD: true
   CMD: 'tell [playername] change this message in your config.yml'
-  NoPermCraft: 'No Permissions: you need medkit.craft'
-  NoPermUse: 'No Permissions: you need medkit.use'
+  NoPermCraft: 'No Permissions: you need medcraft.medkit.craft'
+  NoPermUse: 'No Permissions: you need medcraft.medkit.use'
