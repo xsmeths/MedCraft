@@ -87,7 +87,7 @@ public class MedCraftListeners implements Listener {
             return;
         recipient = (Player) e.getRightClicked();
         for (CustomItem item : CustomItem.getCustomItems()) {
-            if (oi == item.getItem() && i != item.getItem())
+            if (oi == item.getItem() && i != item.getItem() && !item.HasRange())
                 if (oi.getAmount() == 1 && p.hasPermission("bandage.use.offhand")) {
                     p.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
                     p.updateInventory();
