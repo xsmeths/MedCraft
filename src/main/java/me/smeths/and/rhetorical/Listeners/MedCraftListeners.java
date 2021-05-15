@@ -93,21 +93,20 @@ public class MedCraftListeners implements Listener {
             if (oi.getType() == item.getItem().getType()
                     && oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == item.getItem().getType()
                     && oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData()
-                    && !recipient.hasPotionEffect(PotionEffectType.REGENERATION)
+                    && !recipient.hasPotionEffect(PotionEffectType.REGENERATION) && !item.HasRange()
                     && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()
                     && !isBandaging(recipient) && i.getItemMeta() != null && i.getItemMeta().hasCustomModelData()
                     && i.getItemMeta().getCustomModelData() != item.getItem().getItemMeta().getCustomModelData()
                     || oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == item.getItem().getType()
                     && oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData()
-                    && !recipient.hasPotionEffect(PotionEffectType.REGENERATION)
+                    && !recipient.hasPotionEffect(PotionEffectType.REGENERATION) && !item.HasRange()
                     && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()
                     && isBandaging(recipient) && i.getType() == Material.AIR
                     || oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == item.getItem().getType()
                     && oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData()
-                    && !recipient.hasPotionEffect(PotionEffectType.REGENERATION)
+                    && !recipient.hasPotionEffect(PotionEffectType.REGENERATION) && !item.HasRange()
                     && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()
                     && isBandaging(recipient)) {
-                p.sendMessage("if passed");
                 if (oi.getAmount() == 1 && p.hasPermission("bandage.use.offhand")) {
                     p.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
                     p.updateInventory();
