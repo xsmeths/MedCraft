@@ -17,11 +17,11 @@ import java.util.Map;
 import java.util.Objects;
 
 public class MedicalHandler {
-  private static final Map<Player, BukkitRunnable> bandagingPlayers = new HashMap<>();
+  private static final Map<Player, BukkitRunnable> HealingPlayers = new HashMap<>();
   public MedicalHandler(final Player p, CustomItem item) {
-    if (bandagingPlayers.containsKey(p)) {
-        bandagingPlayers.get(p).cancel();
-        bandagingPlayers.remove(p);
+    if (HealingPlayers.containsKey(p)) {
+        HealingPlayers.get(p).cancel();
+        HealingPlayers.remove(p);
         if (item.isDropifnotused()) {
             p.getWorld().dropItem(p.getLocation(), item.getItem());
         }
@@ -29,52 +29,31 @@ public class MedicalHandler {
             p.getInventory().addItem(item.getItem());
         }
     }
-    bandagingPlayers.put(p, new BukkitRunnable() {
+    HealingPlayers.put(p, new BukkitRunnable() {
               final Location position = p.getLocation();
               final int total = 60;
               int progress = 0;
               final int duration = 20 * item.getRegen_time();
               final int amplifier = item.getRegen_amplifier();
               final int multiplier = item.getWarmupspeed();
-
               public void cancel() {
                 super.cancel();
               }
-
               public void run() {
                 boolean cancelled = p.getLocation().distance(position) > 0.75D;
                 if ((progress > total) || (cancelled)) {
                   if (cancelled) {
-                      if (item.isPerformCancelCMD() && item.isConsoleCancelCMD()) {
-                          Bukkit.dispatchCommand(Bukkit.getConsoleSender(), item.getCancelCMD().replace("[playername]", p.getName()));
-                          if (item.isDropifnotused()) {
-                              p.getWorld().dropItem(p.getLocation(), item.getItem());
-                          }
-                          if (!item.isDropifnotused()) {
-                              p.getInventory().addItem(item.getItem());
-                          }
+                      if (item.isDropifnotused()) {
+                          p.getWorld().dropItem(p.getLocation(), item.getItem());
                       }
-                      if (item.isPerformCancelCMD() && !item.isConsoleCancelCMD() && p.getPlayer() != null) {
-                          Bukkit.dispatchCommand(p.getPlayer(), item.getCancelCMD().replace("[playername]", p.getName()));
-                          if (item.isDropifnotused()) {
-                              p.getWorld().dropItem(p.getLocation(), item.getItem());
-                          }
-                          if (!item.isDropifnotused()) {
-                              p.getInventory().addItem(item.getItem());
-                          }
-                      }
-                      if (!item.isPerformCancelCMD() && !item.isConsoleCancelCMD()) {
-                          if (item.isDropifnotused()) {
-                              p.getWorld().dropItem(p.getLocation(), item.getItem());
-                          }
-                          if (!item.isDropifnotused()) {
-                              p.getInventory().addItem(item.getItem());
-                          }
+                      if (!item.isDropifnotused()) {
+                          p.getInventory().addItem(item.getItem());
                       }
                   }
-          MedicalHandler.bandagingPlayers.remove(p);
+          MedicalHandler.HealingPlayers.remove(p);
           cancel();
-        } else if (progress == total) {
+        }
+                else if (progress == total) {
           if (item.isPerformSuccessCMD() && item.isConsoleSuccessCMD()
                   && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
               if (item.HasRange()) {
@@ -86,7 +65,8 @@ public class MedicalHandler {
               }
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), item.getSuccessCMD().replace("[playername]", p.getName()));
-          } else if (p.getPlayer() != null && item.isPerformSuccessCMD() && !item.isConsoleSuccessCMD()
+          }
+          else if (p.getPlayer() != null && item.isPerformSuccessCMD() && !item.isConsoleSuccessCMD()
                   && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
               if (item.HasRange()) {
                   for (Entity e : p.getNearbyEntities(item.getRadius(), item.getRadius(), item.getRadius())) {
@@ -97,7 +77,8 @@ public class MedicalHandler {
               }
             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
             Bukkit.dispatchCommand(p.getPlayer(), item.getSuccessCMD().replace("[playername]", p.getName()));
-          } else if (!item.isPerformSuccessCMD()
+          }
+          else if (!item.isPerformSuccessCMD()
                   && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
               if (item.HasRange()) {
                   for (Entity e : p.getNearbyEntities(item.getRadius(), item.getRadius(), item.getRadius())) {
@@ -134,7 +115,7 @@ public class MedicalHandler {
                       p.getInventory().addItem(item.getItem());
                   }
               }
-            MedicalHandler.bandagingPlayers.remove(p);
+            MedicalHandler.HealingPlayers.remove(p);
             cancel();
           }
         }
@@ -152,8 +133,10 @@ public class MedicalHandler {
         PacketHandler.getInstance().sendActionBarMessage(p,sb.toString());
         progress += multiplier;
       }
-    });
-    bandagingPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
+    }
+    )
+    ;
+    HealingPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
   }
-  public static boolean isBandaging(Player p){return !bandagingPlayers.containsKey(p);}
+  public static boolean isBandaging(Player p){return !HealingPlayers.containsKey(p);}
 }

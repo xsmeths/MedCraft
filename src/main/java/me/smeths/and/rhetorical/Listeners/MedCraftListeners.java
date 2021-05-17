@@ -11,21 +11,21 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
-
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Predicate;
 
 import static me.smeths.and.rhetorical.Handlers.MedicalHandler.isBandaging;
-
 @SuppressWarnings("InstantiationOfUtilityClass")
 public class MedCraftListeners implements Listener {
     @EventHandler
@@ -34,32 +34,32 @@ public class MedCraftListeners implements Listener {
         ItemStack i = p.getInventory().getItemInMainHand();
         if (i.getItemMeta() != null){
             for(CustomItem item : CustomItem.getCustomItems()){
-               if (e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_BLOCK
-                        && !p.hasPotionEffect(PotionEffectType.REGENERATION) && isBandaging(p)
-                        && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData() && e.getClickedBlock() != null
-                        && !e.getClickedBlock().getType().toString().contains("FURNACE") && e.getClickedBlock().getType() != Material.SMOKER
-                        && !e.getClickedBlock().getType().toString().contains("TABLE") && !e.getClickedBlock().getType().toString().contains("HOPPER")
-                        && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
-                        && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
-                        || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_BLOCK
-                        && !p.hasPotionEffect(PotionEffectType.REGENERATION) && isBandaging(p)
-                        && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData() && e.getClickedBlock() != null
-                        && !e.getClickedBlock().getType().toString().contains("CHEST") && !e.getClickedBlock().getType().toString().contains("BED")
-                        && !e.getClickedBlock().getType().toString().contains("FURNACE") && e.getClickedBlock().getType() != Material.SMOKER
-                        && !e.getClickedBlock().getType().toString().contains("TABLE") && !e.getClickedBlock().getType().toString().contains("HOPPER")
-                        && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
-                        && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
-                        || e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_AIR
-                        && isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
-                        && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData()
-                        && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
-                        || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_AIR
-                        && isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
-                        && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData()
-                        && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())) {
-                   if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("med.craft.use")) {
-                        int heldslot = p.getInventory().getHeldItemSlot();
-                        p.getInventory().setItemInHand(new ItemStack(Material.AIR));
+                if (item.getItem().getItemMeta() != null)
+                    if (e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_BLOCK
+                            && !p.hasPotionEffect(PotionEffectType.REGENERATION) && isBandaging(p)
+                            && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData() && e.getClickedBlock() != null
+                            && !e.getClickedBlock().getType().toString().contains("FURNACE") && e.getClickedBlock().getType() != Material.SMOKER
+                            && !e.getClickedBlock().getType().toString().contains("TABLE") && !e.getClickedBlock().getType().toString().contains("HOPPER")
+                            && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
+                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
+                            || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_BLOCK
+                            && !p.hasPotionEffect(PotionEffectType.REGENERATION) && isBandaging(p)
+                            && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData() && e.getClickedBlock() != null
+                            && !e.getClickedBlock().getType().toString().contains("CHEST") && !e.getClickedBlock().getType().toString().contains("BED")
+                            && !e.getClickedBlock().getType().toString().contains("FURNACE") && e.getClickedBlock().getType() != Material.SMOKER
+                            && !e.getClickedBlock().getType().toString().contains("TABLE") && !e.getClickedBlock().getType().toString().contains("HOPPER")
+                            && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
+                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
+                            || e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_AIR
+                            && isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
+                            && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData()
+                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
+                            || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_AIR
+                            && isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION)
+                            && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData()
+                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())) {
+                        if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("med.craft.use")) {
+                        p.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                         p.updateInventory();
                         new MedicalHandler(p,item);
                         return;
@@ -71,8 +71,9 @@ public class MedCraftListeners implements Listener {
                         return;
                     }
                     if (!p.hasPermission("med.craft.use")) {
-                        PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse")).replace("[item]",p.getInventory().getItemInMainHand().getItemMeta().getDisplayName()));;
-                    } else {
+                        PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse"))).replace("[item]", Objects.requireNonNull(p.getInventory().getItemInMainHand().getItemMeta()).getDisplayName()));
+                    }
+                    else {
                         e.setCancelled(true);
                     }
                 }
@@ -89,6 +90,7 @@ public class MedCraftListeners implements Listener {
             if (!(e.getRightClicked() instanceof Player))
                 return;
             recipient = (Player) e.getRightClicked();
+            if (item.getItem().getItemMeta() != null)
             if (oi.getType() == item.getItem().getType()
                     && oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == item.getItem().getType()
                     && oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData()
@@ -131,13 +133,14 @@ public class MedCraftListeners implements Listener {
         if (e.getInventory().getResult() != null) {
             if (e.getWhoClicked().getType() == EntityType.PLAYER) {
                 for (CustomItem customItem : CustomItem.getCustomItems()) {
+                    if (customItem.getItem().getItemMeta() != null)
                     if (Objects.requireNonNull(e.getInventory().getResult()).getType() == customItem.getItem().getType()
                             && e.getInventory().getResult().getItemMeta() != null && e.getInventory().getResult().getItemMeta().hasCustomModelData()
                             && e.getInventory().getResult().getItemMeta().getCustomModelData() == customItem.getItem().getItemMeta().getCustomModelData()) {
                         Player crafter = (Player) e.getWhoClicked();
                         if (!crafter.hasPermission("med.craft")) {
                             e.setCancelled(true);
-                            PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', MedCraft.getPlugin().getConfig().getString("Messages.NoPermsCraft")).replace("[item]", e.getInventory().getResult().getItemMeta().getDisplayName()).replace("[permission]",customItem.getInternalName() + ".craft"));
+                            PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermsCraft"))).replace("[item]", e.getInventory().getResult().getItemMeta().getDisplayName()));
                         }
                     }
                 }
@@ -153,6 +156,17 @@ public class MedCraftListeners implements Listener {
                 if (Arrays.stream(e.getInventory().getMatrix()).anyMatch(Predicate.isEqual(is))) {
                     e.getInventory().setResult(new ItemStack(Material.AIR));
                 }
+            }
+        }
+    }
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void OnMedCraftItemPickup(EntityPickupItemEvent e){
+        for (CustomItem customitem : CustomItem.getCustomItems()) {
+            if (e.getEntity().getType() != EntityType.PLAYER)
+                return;
+            Player p = (Player) e.getEntity();
+            if (e.getItem().getItemStack() == customitem.getItem() && e.isCancelled()) {
+                e.setCancelled(false);
             }
         }
     }

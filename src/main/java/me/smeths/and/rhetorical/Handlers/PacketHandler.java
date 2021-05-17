@@ -20,7 +20,8 @@ public class PacketHandler {
 		nmsVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 		try {
 			craftPlayer = Class.forName("org.bukkit.craftbukkit." + nmsVersion + ".entity.CraftPlayer");
-		} catch(Exception e) {
+		}
+		catch(Exception e) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Could not get CraftPlayer class! Is there a typo?");
 			e.printStackTrace();
 		}
@@ -28,11 +29,15 @@ public class PacketHandler {
 	public static PacketHandler getInstance() {
 		return instance;
 	}
-	public Class getCraftPlayer() { return craftPlayer; }
-	public static Class<?> getNmsClass(String name){
+	public Class getCraftPlayer() {
+		return craftPlayer;
+	}
+	public static Class<?> getNmsClass(String name)
+	{
 		try {
 			return Class.forName("net.minecraft.server." + getInstance().nmsVersion + "." + name);
-		} catch(Exception e) {
+		}
+		catch(Exception e) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Could not get class for name! Is there a typo?");
 			e.printStackTrace();
 			return null;
@@ -45,7 +50,8 @@ public class PacketHandler {
 			Object handle = p.getClass().getMethod("getHandle").invoke(p);
 			Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
 			playerConnection.getClass().getMethod("sendPacket", getNmsClass("Packet")).invoke(playerConnection, packetPlayOutChat);
-		} catch(Exception e) {
+		}
+		catch(Exception e) {
 			p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
 		}
 	}

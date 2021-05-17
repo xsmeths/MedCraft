@@ -29,12 +29,9 @@ PAPER:
     PerformSuccessCMD: true
     ConsoleSuccessCMD: true
     SuccessCMD: tell [playername] ayyyyyyyy
-    PerformCancelCMD: true
-    ConsoleCancelCMD: true
-    CancelCMD: tell [playername] you cancelled your warmup, oof, try again maybe?
     PerformFailureCMD: true
     ConsoleFailureCMD: true
-    FailureCMD: tell [playername] Could not use Healing Item you, oof, try again maybe?
+    FailureCMD: tell [playername] Could not use Healing Item on you, oof, try again maybe?
     InternalName: BANDAGE
   '17':
     Glows: false
@@ -45,8 +42,8 @@ PAPER:
     Result-Amount: 3
     Name: '&4✚&fSmallBandage&4✚&r'
     Lore:
-      - '&6Right/Left click to use this custom'
-      - '&4✚&fSmallBandage&4✚&r'
+      - '&6Right/Left click to use this item'
+      - '&3-------------------------------------'
       - '&6Because zombie_striker is epic'
     Regen-Time: 2
     Regen-Amplifier: 1
@@ -66,9 +63,6 @@ PAPER:
     PerformSuccessCMD: true
     ConsoleSuccessCMD: true
     SuccessCMD: tell [playername] ayyyyyyyy
-    PerformCancelCMD: true
-    ConsoleCancelCMD: true
-    CancelCMD: tell [playername] you cancelled your warmup, oof, try again maybe?
     PerformFailureCMD: true
     ConsoleFailureCMD: true
     FailureCMD: tell [playername] Could not use Healing Item you, oof, try again maybe?
@@ -104,13 +98,10 @@ PAPER:
     PerformSuccessCMD: true
     ConsoleSuccessCMD: true
     SuccessCMD: tell [playername] ayyyyyyyy
-    PerformCancelCMD: true
-    ConsoleCancelCMD: true
-    CancelCMD: tell [playername] you cancelled your warmup, oof, try again maybe?
     PerformFailureCMD: true
     ConsoleFailureCMD: true
-    FailureCMD: tell [playername] Could not use Healing Item you, oof, try again maybe?
-    InternalName: MEDICALKIT
+    FailureCMD: tell [playername] Could not use Healing Item, oof, try again maybe?
+    InternalName: MEDKIT
 Messages:
   NoPermCraft: 'You cannot craft [item] without bandage.craft'
   NoPermUse: 'You cannot use [item] without bandage.use'

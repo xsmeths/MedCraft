@@ -10,19 +10,15 @@ import java.io.File;
 
 public class MedCraft extends JavaPlugin {
     private static MedCraft instance;
-    private static ConfigParser parser;
-
     public void onEnable() {
         if (instance != null) {
             return;
         }
         instance = this;
-
         new PacketHandler();
         Bukkit.getPluginManager().registerEvents(new MedCraftListeners(), getPlugin());
         loadConfiguration();
     }
-
     public void loadConfiguration() {
         try {
             if (!getDataFolder().exists()) {
@@ -33,21 +29,21 @@ public class MedCraft extends JavaPlugin {
             if (!file.exists()) {
                 getConfig().options().copyDefaults(true);
                 saveConfig();
-                MedCraft.getPlugin().reloadConfig();
-            } else {
-                MedCraft.getPlugin().saveDefaultConfig();
-                MedCraft.getPlugin().reloadConfig();
             }
-        } catch (Exception e) {
+            else {
+                MedCraft.getPlugin().saveDefaultConfig();
+            }
+            MedCraft.getPlugin().reloadConfig();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
-        parser = new ConfigParser(getConfig());
+        ConfigParser parser = new ConfigParser(getConfig());
         parser.loadItems();
     }
-
     public void onDisable() {
     }
-    public void onLoad(){
+    public void onLoad() {
     }
     public static JavaPlugin getPlugin() {
         return instance;
