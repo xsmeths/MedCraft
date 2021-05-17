@@ -4,11 +4,14 @@ import me.smeths.and.rhetorical.Data.CustomItem;
 import me.smeths.and.rhetorical.Handlers.MedicalHandler;
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.MedCraft;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -19,7 +22,9 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.potion.PotionEffectType;
 import java.util.Arrays;
 import java.util.Objects;
@@ -159,14 +164,24 @@ public class MedCraftListeners implements Listener {
             }
         }
     }
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void OnMedCraftItemPickup(EntityPickupItemEvent e){
-        for (CustomItem customitem : CustomItem.getCustomItems()) {
-            if (e.getEntity().getType() != EntityType.PLAYER)
-                return;
-            Player p = (Player) e.getEntity();
-            if (e.getItem().getItemStack() == customitem.getItem() && e.isCancelled()) {
-                e.setCancelled(false);
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void OnMedCraftItemPickup(PlayerMoveEvent e) {
+        if (MedCraft.getPlugin().getConfig().getBoolean("Experimental.AlternatePickup")){
+            for (Entity E : e.getPlayer().getNearbyEntities(0.2,0.2,0.2)) {
+                if (E.getType() == EntityType.DROPPED_ITEM) {
+                    Item i = (Item) E;
+                    ItemStack stackitem = i.getItemStack();
+                    e.getPlayer().getInventory().addItem(stackitem);
+                    E.remove();
+                }
+            }
+        }
+    }
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled=true)
+    public void OnMedCraftItemPickup(EntityPickupItemEvent e) {
+        if (MedCraft.getPlugin().getConfig().getBoolean("Experimental.AlternatePickup")) {
+            if (e.getEntity().getType() == EntityType.PLAYER){
+                e.setCancelled(true);
             }
         }
     }

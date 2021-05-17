@@ -22,7 +22,7 @@ public class CustomItem {
     private int regen_time;
     private int regen_amplifier;
     private int warmupspeed;
-    private int Radius;
+    private double Radius;
     private boolean Offhand;
     private boolean HasRange;
     private final String internalName;
@@ -93,7 +93,7 @@ public class CustomItem {
         this.PerformFailureCMD = PerformFailureCMD;
     }
 
-    public void setRadius(int Radius) {
+    public void setRadius(double Radius) {
         this.Radius = Radius;
     }
 
@@ -117,7 +117,7 @@ public class CustomItem {
         return isglows;
     }
 
-    public int getRadius() {
+    public double getRadius() {
         return Radius;
     }
 

@@ -54,8 +54,11 @@ public class ConfigParser {
     public ConfigParser(FileConfiguration config) {
         this.config = config;
     }
+
     public void loadItems() {
         for (String material : config.getKeys(false)) {
+            if (material.equals("Experimental"))
+                continue;
             if (material.equals("Messages"))
                 continue;
             for (String custommodeldata : Objects.requireNonNull(config.getConfigurationSection(material)).getKeys(false)) {
@@ -64,15 +67,15 @@ public class ConfigParser {
                 CustomItem customitem = new CustomItem(getValueForString(material, custommodeldataint, KEY_INTERNAL_NAME), custommodeldataint, item);
                 ItemMeta im = item.getItemMeta();
                 assert im != null;
-                im.setDisplayName(ChatColor.translateAlternateColorCodes('&',(String) getValueForObject(material, custommodeldataint, KEY_DISPLAYNAME)));
+                im.setDisplayName(ChatColor.translateAlternateColorCodes('&', (String) getValueForObject(material, custommodeldataint, KEY_DISPLAYNAME)));
                 im.setCustomModelData(custommodeldataint);
                 List<String> loreconfig = getValueForStringList(material, custommodeldataint, KEY_LORE);
                 List<String> lore = new ArrayList<>();
-                for(String s : loreconfig) {
-                    lore.add(ChatColor.translateAlternateColorCodes('&',s));
+                for (String s : loreconfig) {
+                    lore.add(ChatColor.translateAlternateColorCodes('&', s));
                 }
-                if (getValueForBoolean(material,custommodeldataint,KEY_GLOWS)) {
-                    im.addEnchant(Enchantment.DURABILITY,1,true);
+                if (getValueForBoolean(material, custommodeldataint, KEY_GLOWS)) {
+                    im.addEnchant(Enchantment.DURABILITY, 1, true);
                     im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                 }
                 im.setLore(lore);
@@ -91,7 +94,7 @@ public class ConfigParser {
                 customitem.setisGlows(getValueForBoolean(material, custommodeldataint, KEY_GLOWS));
                 customitem.setOffhand(getValueForBoolean(material, custommodeldataint, KEY_USE_OFF_HAND));
                 customitem.setHasRange(getValueForBoolean(material, custommodeldataint, KEY_HASRANGE));
-                customitem.setRadius(getValueForInt(material, custommodeldataint, KEY_RADIUS));
+                customitem.setRadius(getValueForDouble(material, custommodeldataint, KEY_RADIUS));
 
                 if (customitem.isCraftable()) {
                     ItemStack CraftedBandage = new ItemStack(item.getType(), 1);
@@ -99,8 +102,8 @@ public class ConfigParser {
                     CraftedBandage.setItemMeta(craftedBandageMeta);
                     ItemStack ResultItemStack = customitem.getItem().clone();
                     ResultItemStack.setAmount(getValueForInt(material, custommodeldataint, KEY_RESULT_AMOUNT));
-                    ShapedRecipe Bandagerecipe = new ShapedRecipe(new NamespacedKey(MedCraft.getPlugin(),customitem.getInternalName()), ResultItemStack);
-                    Bandagerecipe.shape(getValueForString(material,custommodeldataint,KEY_SHAPE_TOP),getValueForString(material,custommodeldataint,KEY_SHAPE_MIDDLE),getValueForString(material,custommodeldataint,KEY_SHAPE_BOTTOM));
+                    ShapedRecipe Bandagerecipe = new ShapedRecipe(new NamespacedKey(MedCraft.getPlugin(), customitem.getInternalName()), ResultItemStack);
+                    Bandagerecipe.shape(getValueForString(material, custommodeldataint, KEY_SHAPE_TOP), getValueForString(material, custommodeldataint, KEY_SHAPE_MIDDLE), getValueForString(material, custommodeldataint, KEY_SHAPE_BOTTOM));
                     if (Bandagerecipe.getIngredientMap().containsKey('1')) {
                         Bandagerecipe.setIngredient('1', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_1).toUpperCase())));
                     }
@@ -133,19 +136,28 @@ public class ConfigParser {
             }
         }
     }
+
     public String getValueForString(String material, int custommodeldata, String key) {
         return config.getString(material + "." + custommodeldata + "." + key);
     }
+
     public List<String> getValueForStringList(String material, int custommodeldata, String key) {
         return config.getStringList(material + "." + custommodeldata + "." + key);
     }
+
     public boolean getValueForBoolean(String material, int custommodeldata, String key) {
         return config.getBoolean(material + "." + custommodeldata + "." + key);
     }
+
     public Object getValueForObject(String material, int custommodeldata, String key) {
         return config.get(material + "." + custommodeldata + "." + key);
     }
+
     public int getValueForInt(String material, int custommodeldata, String key) {
         return config.getInt(material + "." + custommodeldata + "." + key);
+    }
+
+    public double getValueForDouble(String material, int custommodeldata, String key) {
+        return config.getDouble(material + "." + custommodeldata + "." + key);
     }
 }

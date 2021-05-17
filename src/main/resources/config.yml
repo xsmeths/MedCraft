@@ -106,3 +106,6 @@ Messages:
   NoPermCraft: 'You cannot craft [item] without bandage.craft'
   NoPermUse: 'You cannot use [item] without bandage.use'
   NoPermUseOffhand: 'You cannot use [item] in offhand without bandage.use.offhand'
+Experimental:
+  Edge_Case_Fix: 'Do not enable this option if you can pickup items with it set to false'
+  AlternatePickup: false
