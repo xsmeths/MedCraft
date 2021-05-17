@@ -138,5 +138,7 @@ public class MedicalHandler {
     ;
     HealingPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
   }
-  public static boolean isBandaging(Player p){return !HealingPlayers.containsKey(p);}
+  public static boolean isBandaging(Player p) {
+      return !HealingPlayers.containsKey(p);
+  }
 }

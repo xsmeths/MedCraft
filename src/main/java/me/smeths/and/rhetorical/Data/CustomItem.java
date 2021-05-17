@@ -27,7 +27,7 @@ public class CustomItem {
     private boolean HasRange;
     private final String internalName;
 
-    public CustomItem(String name, int customModelID, ItemStack item){
+    public CustomItem(String name, int customModelID, ItemStack item) {
         this.item = item;
         customitems.put(customModelID, this);
         this.internalName = name;

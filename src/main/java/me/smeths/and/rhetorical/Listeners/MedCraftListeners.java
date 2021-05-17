@@ -37,8 +37,8 @@ public class MedCraftListeners implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         ItemStack i = p.getInventory().getItemInMainHand();
-        if (i.getItemMeta() != null){
-            for(CustomItem item : CustomItem.getCustomItems()){
+        if (i.getItemMeta() != null) {
+            for(CustomItem item : CustomItem.getCustomItems()) {
                 if (item.getItem().getItemMeta() != null)
                     if (e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_BLOCK
                             && !p.hasPotionEffect(PotionEffectType.REGENERATION) && isBandaging(p)
@@ -166,7 +166,7 @@ public class MedCraftListeners implements Listener {
     }
     @EventHandler(priority = EventPriority.MONITOR)
     public void OnMedCraftItemPickup(PlayerMoveEvent e) {
-        if (MedCraft.getPlugin().getConfig().getBoolean("Experimental.AlternatePickup")){
+        if (MedCraft.getPlugin().getConfig().getBoolean("Experimental.AlternatePickup")) {
             for (Entity E : e.getPlayer().getNearbyEntities(0.2,0.2,0.2)) {
                 if (E.getType() == EntityType.DROPPED_ITEM) {
                     Item i = (Item) E;
@@ -180,7 +180,7 @@ public class MedCraftListeners implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled=true)
     public void OnMedCraftItemPickup(EntityPickupItemEvent e) {
         if (MedCraft.getPlugin().getConfig().getBoolean("Experimental.AlternatePickup")) {
-            if (e.getEntity().getType() == EntityType.PLAYER){
+            if (e.getEntity().getType() == EntityType.PLAYER) {
                 e.setCancelled(true);
             }
         }
