@@ -95,7 +95,6 @@ public class ConfigParser {
                 customitem.setOffhand(getValueForBoolean(material, custommodeldataint, KEY_USE_OFF_HAND));
                 customitem.setHasRange(getValueForBoolean(material, custommodeldataint, KEY_HASRANGE));
                 customitem.setRadius(getValueForDouble(material, custommodeldataint, KEY_RADIUS));
-
                 if (customitem.isCraftable()) {
                     ItemStack CraftedBandage = new ItemStack(item.getType(), 1);
                     ItemMeta craftedBandageMeta = item.getItemMeta();
@@ -136,27 +135,21 @@ public class ConfigParser {
             }
         }
     }
-
     public String getValueForString(String material, int custommodeldata, String key) {
         return config.getString(material + "." + custommodeldata + "." + key);
     }
-
     public List<String> getValueForStringList(String material, int custommodeldata, String key) {
         return config.getStringList(material + "." + custommodeldata + "." + key);
     }
-
     public boolean getValueForBoolean(String material, int custommodeldata, String key) {
         return config.getBoolean(material + "." + custommodeldata + "." + key);
     }
-
     public Object getValueForObject(String material, int custommodeldata, String key) {
         return config.get(material + "." + custommodeldata + "." + key);
     }
-
     public int getValueForInt(String material, int custommodeldata, String key) {
         return config.getInt(material + "." + custommodeldata + "." + key);
     }
-
     public double getValueForDouble(String material, int custommodeldata, String key) {
         return config.getDouble(material + "." + custommodeldata + "." + key);
     }

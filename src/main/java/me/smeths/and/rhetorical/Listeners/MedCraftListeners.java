@@ -4,7 +4,6 @@ import me.smeths.and.rhetorical.Data.CustomItem;
 import me.smeths.and.rhetorical.Handlers.MedicalHandler;
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.MedCraft;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -20,23 +19,26 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.potion.PotionEffectType;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Predicate;
 
 import static me.smeths.and.rhetorical.Handlers.MedicalHandler.isBandaging;
+
 @SuppressWarnings("InstantiationOfUtilityClass")
 public class MedCraftListeners implements Listener {
     @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
+    public void onMedicalItem(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         ItemStack i = p.getInventory().getItemInMainHand();
+        ItemStack oi = p.getInventory().getItemInOffHand();
         if (i.getItemMeta() != null) {
             for(CustomItem item : CustomItem.getCustomItems()) {
                 if (item.getItem().getItemMeta() != null)
@@ -84,9 +86,59 @@ public class MedCraftListeners implements Listener {
                 }
             }
         }
+        if (oi.getItemMeta() != null) {
+            for(CustomItem item : CustomItem.getCustomItems()) {
+                if (item.getItem().getItemMeta() != null)
+                    if (e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_BLOCK
+                            && !p.hasPotionEffect(PotionEffectType.REGENERATION) && isBandaging(p) && !item.HasRange() && oi.getType() != i.getType()
+                            && (oi.getType().equals(item.getItem().getType())) && oi.getItemMeta().hasCustomModelData() && e.getClickedBlock() != null
+                            && !e.getClickedBlock().getType().toString().contains("FURNACE") && e.getClickedBlock().getType() != Material.SMOKER
+                            && !e.getClickedBlock().getType().toString().contains("TABLE") && !e.getClickedBlock().getType().toString().contains("HOPPER")
+                            && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
+                            && p.getGameMode() != GameMode.CREATIVE && (oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
+                            || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_BLOCK
+                            && !p.hasPotionEffect(PotionEffectType.REGENERATION) && isBandaging(p) && !item.HasRange() && oi.getType() != i.getType()
+                            && (oi.getType().equals(item.getItem().getType())) && oi.getItemMeta().hasCustomModelData() && e.getClickedBlock() != null
+                            && !e.getClickedBlock().getType().toString().contains("CHEST") && !e.getClickedBlock().getType().toString().contains("BED")
+                            && !e.getClickedBlock().getType().toString().contains("FURNACE") && e.getClickedBlock().getType() != Material.SMOKER
+                            && !e.getClickedBlock().getType().toString().contains("TABLE") && !e.getClickedBlock().getType().toString().contains("HOPPER")
+                            && e.getClickedBlock().getType() != Material.BREWING_STAND && e.getClickedBlock().getType() != Material.LOOM
+                            && p.getGameMode() != GameMode.CREATIVE && (oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
+                            || e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_AIR
+                            && isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION) && !item.HasRange() && oi.getType() != i.getType()
+                            && (oi.getType().equals(item.getItem().getType())) && oi.getItemMeta().hasCustomModelData()
+                            && p.getGameMode() != GameMode.CREATIVE && (oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
+                            || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_AIR
+                            && isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION) && !item.HasRange() && oi.getType() != i.getType()
+                            && (oi.getType().equals(item.getItem().getType())) && oi.getItemMeta().hasCustomModelData()
+                            && p.getGameMode() != GameMode.CREATIVE && (oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())) {
+                        if (p.getInventory().getItemInOffHand().getAmount() == 1 && p.hasPermission("med.craft.use")) {
+                            p.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
+                            p.updateInventory();
+                            new MedicalHandler(p,item);
+                            return;
+                        }
+                        if (oi.getAmount() >= 2 && p.hasPermission("med.craft.use.offhand")) {
+                            oi.setAmount(oi.getAmount() - 1);
+                            p.updateInventory();
+                            new MedicalHandler(p,item);
+                            return;
+                        }
+                        if (!p.hasPermission("med.craft.use.offhand")) {
+                            PacketHandler.getInstance().sendActionBarMessage(p,
+                                    ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',
+                                            Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse")))
+                                            .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInOffHand().getItemMeta()).getDisplayName()));
+                        }
+                        else {
+                            e.setCancelled(true);
+                        }
+                    }
+            }
+        }
     }
     @EventHandler
-    public void offhandbandage(PlayerInteractEntityEvent e) {
+    public void onOffhandNotRanged(PlayerInteractEntityEvent e) {
         for (CustomItem item : CustomItem.getCustomItems()) {
             Player p = e.getPlayer();
             Player recipient;
@@ -126,7 +178,10 @@ public class MedCraftListeners implements Listener {
                     return;
                 }
                 if (!p.hasPermission("med.craft.use.offhand")) {
-                    PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Bandage.NoPermUseOffhand"))));
+                    PacketHandler.getInstance().sendActionBarMessage(p,
+                            ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',
+                                    Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Bandage.NoPermUseOffhand"))
+                                    .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInOffHand().getItemMeta()).getDisplayName())));
                 } else {
                     e.setCancelled(true);
                 }
@@ -145,7 +200,10 @@ public class MedCraftListeners implements Listener {
                         Player crafter = (Player) e.getWhoClicked();
                         if (!crafter.hasPermission("med.craft")) {
                             e.setCancelled(true);
-                            PacketHandler.getInstance().sendActionBarMessage(crafter, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermsCraft"))).replace("[item]", e.getInventory().getResult().getItemMeta().getDisplayName()));
+                            PacketHandler.getInstance().sendActionBarMessage(crafter,
+                                    ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',
+                                            Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermsCraft")))
+                                            .replace("[item]", e.getInventory().getResult().getItemMeta().getDisplayName()));
                         }
                     }
                 }
@@ -178,7 +236,7 @@ public class MedCraftListeners implements Listener {
         }
     }
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled=true)
-    public void OnMedCraftItemPickup(EntityPickupItemEvent e) {
+    public void OnVanillaItemPickup(EntityPickupItemEvent e) {
         if (MedCraft.getPlugin().getConfig().getBoolean("Experimental.AlternatePickup")) {
             if (e.getEntity().getType() == EntityType.PLAYER) {
                 e.setCancelled(true);
