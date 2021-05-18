@@ -12,6 +12,8 @@ MrRhetorical -> Has helped me lots over the last few years and continues to help
 
 Chasef8 -> Came up with the original idea for Bandages which turned into BandageCraft and was eventually adapted into what is now MedCraft
 
+mrfloris -> Constant feedback and donation, appreciated buddy :)
+
 Everyone who uses or has used this plugin and/or gives ideas for its continued development
 
 love you all
