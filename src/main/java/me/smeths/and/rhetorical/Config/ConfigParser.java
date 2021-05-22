@@ -54,7 +54,6 @@ public class ConfigParser {
     public ConfigParser(FileConfiguration config) {
         this.config = config;
     }
-
     public void loadItems() {
         for (String material : config.getKeys(false)) {
             if (material.equals("Experimental"))

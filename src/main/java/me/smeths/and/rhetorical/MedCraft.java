@@ -29,8 +29,7 @@ public class MedCraft extends JavaPlugin {
             if (!file.exists()) {
                 getConfig().options().copyDefaults(true);
                 saveConfig();
-            }
-            else {
+            } else {
                 MedCraft.getPlugin().saveDefaultConfig();
             }
             MedCraft.getPlugin().reloadConfig();

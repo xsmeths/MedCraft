@@ -136,9 +136,9 @@ PAPER:
     FailureCMD: tell [playername] Could not use Healing Item, oof, try again maybe?
     InternalName: SMALLMEDKIT
 Messages:
-  NoPermCraft: 'You cannot craft [item] without bandage.craft'
-  NoPermUse: 'You cannot use [item] without bandage.use'
-  NoPermUseOffhand: 'You cannot use [item] in offhand without bandage.use.offhand'
+  NoPermCraft: 'You cannot craft [item] without med.craft'
+  NoPermUse: 'You cannot use [item] without med.craft.use'
+  NoPermUseOffhand: 'You cannot use [item] in offhand without med.craft.use.offhand'
 Experimental:
   Item-Pickup_Fix: 'Do not enable this option if you can pickup items with it set to false'
   AlternatePickup: false
