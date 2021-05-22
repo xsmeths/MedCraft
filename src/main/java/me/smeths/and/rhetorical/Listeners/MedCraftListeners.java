@@ -78,7 +78,10 @@ public class MedCraftListeners implements Listener {
                         return;
                     }
                     if (!p.hasPermission("med.craft.use")) {
-                        PacketHandler.getInstance().sendActionBarMessage(p, ChatColor.RESET + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse"))).replace("[item]", Objects.requireNonNull(p.getInventory().getItemInMainHand().getItemMeta()).getDisplayName()));
+                        PacketHandler.getInstance().sendActionBarMessage(p,
+                                ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',
+                                        Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse")))
+                                        .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInMainHand().getItemMeta()).getDisplayName()));
                     }
                     else {
                         e.setCancelled(true);
