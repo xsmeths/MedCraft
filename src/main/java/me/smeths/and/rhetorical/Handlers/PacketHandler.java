@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({"rawtypes","unused"})
 public class PacketHandler {
 	private static PacketHandler instance;
 	private String nmsVersion;
@@ -33,18 +33,15 @@ public class PacketHandler {
 		return craftPlayer;
 	}
 	public static Class<?> getNmsClass(String name)
-	{
-		try {
-			return Class.forName("net.minecraft.server." + getInstance().nmsVersion + "." + name);
-		}
-		catch(Exception e) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Could not get class for name! Is there a typo?");
-			e.printStackTrace();
-			return null;
-		}
+	{ try {
+		return Class.forName("net.minecraft.server." + getInstance().nmsVersion + "." + name);
 	}
-	public void sendActionBarMessage(Player p, String message) {
-		try {
+	catch(Exception e) {
+		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Could not get class for name! Is there a typo?");
+		e.printStackTrace();
+		return null;
+	}
+	} public void sendActionBarMessage(Player p, String message) { try {
 			Object chatComponent = Objects.requireNonNull(getNmsClass("ChatComponentText")).getConstructor(String.class).newInstance(message);
 			Object packetPlayOutChat = Objects.requireNonNull(getNmsClass("PacketPlayOutChat")).getConstructor(getNmsClass("IChatBaseComponent"), byte.class).newInstance(chatComponent, (byte) 2);
 			Object handle = p.getClass().getMethod("getHandle").invoke(p);

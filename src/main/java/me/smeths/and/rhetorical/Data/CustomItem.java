@@ -4,7 +4,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
 import java.util.HashMap;
-
+@SuppressWarnings("unused")
 public class CustomItem {
 
     private static final HashMap<Integer, CustomItem> customitems = new HashMap<>();
