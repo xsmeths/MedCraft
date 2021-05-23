@@ -4,10 +4,7 @@ import me.smeths.and.rhetorical.Data.CustomItem;
 import me.smeths.and.rhetorical.Handlers.MedicalHandler;
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.MedCraft;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -30,11 +27,25 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static me.smeths.and.rhetorical.Handlers.MedicalHandler.isBandaging;
 
 @SuppressWarnings("InstantiationOfUtilityClass")
 public class MedCraftListeners implements Listener {
+    Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
+    private String format(String msg) {
+        if (!Bukkit.getVersion().contains("1.14") && !Bukkit.getVersion().contains("1.15")) {
+            Matcher matcher = pattern.matcher(msg);
+            while (matcher.find()) {
+                String color = msg.substring(matcher.start(), matcher.end());
+                msg = msg.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
+                matcher = pattern.matcher(msg);
+            }
+        }
+        return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', msg);
+    }
     @EventHandler
     public void onMedicalItemUse(PlayerInteractEvent e) {
         Player p = e.getPlayer();
@@ -80,8 +91,7 @@ public class MedCraftListeners implements Listener {
                     }
                     if (!p.hasPermission("med.craft.use")) {
                         PacketHandler.getInstance().sendActionBarMessage(p,
-                                ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',
-                                        Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse")))
+                                format(Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse")))
                                         .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInMainHand().getItemMeta()).getDisplayName()));
                     } else {
                         e.setCancelled(true);
@@ -120,9 +130,9 @@ public class MedCraftListeners implements Listener {
                     && isBandaging(recipient)) {
                 if (oi.getAmount() == 1 && p.hasPermission("med.craft.use.offhand")) {
                     PacketHandler.getInstance().sendActionBarMessage(p,
-                            ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',
-                                    Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.OffhandUse")))
-                                    .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInOffHand().getItemMeta()).getDisplayName()).replace("[recipient]", recipient.getDisplayName()));
+                            format(Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.OffhandUse")))
+                                    .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInOffHand().getItemMeta()).getDisplayName())
+                                    .replace("[recipient]", recipient.getDisplayName()));
                     p.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
                     p.updateInventory();
                     new MedicalHandler(recipient, item);
@@ -130,9 +140,9 @@ public class MedCraftListeners implements Listener {
                 }
                 if (oi.getAmount() >= 2 && p.hasPermission("med.craft.use.offhand")) {
                     PacketHandler.getInstance().sendActionBarMessage(p,
-                            ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',
-                                    Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.OffhandUse")))
-                                    .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInOffHand().getItemMeta()).getDisplayName()).replace("[recipient]", recipient.getDisplayName()));
+                            format(Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.OffhandUse")))
+                                    .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInOffHand().getItemMeta()).getDisplayName())
+                                    .replace("[recipient]", recipient.getDisplayName()));
                     oi.setAmount(oi.getAmount() - 1);
                     p.updateInventory();
                     new MedicalHandler(recipient, item);
@@ -140,8 +150,7 @@ public class MedCraftListeners implements Listener {
                 }
                 if (!p.hasPermission("med.craft.use.offhand")) {
                     PacketHandler.getInstance().sendActionBarMessage(p,
-                            ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',
-                                    Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Bandage.NoPermUseOffhand"))
+                            format(Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Bandage.NoPermUseOffhand"))
                                     .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInOffHand().getItemMeta()).getDisplayName())));
                 } else {
                     e.setCancelled(true);
@@ -162,8 +171,7 @@ public class MedCraftListeners implements Listener {
                         if (!crafter.hasPermission("med.craft")) {
                             e.setCancelled(true);
                             PacketHandler.getInstance().sendActionBarMessage(crafter,
-                                    ChatColor.RESET + ChatColor.translateAlternateColorCodes('&',
-                                            Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermsCraft")))
+                                    format(Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermsCraft")))
                                             .replace("[item]", e.getInventory().getResult().getItemMeta().getDisplayName()));
                         }
                     }

@@ -16,6 +16,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ConfigParser {
     public static final String KEY_DISPLAYNAME = "Name";
@@ -66,12 +68,12 @@ public class ConfigParser {
                 CustomItem customitem = new CustomItem(getValueForString(material, custommodeldataint, KEY_INTERNAL_NAME), custommodeldataint, item);
                 ItemMeta im = item.getItemMeta();
                 assert im != null;
-                im.setDisplayName(ChatColor.translateAlternateColorCodes('&', (String) getValueForObject(material, custommodeldataint, KEY_DISPLAYNAME)));
+                im.setDisplayName(format((String) getValueForObject(material, custommodeldataint, KEY_DISPLAYNAME)));
                 im.setCustomModelData(custommodeldataint);
                 List<String> loreconfig = getValueForStringList(material, custommodeldataint, KEY_LORE);
                 List<String> lore = new ArrayList<>();
                 for (String s : loreconfig) {
-                    lore.add(ChatColor.translateAlternateColorCodes('&', s));
+                    lore.add(format(s));
                 }
                 if (getValueForBoolean(material, custommodeldataint, KEY_GLOWS)) {
                     im.addEnchant(Enchantment.DURABILITY, 1, true);
@@ -151,5 +153,17 @@ public class ConfigParser {
     }
     public double getValueForDouble(String material, int custommodeldata, String key) {
         return config.getDouble(material + "." + custommodeldata + "." + key);
+    }
+    Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
+    private String format(String msg) {
+        if (!Bukkit.getVersion().contains("1.14") && !Bukkit.getVersion().contains("1.15")) {
+            Matcher matcher = pattern.matcher(msg);
+            while (matcher.find()) {
+                String color = msg.substring(matcher.start(), matcher.end());
+                msg = msg.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
+                matcher = pattern.matcher(msg);
+            }
+        }
+        return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', msg);
     }
 }

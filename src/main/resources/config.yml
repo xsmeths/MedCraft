@@ -6,11 +6,11 @@ PAPER:
     Radius: 1.1
     Warmup-Speed: 3
     Result-Amount: 2
-    Name: '&4✚&fBandage&4✚&r'
+    Name: '#FF0000✚#FFFFFFBandage#FF0000✚'
     Lore:
-      - '&6Right/Left click to use this Bandage'
-      - '&3-------------------------------------'
-      - '&6Because floris is my lord and saviour'
+      - '#FFA500Right/Left click to use this Bandage'
+      - '#666666-------------------------------------'
+      - '#FFA500Because floris is my lord and saviour'
     Regen-Time: 4
     Regen-Amplifier: 1
     Craftable: true
@@ -40,11 +40,11 @@ PAPER:
     Radius: 1.1
     Warmup-Speed: 60
     Result-Amount: 3
-    Name: '&4✚&fSmallBandage&4✚&r'
+    Name: '#FF0000✚#FFFFFFSmallBandage#FF0000✚'
     Lore:
-      - '&6Right/Left click to use'
-      - '&3------------------------------'
-      - '&6Because Zombie_Striker is epic'
+      - '#FFA500Right/Left click to use'
+      - '#666666------------------------------'
+      - '#FFA500Because Zombie_Striker is epic'
     Regen-Time: 2
     Regen-Amplifier: 1
     Craftable: true
@@ -74,11 +74,11 @@ PAPER:
     Radius: 6.66
     Warmup-Speed: 1
     Result-Amount: 1
-    Name: '&4✚&fMedKit&4✚&r'
+    Name: '#FF0000✚#FFFFFFMedKit#FF0000✚'
     Lore:
-      - '&6Right/Left click to use'
-      - '&3-----------------------------'
-      - '&6Because MrRhetorical is a pro'
+      - '#FFA500Right/Left click to use'
+      - '#666666-----------------------------'
+      - '#FFA500Because MrRhetorical is a pro'
     Regen-Time: 9
     Regen-Amplifier: 2
     Craftable: true
@@ -108,11 +108,11 @@ PAPER:
     Radius: 3.33
     Warmup-Speed: 2
     Result-Amount: 3
-    Name: '&4✚&fSmall MedKit&4✚&r'
+    Name: '#FF0000✚#FFFFFFSmall MedKit#FF0000✚'
     Lore:
-      - '&6Right/Left click to use'
-      - '&3-----------------------'
-      - '&6Because smeths is cool'
+      - '#FFA500Right/Left click to use'
+      - '#666666-----------------------'
+      - '#FFA500Because smeths is cool'
     Regen-Time: 4
     Regen-Amplifier: 4
     Craftable: true
@@ -136,10 +136,10 @@ PAPER:
     FailureCMD: tell [playername] Could not use Healing Item, oof, try again maybe?
     InternalName: SMALLMEDKIT
 Messages:
-  NoPermCraft: 'You cannot craft [item] &fwithout med.craft'
-  NoPermUse: 'You cannot use [item] &fwithout med.craft.use'
-  NoPermUseOffhand: 'You cannot use [item] &fin offhand without med.craft.use.offhand'
-  OffhandUse: 'You have used a [item] &fon [recipient]'
+  NoPermCraft: 'You cannot craft [item] #FFFFFFwithout med.craft'
+  NoPermUse: 'You cannot use [item] #FFFFFFwithout med.craft.use'
+  NoPermUseOffhand: 'You cannot use [item] #FFFFFFin offhand without med.craft.use.offhand'
+  OffhandUse: 'You have used a [item] #FFFFFFon [recipient]'
 Experimental:
   Item-Pickup_Fix: 'Do not enable this option if you can pickup items with it set to false'
   AlternatePickup: false
