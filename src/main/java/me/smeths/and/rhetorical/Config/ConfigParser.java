@@ -100,36 +100,36 @@ public class ConfigParser {
                     CraftedBandage.setItemMeta(craftedBandageMeta);
                     ItemStack ResultItemStack = customitem.getItem().clone();
                     ResultItemStack.setAmount(getValueForInt(material, custommodeldataint, KEY_RESULT_AMOUNT));
-                    ShapedRecipe Bandagerecipe = new ShapedRecipe(new NamespacedKey(MedCraft.getPlugin(), customitem.getInternalName()), ResultItemStack);
-                    Bandagerecipe.shape(getValueForString(material, custommodeldataint, KEY_SHAPE_TOP), getValueForString(material, custommodeldataint, KEY_SHAPE_MIDDLE), getValueForString(material, custommodeldataint, KEY_SHAPE_BOTTOM));
-                    if (Bandagerecipe.getIngredientMap().containsKey('1')) {
-                        Bandagerecipe.setIngredient('1', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_1).toUpperCase())));
+                    ShapedRecipe HealingItemRecipe = new ShapedRecipe(new NamespacedKey(MedCraft.getPlugin(), customitem.getInternalName()), ResultItemStack);
+                    HealingItemRecipe.shape(getValueForString(material, custommodeldataint, KEY_SHAPE_TOP), getValueForString(material, custommodeldataint, KEY_SHAPE_MIDDLE), getValueForString(material, custommodeldataint, KEY_SHAPE_BOTTOM));
+                    if (HealingItemRecipe.getIngredientMap().containsKey('1')) {
+                        HealingItemRecipe.setIngredient('1', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_1).toUpperCase())));
                     }
-                    if (Bandagerecipe.getIngredientMap().containsKey('2')) {
-                        Bandagerecipe.setIngredient('2', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_2).toUpperCase())));
+                    if (HealingItemRecipe.getIngredientMap().containsKey('2')) {
+                        HealingItemRecipe.setIngredient('2', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_2).toUpperCase())));
                     }
-                    if (Bandagerecipe.getIngredientMap().containsKey('3')) {
-                        Bandagerecipe.setIngredient('3', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_3).toUpperCase())));
+                    if (HealingItemRecipe.getIngredientMap().containsKey('3')) {
+                        HealingItemRecipe.setIngredient('3', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_3).toUpperCase())));
                     }
-                    if (Bandagerecipe.getIngredientMap().containsKey('4')) {
-                        Bandagerecipe.setIngredient('4', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_4).toUpperCase())));
+                    if (HealingItemRecipe.getIngredientMap().containsKey('4')) {
+                        HealingItemRecipe.setIngredient('4', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_4).toUpperCase())));
                     }
-                    if (Bandagerecipe.getIngredientMap().containsKey('5')) {
-                        Bandagerecipe.setIngredient('5', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_5).toUpperCase())));
+                    if (HealingItemRecipe.getIngredientMap().containsKey('5')) {
+                        HealingItemRecipe.setIngredient('5', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_5).toUpperCase())));
                     }
-                    if (Bandagerecipe.getIngredientMap().containsKey('6')) {
-                        Bandagerecipe.setIngredient('6', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_6).toUpperCase())));
+                    if (HealingItemRecipe.getIngredientMap().containsKey('6')) {
+                        HealingItemRecipe.setIngredient('6', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_6).toUpperCase())));
                     }
-                    if (Bandagerecipe.getIngredientMap().containsKey('7')) {
-                        Bandagerecipe.setIngredient('7', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_7).toUpperCase())));
+                    if (HealingItemRecipe.getIngredientMap().containsKey('7')) {
+                        HealingItemRecipe.setIngredient('7', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_7).toUpperCase())));
                     }
-                    if (Bandagerecipe.getIngredientMap().containsKey('8')) {
-                        Bandagerecipe.setIngredient('8', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_8).toUpperCase())));
+                    if (HealingItemRecipe.getIngredientMap().containsKey('8')) {
+                        HealingItemRecipe.setIngredient('8', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_8).toUpperCase())));
                     }
-                    if (Bandagerecipe.getIngredientMap().containsKey('9')) {
-                        Bandagerecipe.setIngredient('9', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_9).toUpperCase())));
+                    if (HealingItemRecipe.getIngredientMap().containsKey('9')) {
+                        HealingItemRecipe.setIngredient('9', Objects.requireNonNull(Material.getMaterial(getValueForString(material, custommodeldataint, KEY_CRAFTING_9).toUpperCase())));
                     }
-                    Bukkit.addRecipe(Bandagerecipe);
+                    Bukkit.addRecipe(HealingItemRecipe);
                 }
             }
         }

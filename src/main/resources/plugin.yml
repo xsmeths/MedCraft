@@ -1,6 +1,6 @@
 name: MedCraft
 main: me.smeths.and.rhetorical.MedCraft
 author: smeths
-contributers: MrRhetorical, Zombie_Striker
+contributors: [ MrRhetorical, Zombie_Striker ]
 version: 2.0.1
 api-version: 1.13
