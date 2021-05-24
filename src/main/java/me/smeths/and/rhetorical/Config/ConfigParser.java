@@ -2,8 +2,8 @@ package me.smeths.and.rhetorical.Config;
 
 import me.smeths.and.rhetorical.Data.CustomItem;
 import me.smeths.and.rhetorical.MedCraft;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -160,10 +160,10 @@ public class ConfigParser {
             Matcher matcher = pattern.matcher(msg);
             while (matcher.find()) {
                 String color = msg.substring(matcher.start(), matcher.end());
-                msg = msg.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
+                msg = msg.replace(color, ChatColor.of(color) + "");
                 matcher = pattern.matcher(msg);
             }
         }
-        return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', msg);
+        return ChatColor.translateAlternateColorCodes('&', msg);
     }
 }

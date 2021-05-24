@@ -4,7 +4,11 @@ import me.smeths.and.rhetorical.Data.CustomItem;
 import me.smeths.and.rhetorical.Handlers.MedicalHandler;
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.MedCraft;
-import org.bukkit.*;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -40,11 +44,11 @@ public class MedCraftListeners implements Listener {
             Matcher matcher = pattern.matcher(msg);
             while (matcher.find()) {
                 String color = msg.substring(matcher.start(), matcher.end());
-                msg = msg.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
+                msg = msg.replace(color, ChatColor.of(color) + "");
                 matcher = pattern.matcher(msg);
             }
         }
-        return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', msg);
+        return ChatColor.translateAlternateColorCodes('&', msg);
     }
     @EventHandler
     public void onMedicalItemUse(PlayerInteractEvent e) {
@@ -68,15 +72,15 @@ public class MedCraftListeners implements Listener {
                             && !e.getClickedBlock().getType().toString().contains("FURNACE") && !e.getClickedBlock().getType().toString().equals("SMOKER")
                             && !e.getClickedBlock().getType().toString().contains("TABLE") && !e.getClickedBlock().getType().toString().contains("HOPPER")
                             && !e.getClickedBlock().getType().toString().equals("BREWING_STAND") && !e.getClickedBlock().getType().toString().equals("LOOM")
-                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
+                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == Objects.requireNonNull(item.getItem().getItemMeta()).getCustomModelData())
                             || e.getAction() != Action.PHYSICAL && e.getAction() == Action.LEFT_CLICK_AIR
                             && isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION) && oi != item.getItem()
                             && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData()
-                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())
+                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == Objects.requireNonNull(item.getItem().getItemMeta()).getCustomModelData())
                             || e.getAction() != Action.PHYSICAL && e.getAction() == Action.RIGHT_CLICK_AIR
                             && isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION) && oi != item.getItem()
                             && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData()
-                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData())) {
+                            && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == Objects.requireNonNull(item.getItem().getItemMeta()).getCustomModelData())) {
                         if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("med.craft.use")) {
                         p.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
                         p.updateInventory();
