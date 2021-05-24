@@ -3,13 +3,10 @@ package me.smeths.and.rhetorical;
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.Listeners.MedCraftListeners;
 import me.smeths.and.rhetorical.Config.ConfigParser;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MedCraft extends JavaPlugin {
     private static MedCraft instance;
