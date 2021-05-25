@@ -2,7 +2,6 @@ package me.smeths.and.rhetorical.Config;
 
 import me.smeths.and.rhetorical.Data.CustomItem;
 import me.smeths.and.rhetorical.MedCraft;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -16,8 +15,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static me.smeths.and.rhetorical.Handlers.HexHandler.format;
 
 public class ConfigParser {
     public static final String KEY_DISPLAYNAME = "Name";
@@ -56,6 +55,7 @@ public class ConfigParser {
     public ConfigParser(FileConfiguration config) {
         this.config = config;
     }
+
     public void loadItems() {
         for (String material : config.getKeys(false)) {
             if (material.equals("Experimental"))
@@ -136,37 +136,28 @@ public class ConfigParser {
             }
         }
     }
+
     public String getValueForString(String material, int custommodeldata, String key) {
         return config.getString(material + "." + custommodeldata + "." + key);
     }
+
     public List<String> getValueForStringList(String material, int custommodeldata, String key) {
         return config.getStringList(material + "." + custommodeldata + "." + key);
     }
+
     public boolean getValueForBoolean(String material, int custommodeldata, String key) {
         return config.getBoolean(material + "." + custommodeldata + "." + key);
     }
+
     public Object getValueForObject(String material, int custommodeldata, String key) {
         return config.get(material + "." + custommodeldata + "." + key);
     }
+
     public int getValueForInt(String material, int custommodeldata, String key) {
         return config.getInt(material + "." + custommodeldata + "." + key);
     }
+
     public double getValueForDouble(String material, int custommodeldata, String key) {
         return config.getDouble(material + "." + custommodeldata + "." + key);
-    }
-    Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-    private String format(String msg) {
-        if (!Bukkit.getVersion().contains("1.8") && !Bukkit.getVersion().contains("1.9")
-                && !Bukkit.getVersion().contains("1.10") && !Bukkit.getVersion().contains("1.11")
-                && !Bukkit.getVersion().contains("1.12") && !Bukkit.getVersion().contains("1.13")
-                && !Bukkit.getVersion().contains("1.14") && !Bukkit.getVersion().contains("1.15")) {
-            Matcher matcher = pattern.matcher(msg);
-            while (matcher.find()) {
-                String color = msg.substring(matcher.start(), matcher.end());
-                msg = msg.replace(color, ChatColor.of(color) + "");
-                matcher = pattern.matcher(msg);
-            }
-        }
-        return ChatColor.translateAlternateColorCodes('&', msg);
     }
 }
