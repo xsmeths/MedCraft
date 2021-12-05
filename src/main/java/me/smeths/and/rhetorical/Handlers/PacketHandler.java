@@ -6,8 +6,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.Objects;
-
 @SuppressWarnings({"rawtypes","unused"})
 public class PacketHandler {
 	private static PacketHandler instance;
@@ -41,15 +39,7 @@ public class PacketHandler {
 		e.printStackTrace();
 		return null;
 	}
-	} public void sendActionBarMessage(Player p, String message) { try {
-			Object chatComponent = Objects.requireNonNull(getNmsClass("ChatComponentText")).getConstructor(String.class).newInstance(message);
-			Object packetPlayOutChat = Objects.requireNonNull(getNmsClass("PacketPlayOutChat")).getConstructor(getNmsClass("IChatBaseComponent"), byte.class).newInstance(chatComponent, (byte) 2);
-			Object handle = p.getClass().getMethod("getHandle").invoke(p);
-			Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
-			playerConnection.getClass().getMethod("sendPacket", getNmsClass("Packet")).invoke(playerConnection, packetPlayOutChat);
-		}
-		catch(Exception e) {
+	} public void sendActionBarMessage(Player p, String message) {
 			p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
-		}
 	}
 }
