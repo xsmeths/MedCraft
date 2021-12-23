@@ -9,15 +9,15 @@ import org.bukkit.entity.Player;
 @SuppressWarnings({"rawtypes","unused"})
 public class PacketHandler {
 	private static PacketHandler instance;
-	private String nmsVersion;
+	private String ServerVersion;
 	private Class craftPlayer;
 	public PacketHandler() {
 		if (instance != null)
 			return;
 		instance = this;
-		nmsVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+		ServerVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 		try {
-			craftPlayer = Class.forName("org.bukkit.craftbukkit." + nmsVersion + ".entity.CraftPlayer");
+			craftPlayer = Class.forName("org.bukkit.craftbukkit." + ServerVersion + ".entity.CraftPlayer");
 		}
 		catch(Exception e) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Could not get CraftPlayer class! Is there a typo?");
@@ -32,7 +32,7 @@ public class PacketHandler {
 	}
 	public static Class<?> getNmsClass(String name)
 	{ try {
-		return Class.forName("net.minecraft.server." + getInstance().nmsVersion + "." + name);
+		return Class.forName("net.minecraft.server." + getInstance().ServerVersion + "." + name);
 	}
 	catch(Exception e) {
 		Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Could not get class for name! Is there a typo?");
