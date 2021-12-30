@@ -18,6 +18,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -209,6 +211,20 @@ public class MedCraftListeners implements Listener {
         for (CustomItem customitem : CustomItem.getCustomItems()) {
             Player player = e.getPlayer();
             player.discoverRecipe(new NamespacedKey(MedCraft.getPlugin(), customitem.getInternalName()));
+        }
+    }
+    @EventHandler
+    public void invclick(InventoryClickEvent ice){
+        for (CustomItem customitem : CustomItem.getCustomItems()) {
+            if (ice.getWhoClicked() instanceof Player
+                    && ice.getClickedInventory().getType() != null
+                    && ice.getClickedInventory().getType() == InventoryType.GRINDSTONE
+                    && ice.getCursor().getType() == customitem.getItem().getType()
+                    && ice.getCursor().getItemMeta().hasCustomModelData()
+                    && ice.getCursor().getItemMeta().getCustomModelData() == customitem.getItem().getItemMeta().getCustomModelData()) {
+                Player p = (Player) ice.getWhoClicked();
+                p.closeInventory();
+            }
         }
     }
 }
