@@ -25,7 +25,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
@@ -228,6 +230,7 @@ public class MedCraftListeners implements Listener {
     @EventHandler
     public void invdrag(InventoryDragEvent ide){
         for (CustomItem customitem : CustomItem.getCustomItems()) {
+            List<ItemStack> oldcurseritem = new ArrayList<ItemStack>();
             if (ide.getWhoClicked() instanceof Player
                     && ide.getInventory() != null
                     && ide.getInventory().getType() != null
@@ -245,7 +248,11 @@ public class MedCraftListeners implements Listener {
                     && ide.getOldCursor().getItemMeta().hasCustomModelData()
                     && ide.getOldCursor().getItemMeta().getCustomModelData() == customitem.getItem().getItemMeta().getCustomModelData()) {
                 Player p = (Player) ide.getWhoClicked();
+                oldcurseritem.add(ide.getOldCursor());
+                ItemStack[] oldcurser = oldcurseritem.toArray(new ItemStack[oldcurseritem.size()]);
                 p.closeInventory();
+                p.getInventory().addItem(oldcurser);
+                p.updateInventory();
             }
         }
     }
