@@ -6,8 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -32,7 +30,6 @@ public class ConfigParser {
     public static final String KEY_FAILURECMD = "FailureCMD";
     public static final String KEY_REGEN_TIME = "Regen-Time";
     public static final String KEY_REGEN_AMPLIFIER = "Regen-Amplifier";
-    public static final String KEY_GLOWS = "Glows";
     public static final String KEY_USE_OFF_HAND = "UseOffHand";
     public static final String KEY_INTERNAL_NAME = "InternalName";
     public static final String KEY_HASRANGE = "HasRange";
@@ -75,10 +72,6 @@ public class ConfigParser {
                 for (String s : loreconfig) {
                     lore.add(format(s));
                 }
-                if (getValueForBoolean(material, custommodeldataint, KEY_GLOWS)) {
-                    im.addEnchant(Enchantment.DURABILITY, 1, true);
-                    im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                }
                 im.setLore(lore);
                 item.setItemMeta(im);
                 customitem.setConsoleSuccessCMD(getValueForBoolean(material, custommodeldataint, KEY_CONSOLESUCCESSCMD));
@@ -92,7 +85,6 @@ public class ConfigParser {
                 customitem.setWarmupspeed(getValueForInt(material, custommodeldataint, KEY_WARMUPSPEED));
                 customitem.setRegen_amplifier(getValueForInt(material, custommodeldataint, KEY_REGEN_AMPLIFIER));
                 customitem.setRegen_time(getValueForInt(material, custommodeldataint, KEY_REGEN_TIME));
-                customitem.setisGlows(getValueForBoolean(material, custommodeldataint, KEY_GLOWS));
                 customitem.setOffhand(getValueForBoolean(material, custommodeldataint, KEY_USE_OFF_HAND));
                 customitem.setHasRange(getValueForBoolean(material, custommodeldataint, KEY_HASRANGE));
                 customitem.setRadius(getValueForDouble(material, custommodeldataint, KEY_RADIUS));

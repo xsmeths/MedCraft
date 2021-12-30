@@ -212,48 +212,4 @@ public class MedCraftListeners implements Listener {
             player.discoverRecipe(new NamespacedKey(MedCraft.getPlugin(), customitem.getInternalName()));
         }
     }
-    @EventHandler
-    public void invclick(InventoryClickEvent ice){
-        for (CustomItem customitem : CustomItem.getCustomItems()) {
-            if (ice.getWhoClicked() instanceof Player
-                    && ice.getClickedInventory() != null
-                    && ice.getClickedInventory().getType() != null
-                    && ice.getClickedInventory().getType() == InventoryType.GRINDSTONE
-                    && ice.getCursor().getType() == customitem.getItem().getType()
-                    && ice.getCursor().getItemMeta().hasCustomModelData()
-                    && ice.getCursor().getItemMeta().getCustomModelData() == customitem.getItem().getItemMeta().getCustomModelData()) {
-                Player p = (Player) ice.getWhoClicked();
-                p.closeInventory();
-            }
-        }
-    }
-    @EventHandler
-    public void invdrag(InventoryDragEvent ide){
-        for (CustomItem customitem : CustomItem.getCustomItems()) {
-            List<ItemStack> oldcurseritem = new ArrayList<ItemStack>();
-            if (ide.getWhoClicked() instanceof Player
-                    && ide.getInventory() != null
-                    && ide.getInventory().getType() != null
-                    && ide.getInventory().getType() == InventoryType.GRINDSTONE
-                    && ide.getCursor() != null
-                    && ide.getCursor().getType() == customitem.getItem().getType()
-                    && ide.getCursor().getItemMeta().hasCustomModelData()
-                    && ide.getCursor().getItemMeta().getCustomModelData() == customitem.getItem().getItemMeta().getCustomModelData()
-                    || ide.getWhoClicked() instanceof Player
-                    && ide.getInventory() != null
-                    && ide.getInventory().getType() != null
-                    && ide.getInventory().getType() == InventoryType.GRINDSTONE
-                    && ide.getOldCursor() != null
-                    && ide.getOldCursor().getType() == customitem.getItem().getType()
-                    && ide.getOldCursor().getItemMeta().hasCustomModelData()
-                    && ide.getOldCursor().getItemMeta().getCustomModelData() == customitem.getItem().getItemMeta().getCustomModelData()) {
-                Player p = (Player) ide.getWhoClicked();
-                oldcurseritem.add(ide.getOldCursor());
-                ItemStack[] oldcurser = oldcurseritem.toArray(new ItemStack[oldcurseritem.size()]);
-                p.closeInventory();
-                p.getInventory().addItem(oldcurser);
-                p.updateInventory();
-            }
-        }
-    }
 }

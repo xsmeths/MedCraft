@@ -10,7 +10,6 @@ public class CustomItem {
     private static final HashMap<Integer, CustomItem> customitems = new HashMap<>();
 
     private final ItemStack item;
-    private boolean isglows;
     private boolean craftable;
     private boolean DropIfNotUsed;
     private boolean PerformSuccessCMD;
@@ -81,10 +80,6 @@ public class CustomItem {
         this.warmupspeed = warmupspeed;
     }
 
-    public void setisGlows(boolean isglows) {
-        this.isglows = isglows;
-    }
-
     public void setPerformSuccessCMD(boolean PerformSuccessCMD) {
         this.PerformSuccessCMD = PerformSuccessCMD;
     }
@@ -111,10 +106,6 @@ public class CustomItem {
 
     public boolean isDropifnotused() {
         return DropIfNotUsed;
-    }
-
-    public boolean isGlows() {
-        return isglows;
     }
 
     public double getRadius() {
