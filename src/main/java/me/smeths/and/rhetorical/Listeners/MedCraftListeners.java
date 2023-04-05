@@ -81,8 +81,8 @@ public class MedCraftListeners implements Listener {
                     }
                     if (!p.hasPermission("med.craft.use")) {
                         PacketHandler.getInstance().sendActionBarMessage(p,
-                                format(Objects.requireNonNull(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse")))
-                                        .replace("[item]", Objects.requireNonNull(p.getInventory().getItemInMainHand().getItemMeta()).getDisplayName()));
+                                format(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse"))
+                                        .replace("[item]", p.getItemOnCursor().getItemMeta().getDisplayName()));
                     } else {
                         e.setCancelled(true);
                     }

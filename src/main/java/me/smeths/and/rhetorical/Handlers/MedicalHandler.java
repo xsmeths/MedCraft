@@ -6,8 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -57,9 +56,9 @@ public class MedicalHandler {
                         && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
                     if (item.HasRange()) {
                         for (Entity e : p.getNearbyEntities(item.getRadius(), item.getRadius(), item.getRadius())) {
-                            if (e instanceof Player)
-                                if (!((Player) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((Player) e).getHealth() < Objects.requireNonNull(((Player) e).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
-                                    ((Player) e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
+                            if (e instanceof Player || e instanceof Wolf || e instanceof Cat || e instanceof Horse || e instanceof Parrot)
+                                if (!((LivingEntity) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((LivingEntity) e).getHealth() < Objects.requireNonNull(((LivingEntity) e).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
+                                    ((LivingEntity) e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
                         }
                     }
                     p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
@@ -69,9 +68,9 @@ public class MedicalHandler {
                         && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
                     if (item.HasRange()) {
                         for (Entity e : p.getNearbyEntities(item.getRadius(), item.getRadius(), item.getRadius())) {
-                            if (e instanceof Player)
-                                if (!((Player) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((Player) e).getHealth() < Objects.requireNonNull(((Player) e).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
-                                    ((Player) e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
+                            if (e instanceof Player || e instanceof Wolf || e instanceof Cat || e instanceof Horse || e instanceof Parrot)
+                                if (!((LivingEntity) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((LivingEntity) e).getHealth() < Objects.requireNonNull(((LivingEntity) e).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
+                                    ((LivingEntity) e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
                         }
                     }
                     p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
@@ -81,9 +80,9 @@ public class MedicalHandler {
                         && p.getHealth() < Objects.requireNonNull(p.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()) {
                     if (item.HasRange()) {
                         for (Entity e : p.getNearbyEntities(item.getRadius(), item.getRadius(), item.getRadius())) {
-                            if (e instanceof Player)
-                                if (!((Player) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((Player) e).getHealth() < Objects.requireNonNull(((Player) e).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
-                                    ((Player) e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
+                            if (e instanceof Player || e instanceof Wolf || e instanceof Cat || e instanceof Horse || e instanceof Parrot)
+                                if (!((LivingEntity) e).hasPotionEffect(PotionEffectType.REGENERATION) && ((LivingEntity) e).getHealth() < Objects.requireNonNull(((LivingEntity) e).getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue())
+                                    ((LivingEntity) e).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
                         }
                     }
                     p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, amplifier));
