@@ -30,6 +30,7 @@ public class MedicalHandler {
     }
     HealingPlayers.put(p, new BukkitRunnable() {
         final Location position = p.getLocation();
+        boolean cancelled = false;
         final int total = 60;
         int progress = 0;
         final int duration = 20 * item.getRegen_time();
@@ -39,14 +40,20 @@ public class MedicalHandler {
                 super.cancel();
               }
               public void run() {
-            boolean cancelled = p.getLocation().distance(position) > 0.75D;
+            if (position.getWorld() != p.getWorld() || p.getLocation().distance(position) > 0.75D) {
+                cancelled = true;
+            }
             if ((progress > total) || (cancelled)) {
                 if (cancelled) {
                     if (item.isDropifnotused()) {
                         p.getWorld().dropItem(p.getLocation(), item.getItem());
                     }
                     if (!item.isDropifnotused()) {
-                        p.getInventory().addItem(item.getItem());
+                        if (p.getInventory().firstEmpty() == -1) {
+                            p.getWorld().dropItem(p.getLocation(), item.getItem());
+                        } else {
+                            p.getInventory().addItem(item.getItem());
+                        }
                     }
                 }
                 MedicalHandler.HealingPlayers.remove(p);
