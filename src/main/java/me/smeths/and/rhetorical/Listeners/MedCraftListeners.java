@@ -67,26 +67,30 @@ public class MedCraftListeners implements Listener {
                             && isBandaging(p) && !p.hasPotionEffect(PotionEffectType.REGENERATION) && oi != item.getItem()
                             && (i.getType().equals(item.getItem().getType())) && i.getItemMeta().hasCustomModelData()
                             && p.getGameMode() != GameMode.CREATIVE && (i.getItemMeta().getCustomModelData() == Objects.requireNonNull(item.getItem().getItemMeta()).getCustomModelData())) {
+                        if (!p.hasPermission("med.craft.use")) {
+                            if (p.getInventory().getItemInMainHand().getItemMeta() != null) {
+                                PacketHandler.getInstance().sendActionBarMessage(p,
+                                        format(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse"))
+                                                .replace("[item]", p.getInventory().getItemInMainHand().getItemMeta().getDisplayName()));
+                            }
+                        }
                         if (p.getInventory().getItemInMainHand().getAmount() == 1 && p.hasPermission("med.craft.use")) {
-                        p.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
-                        p.updateInventory();
-                        new MedicalHandler(p,item);
-                        return;
+                            p.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
+                            p.updateInventory();
+                            new MedicalHandler(p,item);
+
+                            return;
+                        }
+                        if (i.getAmount() >= 2 && p.hasPermission("med.craft.use")) {
+                            i.setAmount(i.getAmount() - 1);
+                            p.updateInventory();
+                            new MedicalHandler(p,item);
+
+                            return;
+                        } else {
+                            e.setCancelled(true);
+                        }
                     }
-                    if (i.getAmount() >= 2 && p.hasPermission("med.craft.use")) {
-                        i.setAmount(i.getAmount() - 1);
-                        p.updateInventory();
-                        new MedicalHandler(p,item);
-                        return;
-                    }
-                    if (!p.hasPermission("med.craft.use")) {
-                        PacketHandler.getInstance().sendActionBarMessage(p,
-                                format(MedCraft.getPlugin().getConfig().getString("Messages.NoPermUse"))
-                                        .replace("[item]", p.getItemOnCursor().getItemMeta().getDisplayName()));
-                    } else {
-                        e.setCancelled(true);
-                    }
-                }
             }
         }
     }
@@ -101,7 +105,7 @@ public class MedCraftListeners implements Listener {
                 return;
             recipient = (Player) e.getRightClicked();
             if (item.getItem().getItemMeta() != null)
-            if (oi.getType() == item.getItem().getType()
+                if (oi.getType() == item.getItem().getType()
                     && oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == item.getItem().getType()
                     && oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData()
                     && !recipient.hasPotionEffect(PotionEffectType.REGENERATION) && !item.HasRange()
