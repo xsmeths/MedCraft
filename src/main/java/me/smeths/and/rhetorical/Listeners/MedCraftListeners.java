@@ -187,9 +187,10 @@ public class MedCraftListeners implements Listener {
     }
     @EventHandler(priority = EventPriority.MONITOR)
     public void OnMedCraftItemPickup(PlayerMoveEvent e) {
+        String Etype = EntityType.valueOf("DROPPED_ITEM") == null ? "ITEM" : "DROPPED_ITEM";
         if (MedCraft.getPlugin().getConfig().getBoolean("Experimental.AlternatePickup")) {
             for (Entity E : e.getPlayer().getNearbyEntities(0.1,0.1,0.1)) {
-                if (E.getType() == EntityType.DROPPED_ITEM) {
+                if (E.getType() == EntityType.valueOf(Etype)) {
                     Item i = (Item) E;
                     ItemStack stackitem = i.getItemStack();
                     for (CustomItem citem : CustomItem.getCustomItems()) {

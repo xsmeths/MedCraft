@@ -45,15 +45,10 @@ public class MedicalHandler {
             }
             if ((progress > total) || (cancelled)) {
                 if (cancelled) {
-                    if (item.isDropifnotused()) {
+                    if (item.isDropifnotused() || p.getInventory().firstEmpty() == -1) {
                         p.getWorld().dropItem(p.getLocation(), item.getItem());
-                    }
-                    if (!item.isDropifnotused()) {
-                        if (p.getInventory().firstEmpty() == -1) {
-                            p.getWorld().dropItem(p.getLocation(), item.getItem());
-                        } else {
-                            p.getInventory().addItem(item.getItem());
-                        }
+                    } else {
+                        p.getInventory().addItem(item.getItem());
                     }
                 }
                 MedicalHandler.HealingPlayers.remove(p);
