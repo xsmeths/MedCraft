@@ -4,6 +4,8 @@ import me.smeths.and.rhetorical.Data.CustomItem;
 import me.smeths.and.rhetorical.Handlers.MedicalHandler;
 import me.smeths.and.rhetorical.Handlers.PacketHandler;
 import me.smeths.and.rhetorical.MedCraft;
+import me.smeths.and.rhetorical.Utils.abstractAttribute;
+import me.smeths.and.rhetorical.Utils.abstractModelData;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -109,18 +111,18 @@ public class MedCraftListeners implements Listener {
                     && oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == item.getItem().getType()
                     && oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData()
                     && !recipient.hasPotionEffect(PotionEffectType.REGENERATION) && !item.HasRange()
-                    && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()
+                    && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(abstractAttribute.valueOf("GENERIC_MAX_HEALTH"))).getValue()
                     && !isBandaging(recipient) && i.getItemMeta() != null && i.getItemMeta().hasCustomModelData()
                     && i.getItemMeta().getCustomModelData() != item.getItem().getItemMeta().getCustomModelData()
                     || oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == item.getItem().getType()
                     && oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData()
                     && !recipient.hasPotionEffect(PotionEffectType.REGENERATION) && !item.HasRange()
-                    && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()
+                    && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(abstractAttribute.valueOf("GENERIC_MAX_HEALTH"))).getValue()
                     && isBandaging(recipient) && i.getType() == Material.AIR
                     || oi.getItemMeta() != null && oi.getItemMeta().hasCustomModelData() && oi.getType() == item.getItem().getType()
                     && oi.getItemMeta().getCustomModelData() == item.getItem().getItemMeta().getCustomModelData()
                     && !recipient.hasPotionEffect(PotionEffectType.REGENERATION) && !item.HasRange()
-                    && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue()
+                    && recipient.getHealth() < Objects.requireNonNull(recipient.getAttribute(abstractAttribute.valueOf("GENERIC_MAX_HEALTH"))).getValue()
                     && isBandaging(recipient)) {
                 if (oi.getAmount() == 1 && p.hasPermission("med.craft.use.offhand")) {
                     PacketHandler.getInstance().sendActionBarMessage(p,
@@ -159,8 +161,8 @@ public class MedCraftListeners implements Listener {
                 for (CustomItem customItem : CustomItem.getCustomItems()) {
                     if (customItem.getItem().getItemMeta() != null)
                     if (Objects.requireNonNull(e.getInventory().getResult()).getType() == customItem.getItem().getType()
-                            && e.getInventory().getResult().getItemMeta() != null && e.getInventory().getResult().getItemMeta().hasCustomModelData()
-                            && e.getInventory().getResult().getItemMeta().getCustomModelData() == customItem.getItem().getItemMeta().getCustomModelData()) {
+                            && e.getInventory().getResult().getItemMeta()!= null && abstractModelData.hasCustomModelData(e.getInventory().getResult().getItemMeta())
+                            && abstractModelData.getCustomModelData(e.getInventory().getResult().getItemMeta()) == abstractModelData.getCustomModelData(customItem.getItem().getItemMeta())) {
                         Player crafter = (Player) e.getWhoClicked();
                         if (!crafter.hasPermission("med.craft")) {
                             e.setCancelled(true);

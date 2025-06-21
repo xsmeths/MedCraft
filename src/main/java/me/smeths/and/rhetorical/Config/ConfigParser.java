@@ -2,6 +2,7 @@ package me.smeths.and.rhetorical.Config;
 
 import me.smeths.and.rhetorical.Data.CustomItem;
 import me.smeths.and.rhetorical.MedCraft;
+import me.smeths.and.rhetorical.Utils.abstractModelData;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -66,7 +67,14 @@ public class ConfigParser {
                 ItemMeta im = item.getItemMeta();
                 assert im != null;
                 im.setDisplayName(format((String) getValueForObject(material, custommodeldataint, KEY_DISPLAYNAME)));
-                im.setCustomModelData(custommodeldataint);
+                try {
+                    abstractModelData.setLegacyCustomModelData(im, custommodeldataint);
+                } catch(Exception handled) {
+                    org.bukkit.inventory.meta.components.CustomModelDataComponent customModelDataComponent = im.getCustomModelDataComponent();
+                    List floats = customModelDataComponent.getFloats();
+                    floats.add(custommodeldataint);
+                    customModelDataComponent.setFloats(floats);
+                }
                 List<String> loreconfig = getValueForStringList(material, custommodeldataint, KEY_LORE);
                 List<String> lore = new ArrayList<>();
                 for (String s : loreconfig) {
