@@ -1,7 +1,8 @@
 # MedCraft
 Realistic Medical Items for spigot
 
-https://www.spigotmc.org/resources/medcraft-realistic-healing-items-for-1-8-to-1-16-5.6760/
+https://www.spigotmc.org/resources/medcraft-realistic-healing-items.6760/
+https://modrinth.com/plugin/medcraft
 
 # Contributors
 
