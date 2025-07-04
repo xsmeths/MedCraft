@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class abstractModelData {
-    public static boolean hasLegacyCustomModelData(ItemMeta meta) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private static boolean hasLegacyCustomModelData(ItemMeta meta) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         // Check if the method exists
         Method method = meta.getClass().getMethod("hasCustomModelData");
         // Make sure it's accessible
@@ -15,7 +15,7 @@ public class abstractModelData {
         // Invoke the method reflectively
         return (boolean) method.invoke(meta);
     }
-    public static Integer getLegacyCustomModelData(ItemMeta meta) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    private static Integer getLegacyCustomModelData(ItemMeta meta) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Method method = meta.getClass().getMethod("getCustomModelData");
         method.setAccessible(true);
         return (Integer) method.invoke(meta);
@@ -46,4 +46,5 @@ public class abstractModelData {
         }
         return returnType;
     }
+
 }

@@ -6,7 +6,6 @@ import me.smeths.and.rhetorical.Utils.abstractAttribute;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -136,6 +135,6 @@ public class MedicalHandler {
         }});HealingPlayers.get(p).runTaskTimer(MedCraft.getPlugin(), 0L, 1L);
   }
   public static boolean isBandaging(Player p) {
-      return !HealingPlayers.containsKey(p);
+      return HealingPlayers.containsKey(p);
   }
 }
